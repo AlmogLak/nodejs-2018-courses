@@ -1,48 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Node.js</title>
     <link rel="stylesheet" href="../assets/css/reveal.css">
     <link rel="stylesheet" href="../assets/css/theme/beige.css">
     <link rel="stylesheet" href="../assets/lib/css/zenburn.css">
     <link rel="stylesheet" href="../styles/main.css">
 </head>
-
 <body>
     <div class="att_logo"></div>
     <div class="reveal">
         <div class="slides">
+            <!-- Node.js Basics -->
             <section>
-                <h1>Introduction to Node.js</h1>
-                <sub>By Nabil Naffar & Danny Vernovsky & Almog Laktivi</sub>
+                <h1>Node.js Basics</h1>
+                <sub>By Almog Laktivi</sub>
             </section>
+            <!-- Agenda -->
             <section>
                 <h2>Agenda</h2>
                 <div>
                     <p>Introduction</p>
-                    <p>Express.js</p>
-                    <p>Events & Async</p>
-                    <p>Persistance</p>
-                    <p>Socket.IO</p>
-                    <p>Testing & Debugging</p>
-                    <p>Deployment</p>
+                    <p>Typescript 101</p>
+                    <p>Async</p>
+                    <p>File System</p>
+                    <p>HTTP server</p>
                 </div>
             </section>
+            <!-- what will you know -->
             <section>
                 <table>
                     <tr>
                         <td>
                             <h2>So what will you know?</h2>
                             <p>Typescript programming</p>
-                            <p>Node.js APIs</p>
-                            <p>NPM package manager</p>
-                            <p>Express framework</p>
-                            <p>Working with DB in Node.js</p>
-                            <p>How to group shop in ebay/amazon</p>
+                            <p>Node.js basic APIs</p>
+                            <p>Npm/Yarn package manager</p>
                         </td>
                         <td>
                             <div class="what-will-you-know"></div>
@@ -50,24 +46,27 @@
                     </tr>
                 </table>
             </section>
+            <!-- what will you need -->
             <section>
                 <h2>So what will you need to install?</h2>
                 <p>
                     Node.js & NPM |
-                    <a href="https://nodejs.org/en/">DOWNLOAD</a>
+                    <a href="https://nodejs.org/en/">Download</a>
                 </p>
                 <p>
                     VS Code |
-                    <a href="https://code.visualstudio.com/download">DOWNLOAD</a>
+                    <a href="https://code.visualstudio.com/download">Download</a>
                 </p>
             </section>
+            <!-- Npm vs Yarn -->
             <section>
-                <h2>NPM/YARN package managers</h2>
+                <h2>Npm vs Yarn</h2>
                 <p>Requesting packages</p>
                 <p>Task runner</p>
                 <p>Deployment scripts</p>
                 <p>Publishing packages</p>
             </section>
+            <!-- npm help -->
             <section>
                 <pre>
                     <code data-trim data-noescape class="bash">
@@ -93,6 +92,7 @@
                     </code>
                 </pre>
             </section>
+            <!-- yarn help -->
             <section>
                 <pre>
                     <code data-trim data-noescape class="bash">
@@ -117,63 +117,7 @@
                     </code>
                 </pre>
             </section>
-            <section>
-                <img src="../assets/demotime.png" alt="">
-            </section>
-            <section>
-                <h2>Typescript</h2>
-                <p>So what's the problem with JS anyway?</p>
-                <div class="fragment">
-                    <h3>Javascript is awesome!</h3>
-                    <img src="../assets/superman.png" width="300" alt="">
-                </div>
-            </section>
-            <section>
-                <h2>But, it's also...</h2>
-                <pre>
-                <code data-trim data-noescape class="js">
-                    function getUserById(id, connection, callback) {
-                        return new Promise((resolve, reject) =>{
-                            if(!id){
-                                reject(new Error('user id is mandatory'));
-                            }
-
-                            connection.getCollection('users')
-                                .then(function(usersCollection, err){
-                                    if(err){
-                                        reject(err);
-                                    }
-                                    usersCollection.find({_id: id}...)
-                                });
-                        });   
-                    }
-                </code>
-            </pre>
-            </section>
-            <section>
-                <h2>Typescript rocks!</h2>
-                <pre class="wide">
-                <code data-trim data-noescape class="ts">
-                    function getUserById(id: number, connection: MongoConnection): Promise<User> {
-                        try {
-                            const usersCollection = await connection.getCollection('users');
-                            return await usersCollection.find({_id: id}...)
-                        } catch (error){
-                            throw new Error(error.message);
-                        }
-                    }
-                </code>
-            </pre>
-            </section>
-            <section>
-                <h2>So what else comes with Typescript?</h2>
-                <p>Typed variables</p>
-                <p>Interfaces</p>
-                <p>Generics</p>
-                <p>Enums</p>
-                <p>Decorators</p>
-                <p>And more...</p>
-            </section>
+            <!-- installation demo -->
             <section>
                 <img src="../assets/demotime.png" alt="">
             </section>
@@ -181,6 +125,7 @@
     </div>
     <script src="../assets/lib/js/head.min.js"></script>
     <script src="../assets/js/reveal.js"></script>
+    <!-- Reveal.js init script -->
     <script>
         Reveal.initialize({
             history: true,
@@ -192,5 +137,4 @@
         });
     </script>
 </body>
-
 </html>

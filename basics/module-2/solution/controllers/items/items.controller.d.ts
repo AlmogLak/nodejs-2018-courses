@@ -1,4 +1,3 @@
-/// <reference types="express" />
 import { Request, Response } from 'express';
 export declare class ItemsController {
     constructor();

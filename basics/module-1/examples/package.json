@@ -1,12 +1,13 @@
 {
-  "name": "examples",
+  "name": "almog",
   "version": "1.0.0",
+  "description": "some description",
   "main": "index.js",
+  "author": "Almog Laktivi",
   "license": "MIT",
-  "scripts": {
-    "tscw": "tsc -w"
-  },
   "dependencies": {
-    "body-parser": "^1.18.2"
+    "@types/request": "^2.47.0",
+    "request": "^2.85.0",
+    "typescript": "^2.8.3"
   }
 }

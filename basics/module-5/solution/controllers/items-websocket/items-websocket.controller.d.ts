@@ -1,4 +1,4 @@
-/// <reference types="socket.io" />
+import * as SocketIO from 'socket.io';
 import Item from '../../../../models/Item';
 export declare class ItemsWebsocketController {
     private io;

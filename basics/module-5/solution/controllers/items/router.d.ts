@@ -1,4 +1,2 @@
-/// <reference types="express" />
-import { Router } from 'express';
 import { ItemsWebsocketController } from '../items-websocket/items-websocket.controller';
-export declare function itemsRouterFactory(itemsWebsocketController: ItemsWebsocketController): Router;
+export declare function itemsRouterFactory(itemsWebsocketController: ItemsWebsocketController): any;
