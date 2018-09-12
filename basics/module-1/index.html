@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../assets/css/reveal.css">
+    <link rel="stylesheet" href="../assets/css/theme/beige.css">
+    <link rel="stylesheet" href="../assets/lib/css/zenburn.css">
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+
+<body>
+    <div class="att_logo"></div>
+    <div class="reveal">
+        <div class="slides">
+            <section>
+                <h1>Introduction to Node.js</h1>
+                <sub>By Nabil Naffar & Danny Vernovsky & Almog Laktivi</sub>
+            </section>
+            <section>
+                <h2>Agenda</h2>
+                <div>
+                    <p>Introduction</p>
+                    <p>Express.js</p>
+                    <p>Events & Async</p>
+                    <p>Persistance</p>
+                    <p>Socket.IO</p>
+                    <p>Testing & Debugging</p>
+                    <p>Deployment</p>
+                </div>
+            </section>
+            <section>
+                <table>
+                    <tr>
+                        <td>
+                            <h2>So what will you know?</h2>
+                            <p>Typescript programming</p>
+                            <p>Node.js APIs</p>
+                            <p>NPM package manager</p>
+                            <p>Express framework</p>
+                            <p>Working with DB in Node.js</p>
+                            <p>How to group shop in ebay/amazon</p>
+                        </td>
+                        <td>
+                            <div class="what-will-you-know"></div>
+                        </td>
+                    </tr>
+                </table>
+            </section>
+            <section>
+                <h2>So what will you need to install?</h2>
+                <p>
+                    Node.js & NPM |
+                    <a href="https://nodejs.org/en/">DOWNLOAD</a>
+                </p>
+                <p>
+                    VS Code |
+                    <a href="https://code.visualstudio.com/download">DOWNLOAD</a>
+                </p>
+            </section>
+            <section>
+                <h2>NPM/YARN package managers</h2>
+                <p>Requesting packages</p>
+                <p>Task runner</p>
+                <p>Deployment scripts</p>
+                <p>Publishing packages</p>
+            </section>
+            <section>
+                <pre>
+                    <code data-trim data-noescape class="bash">
+                    root@HOME:~# npm --help
+
+                    Usage: npm <command>
+                    
+                    where <command> is one of:
+                        access, <mark>adduser</mark>, bin, bugs, c, cache, completion, config,
+                        ddp, dedupe, deprecate, dist-tag, docs, doctor, edit,
+                        explore, get, help, help-search, i, init, <mark>install</mark>,
+                        install-test, it, <mark>link</mark>, <mark>list</mark>, ln, login, logout, ls,
+                        outdated, owner, pack, ping, prefix, prune, <mark>publish</mark>, rb,
+                        rebuild, repo, restart, root, run, run-script, s, se,
+                        search, set, shrinkwrap, star, stars, start, stop, t, team,
+                        test, tst, un, uninstall, unpublish, unstar, up, update, v,
+                        version, view, whoami
+                    
+                    npm <command> -h     quick help on <command>
+                    npm -l           display full usage info
+                    npm help <term>  search for help on <term>
+                    npm help npm     involved overview
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <pre>
+                    <code data-trim data-noescape class="bash">
+                        root@HOME:~# yarn --help
+
+                        Usage: yarn [command] [flags]
+                        
+                        Options:
+                        
+                            -h, --help                      output usage information
+                            -V, --version                   output the version number
+                            --verbose                       output verbose messages on internal operations
+                            --offline                       trigger an error if any required dependencies are not available in local cache
+                            --prefer-offline                use network only if dependencies are not available in local cache
+                            --strict-semver
+                            --json
+                            --ignore-scripts                don't run lifecycle scripts
+                            --har                           save HAR output of network traffic
+                            --ignore-platform               ignore platform checks
+                            --ignore-engines                ignore engines check
+                            --ignore-optional               ignore optional dependencies
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <img src="../assets/demotime.png" alt="">
+            </section>
+            <section>
+                <h2>Typescript</h2>
+                <p>So what's the problem with JS anyway?</p>
+                <div class="fragment">
+                    <h3>Javascript is awesome!</h3>
+                    <img src="../assets/superman.png" width="300" alt="">
+                </div>
+            </section>
+            <section>
+                <h2>But, it's also...</h2>
+                <pre>
+                <code data-trim data-noescape class="js">
+                    function getUserById(id, connection, callback) {
+                        return new Promise((resolve, reject) =>{
+                            if(!id){
+                                reject(new Error('user id is mandatory'));
+                            }
+
+                            connection.getCollection('users')
+                                .then(function(usersCollection, err){
+                                    if(err){
+                                        reject(err);
+                                    }
+                                    usersCollection.find({_id: id}...)
+                                });
+                        });   
+                    }
+                </code>
+            </pre>
+            </section>
+            <section>
+                <h2>Typescript rocks!</h2>
+                <pre class="wide">
+                <code data-trim data-noescape class="ts">
+                    function getUserById(id: number, connection: MongoConnection): Promise<User> {
+                        try {
+                            const usersCollection = await connection.getCollection('users');
+                            return await usersCollection.find({_id: id}...)
+                        } catch (error){
+                            throw new Error(error.message);
+                        }
+                    }
+                </code>
+            </pre>
+            </section>
+            <section>
+                <h2>So what else comes with Typescript?</h2>
+                <p>Typed variables</p>
+                <p>Interfaces</p>
+                <p>Generics</p>
+                <p>Enums</p>
+                <p>Decorators</p>
+                <p>And more...</p>
+            </section>
+            <section>
+                <img src="../assets/demotime.png" alt="">
+            </section>
+        </div>
+    </div>
+    <script src="../assets/lib/js/head.min.js"></script>
+    <script src="../assets/js/reveal.js"></script>
+    <script>
+        Reveal.initialize({
+            history: true,
+            dependencies: [
+                { src: '../assets/plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: '../assets/plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: '../assets/plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
+            ]
+        });
+    </script>
+</body>
+
+</html>
