@@ -267,55 +267,86 @@
             <!-- Typescript Generics -->
             <section>
                 <h2>Typescript Generics</h2>
-                <pre>
-                    <code data-trim data-noescape class="js">
-                        function identity(arg: any): any {
-                            return arg;
-                        }
+                <section>
+                    <h3>The problem</h3>
+                    Create a Typescript function which returns the object it gets as arg
+                </section>
+                <section>
+                    <h3>Naive solution</h3>
+                    <pre>
+                        <code data-trim data-noescape class="js">
+                            function identity(arg: any): any {
+                                return arg;
+                            }
 
-                        function identity<T>(arg: T): T {
-                            return arg;
-                        }
-
-                        let output = identity<string>("myString");
-                    </code>
-                </pre>
+                            let output = identity<string>("myString");
+                        </code>
+                    </pre>
+                    <h4>What is the problem?</h4>
+                </section>
+                <section>
+                    <h3>Solution with generics</h3>
+                    <pre>
+                        <code data-trim data-noescape class="js">
+                            function identity<T>(arg: T): T {
+                                return arg;
+                            }
+    
+                            let output = identity<string>("myString");
+                        </code>
+                    </pre>
+                </section>
             </section>
             <!-- TypeScript Decorators -->
             <section>
                 <h2>TypeScript Decorators</h2>
-                <p>Instead of wrapping the function with another function, we can use decorators</p>
-                <pre>
-                    <code data-trim data-noescape class="js">
-                        function f() {
-                            console.log("f(): evaluated");
-                            return function (target, propertyKey: string, descriptor: PropertyDescriptor) {
-                                console.log("f(): called");
+                <section>
+                    <br>
+                    <p>Instead of wrapping the function with another function, we can use decorators</p>
+                    <pre>
+                        <code data-trim data-noescape class="js">
+                            function f() {
+                                console.log("f(): evaluated");
+                                return function (target, propertyKey: string, descriptor: PropertyDescriptor) {
+                                    console.log("f(): called");
+                                }
                             }
-                        }
-                        
-                        function g() {
-                            console.log("g(): evaluated");
-                            return function (target, propertyKey: string, descriptor: PropertyDescriptor) {
-                                console.log("g(): called");
+                            function g() {
+                                console.log("g(): evaluated");
+                                return function (target, propertyKey: string, descriptor: PropertyDescriptor) {
+                                    console.log("g(): called");
+                                }
                             }
-                        }
-                        
-                        class C {
-                            @f()
-                            @g()
-                            method() {}
-                        }
-                    </code>
-                </pre>
+                            class C {
+                                @f()
+                                @g()
+                                method() {}
+                            }
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h3>Evaluation</h3>
+                    <div class="fragment">    
+                        <pre>
+                            <code data-trim data-noescape class="js">
+                                f(): evaluated
+                                g(): evaluated
+                                g(): called
+                                f(): called
+                            </code>
+                        </pre>
+                    </div>
+                </section>
             </section>
             <!-- Node.js with Typescript -->
             <section>
                 <h2>Node.js with Typescript</h2>
                 <section>
-                    <p>yarn add ts-node</p>
+                    <p>yarn add @types/node</p>
+                    <p>yarn add ts-node --> cli</p>
                     <p>Add library types: <a href="https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types">DefinitelyTyped</a></p>
-                    <p>Use typescript modules and export to define node modules</p>
+                    <p>Use typescript 'modules' and 'export' to define node modules</p>
                 </section>
                 <section>
                     <pre>
@@ -330,6 +361,47 @@
 
                             import { ItemsController } from './items.controller';
                             const itemsController = new ItemsController();
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <pre>
+                        <code data-trim data-noescape class="js">
+                            var myObj = {
+                                specialFunction: function () {console.log("a");},
+                                anotherSpecialFunction: function () {console.log("b");},
+                                getAsyncData: function (cb) {
+                                    cb();
+                                },
+                                render: function () {
+                                    var that = this;
+                                    this.getAsyncData(function () {
+                                        that.specialFunction();
+                                        that.anotherSpecialFunction();
+                                    });
+                                }
+                            };
+                            myObj.render();
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <pre>
+                        <code data-trim data-noescape class="js">
+                            var myObj = {
+                                specialFunction: function () {console.log("a");},
+                                anotherSpecialFunction: function () {console.log("b");},
+                                getAsyncData: function (cb) {
+                                    cb();
+                                },
+                                render: function () {
+                                    this.getAsyncData(function () {
+                                        this.specialFunction();
+                                        this.anotherSpecialFunction();
+                                    }.bind(this));
+                                }
+                            };
+                            myObj.render();
                         </code>
                     </pre>
                 </section>
@@ -348,7 +420,7 @@
                                         <li>Interface for <code>ItemsController</code> class which will include: create/list/show/delete functions</li>
                                         <li>Model for <code>Item</code> with the following: name, description, price, address, isInStock, amount, creator, itemType</li>
                                         <li>Enum for itemType which declare categories of items</li>
-                                        <li>Model for <code>User</code> with the following: firstName, lastName, address, age, attUUID</li>
+                                        <li>Model for <code>User</code> with the following: firstName, lastName, address, age, attUUID (all private). One public method to get the full name</li>
                                         <li>App class which will be run by Node and print all data</li>
                                     </ul>
                                 </li>
