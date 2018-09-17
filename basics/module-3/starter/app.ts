@@ -1,10 +1,11 @@
-import * as express from 'express'
-import * as bodyParser from 'body-parser';
-import * as cors from 'cors';
-import { itemsRouter } from './controllers/items/router';
-const app = express();
-app.use(cors());
-app.use(bodyParser.json());
-app.use('/api/items', itemsRouter)
+import { ItemsController } from "./controllers/items.controller";
+import { Item } from "./models/item.model";
+import { ItemType } from "./enums/item-type.enum";
 
-app.listen(3000, () => console.log('app listening on port 3000!'))
+
+let itemsController = new ItemsController();
+let item = new Item("Table", "Designers table", 1350, "TLV", true, 1, "almog", ItemType.Garden);
+console.log("inserted item", item);
+console.log("items", itemsController.list());
+itemsController.create(item);
+console.log("items after insert", itemsController.list());

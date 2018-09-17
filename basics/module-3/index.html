@@ -1,284 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Node.js</title>
     <link rel="stylesheet" href="../assets/css/reveal.css">
     <link rel="stylesheet" href="../assets/css/theme/beige.css">
     <link rel="stylesheet" href="../assets/lib/css/zenburn.css">
     <link rel="stylesheet" href="../styles/main.css">
 </head>
-
 <body>
     <div class="att_logo"></div>
     <div class="reveal">
         <div class="slides">
+            <!-- Node.js Basics -->
             <section>
-                <h1>Events & Async</h1>
-                <sub>By Nabil Naffar & Danny Vernovsky & Almog Laktivi</sub>
+                <h1>Node.js Basics</h1>
+                <sub>By Almog Laktivi</sub>
             </section>
+            <!-- In This Module -->
             <section>
                 <h2>In This Module</h2>
-                <p>Middlewares</p>
-                <p>Events</p>
+                <p>Callbacks</p>
                 <p>Promises</p>
-                <p>Async-Await</p>
-                <p>File API</p>
+                <p>Async/Await</p>
             </section>
+            <!-- Callbacks -->
             <section>
-                <h2>Middleware example</h2>
-                <pre class="wide">
+                <h2>Callbacks</h2>
+                <section>
+                    <h3>What is callback?</h3>
+                    <iframe src="https://giphy.com/embed/8vvW3EUR0jLTlJQ8i4" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/statefarm-ad-8vvW3EUR0jLTlJQ8i4">via GIPHY</a></p>
+                </section>
+                <section>
+                    <h3>A callback is a function that is to be executed after another function has finished executing </h3>
+                    <span>In JavaScript, functions are objects. ... Any function that is passed as an argument is called a callback function</span>
+                </section>
+                <section>
+                    <h3>Callback example</h3>
+                    <pre>
                         <code data-trim data-noescape class="ts">
-                            function authenticate(req: express.Request, res: express.Response, next: express.NextFunction) {
-                                const userId = req.header('x-auth');
-                            
-                                if (!userId || userId !== 'Danny') {
-                                    console.log(userId);
-                                    res.status(401).send('Authentication Error');
-                                }
-                            
-                                res.set('x-user-surname', 'Vernovsky');
-                                next();
+                            function doExcercise(num: number, midCallback: ()=>void, finishCallback: (num: number)=>void) {
+                                //do something:
+                                num++;
+                                //callback 1:
+                                midCallback();
+                                //do something else:
+                                num--;
+                                //callback 2:
+                                finishCallback(num);
                             }
+
+                            doExcercise(12, ()=>{ console.log("mid"); }, (num) => { console.log(num); })
                         </code>
                     </pre>
+                </section>
+                <section>
+                    <h2>Callback function result standard</h2>
+                    <pre>  
+                        <code data-trim data-noescape class="ts">
+                            fs.getFile((err, result)=>{
+                                if(err){
+                                    // do something with error
+                                    return;
+                                }
+    
+                                // do something with result
+                            }); 
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h3>So whats the problem with callback anyway?</h3>
+                    <img class="fragment" src="../assets/callbackhell.png" />
+                </section>
+                <section>
+                    <h3>What's the solution?</h3>
+                </section>
             </section>
-            <section>
-                <h2>Observer</h2>
-                <table>
-                    <tr>
-                        <td>
-                            <img src="../assets/hubble.png" width="400" />
-                        </td>
-                        <td style="vertical-align: top">
-                            <ul>
-                                <li>Full Orbit in 96 Minutes</li>
-                                <li>8ft Mirror Diameter</li>
-                                <li>~550km Above Surface</li>
-                                <li>7.59km/s Velocity</li>
-                            </ul>
-                        </td>
-                    </tr>
-                </table>
-            </section>
-            <section>
-                <h2>Events</h2>
-                Emitter side
-                <pre>
-                    <code data-trim data-noescape class="ts">
-                        const event = new EventEmitter();
-                        event.emit('data-received', {data: 'some new data'});
-                    </code>
-                </pre> Observer side
-                <pre>
-                    <code data-trim data-noescape class="ts">
-                        event.on('data-received', (eventArgs)=>{
-                            // do something with the data
-                        });
-                    </code>
-                </pre>
-            </section>
-            <section>
-                <h2>Node.js Event Emitter
-                </h2>
-                Notable EventEmitter functions
-                <pre>
-                    <code data-trim data-noescape class="ts">
-                        emitter.addListener(eventName, listener)
-                        emitter.emit(eventName[, ...args])
-                        emitter.eventNames()
-                        emitter.listenerCount(eventName)
-                        emitter.listeners(eventName)
-                        emitter.on(eventName, listener)
-                        emitter.once(eventName, listener)
-                    </code>
-                </pre>
-            </section>
+            <!-- Promises -->
             <section>
                 <h2>Promises</h2>
-                <p class="fragment">So whats the problem with callback anyway?</p>
-                <img class="fragment" src="../assets/callbackhell.png" />
-            </section>
-            <section>
-                <h2>Promises
-                    <a href="https://www.youtube.com/channel/UCsXVk37bltHxD1rDPwtNM8Q">
-                        <span style="font-size: 26px">In a nutshell(kurzgesagt)</span>
-                    </a>
-                </h2>
-                <pre>  
-                    <code data-trim data-noescape class="ts">
-                        function getData(){
-                            return new Promise((resolve, reject))=>{
-                                someAsyncSource.getSomeData((err, res)=>{
-                                    if(err){
-                                        return reject(err);
-                                    }
-                                    resolve(res);
-                                });
-                            });
-                        }
-                    </code>
-                </pre>
-            </section>
-            <section>
-                <h2>Promises cont.</h2>
-                <pre>  
-                    <code data-trim data-noescape class="ts">
-                        getData()
-                        .then((data)=>{
-                            // do something with data 
-                        })
-                        .catch((error)=>{
-                            // do something with error
-                        })
-                        .finally(()=>{
-                            // do something at the end
-                        });
-                    </code>
-                </pre>
-            </section>
-            <section>
-                <h2>This is awesome, but...</h2>
-                <pre>  
-                    <code data-trim data-noescape class="ts">
-                        getData()
-                        .then((data)=>{
-                            // manipulate data
-                            getMoreData(data)
-                            .then((moreData)=>{
-                                // manipulate more data
-                                getEvenMoreData(modeData)
-                                .then((evenModeData)=>{
-                                    // handle data
-                                })
-                                .catch((er)r=>{
-                                    // handle errors of getEvenMoreData
-                                });
+                <section>
+                    <h3>What is promise?</h3>
+                    <iframe src="https://giphy.com/embed/8vvW3EUR0jLTlJQ8i4" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/statefarm-ad-8vvW3EUR0jLTlJQ8i4">via GIPHY</a></p>
+                </section>
+                <section>
+                    <h3>The Promise object represents the eventual completion (or failure) of an asynchronous operation, and its resulting value</h3>
+                </section>
+                <section>
+                    <h3>Promise example</h3>
+                    <pre>
+                        <code data-trim data-noescape class="ts">
+                            let promise1 = new Promise((resolve, reject) => {
+                                setTimeout(function() { 
+                                  resolve('foo');
+                                }, 300);
+                              });
+                              
+                              promise1.then((value) => { 
+                                console.log(value);
+                                // expected output: "foo"
+                              }).catch((err: Error) => {
+                                  console.error(err);
+                              });
+                              
+                              console.log(promise1);
+                              // expected output: [object Promise]
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Promises cont.</h2>
+                    <pre>  
+                        <code data-trim data-noescape class="ts">
+                            getData()
+                            .then((data)=>{
+                                // do something with data 
                             })
-                            .catch((err)=>{
-                                // handle errors of getMoreData
-                            }) 
-                        })
-                    </code> 
-                </pre>
+                            .catch((error)=>{
+                                // do something with error
+                            })
+                            .finally(()=>{
+                                // do something at the end
+                            });
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h3>This is awesome, but...</h3>
+                    <pre>  
+                        <code data-trim data-noescape class="ts">
+                            getData()
+                            .then((data)=>{
+                                // manipulate data
+                                getMoreData(data)
+                                .then((moreData)=>{
+                                    // manipulate more data
+                                    getEvenMoreData(modeData)
+                                    .then((evenModeData)=>{
+                                        // handle data
+                                    })
+                                    .catch((er)r=>{
+                                        // handle errors of getEvenMoreData
+                                    });
+                                })
+                                .catch((err)=>{
+                                    // handle errors of getMoreData
+                                }) 
+                            })
+                        </code> 
+                    </pre>
+                </section>
+                <section>
+                    <h3>What's the solution?</h3>
+                </section>
             </section>
+            <!-- Async/Await -->
             <section>
                 <h2>Async/await</h2>
-                <pre>  
-                    <code data-trim data-noescape class="ts">
-                        async function handleData(){
-                            try{
-                                const data = await dataService.getData();
-                                // do something with data
-                            } catch (error){
-                                // do something with error
-                            }
-                        }
-                    </code>
-                </pre>
-                <ul class="fragment">
-                    <li>Just a wrapper around promises</li>
-                    <li>In future: unhandled promises will fail process</li>
-                    <li>Each function using await should be masked as <code>async</code></li>
-                </ul>
-            </section>
-            <section>
-                <h2>Advanced async/await</h2>
-                <pre>  
-                    <code data-trim data-noescape class="ts">
-                            async function handleLotsOfData(){
-                                try{
-                                    const dataPromse = dataService.getData();
-                                    const moreDataPromise = dataService.getMoredata();
-
-                                    const [data, moreData] = 
-                                        await Prmise.all([dataPromise, moreDataPrmise]);
-                                    // do something with data
-                                } catch (error){
-                                    // do something with error
+                <section>
+                    <h3>Definition</h3>
+                    <span>TypeScript supports asynchronous functions for engines that have native support for ES6 generators, e.g. Node v4 and above. Asynchronous functions are prefixed with the async keyword; await suspends the execution until an asynchronous function return promise is fulfilled and unwraps the value from the Promise returned</span>
+                </section>
+                <section>
+                    <h3>Example</h3>
+                    <pre>
+                        <code data-trim data-noescape class="ts">
+                            async function printDelayed(elements: string[]) {
+                                for (const element of elements) {
+                                    await delay(400);
+                                    console.log(element);
                                 }
                             }
-                    </code>
-                </pre>
-                <p>Use
-                    <a href="http://bluebirdjs.com/docs/getting-started.html">Bluebird</a> for awesome advanced async/await features</p>
-            </section>
-            <section>
-                <h2>Callback function result standard</h2>
-                <pre>  
-                    <code data-trim data-noescape class="ts">
-                        fs.getFile((err, result)=>{
-                            if(err){
-                                // do something with error
-                                return;
+                            async function delay(milliseconds: number) {
+                                return new Promise<void>(resolve => {
+                                    setTimeout(resolve, milliseconds);
+                                });
                             }
-
-                            // do something with result
-                        }); 
-                    </code>
-                </pre>
+                            printDelayed(["Hello", "beautiful", "asynchronous", "world"]).then(() => {
+                                console.log();
+                                console.log("Printed every element!");
+                            });
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <ul>
+                        <li>Just a wrapper around promises</li>
+                        <li>In future: unhandled promises will fail process, meanwhile surround with try/catch</li>
+                        <li>Each function using await should be masked as <code>async</code></li>
+                    </ul>
+                </section>
+                <section>
+                    <p>
+                        Use <a href="http://bluebirdjs.com/docs/getting-started.html">Bluebird</a> for awesome advanced async/await features
+                    </p>
+                </section>
             </section>
-            <section>
-                <h2>fs
-                    <span style="font-size: 26px">(file system)</span> api</h2>
-                <p>Notable fs API functions</p>
-                <pre>  
-                    <code data-trim data-noescape class="ts">
-                        fs.writeFile(file, data[, options], callback);
-                        fs.readFile(path[, options], callback);
-                        fs.read(fd, buffer, offset, length, position, callback);
-                        fs.lstat(path, callback);
-
-                        ...and tons more...
-                    </code>
-                </pre>
-                <span class="fragment" style="font-size: 26px">
-                    <i>* Most nodejs api are async by default</i>
-                </span>
-            </section>
-            <section>
-                <h2>fs api
-                    <span style="font-size: 26px">sync</span>
-                </h2>
-                <p>Some of the API are available as sync</p>
-                <pre>  
-                    <code data-trim data-noescape class="ts">
-                        fs.writeFileSync(file, data[, options]);
-                        fs.lstatSync(path);
-                        fs.existsSync(path);
-                        fs.readFileSync(path[, options]);
-                    </code>
-                </pre>
-                <span class="fragment" style="font-size: 26px">
-                    <i>* When using sync function wrap with try..catch</i>
-                </span>
-            </section>
-            <section>
-                <img src="../assets/demotime.png" alt="">
-            </section>
+            <!-- exercise -->
             <section>
                 <table>
                     <tr>
                         <td style="width:50%">
-                            <img src="../assets/exercise-time.png" />
+                            <img src="../assets/exercise-time.png"/>
                         </td>
                         <td style="vertical-align: top; font-size:16px">
                             <ul style="list-style-type: none">
-                                <li>Move persistance layer to file API
+                                <li>Covert ItemsController API to work asynchronous with async/await
                                     <ul>
-                                        <li>Extract (if you haven't already an interface from the persistance api
-                                            so it will be easier to refactor later
-                                        </li>
-                                        <li>Every item should be in a separate file when filename is:
-                                            <code>[itemId].json</code>
-                                        </li>
-                                        <li>Don't use sync version of API
-                                        </li>
-                                        <li>Wrap fs api with promise and use async/await in your calls
-                                        </li>
+                                        <li>Convert all methods to async(will return promises)</li>
+                                        <li>Change methods consumers to use await to get the value</li>
+                                        <li>Print the result and make sure nothing change at the UX</li>
                                     </ul>
                                 </li>
                             </ul>
@@ -286,6 +220,7 @@
                     </tr>
                 </table>
             </section>
+            </div>
         </div>
         <script src="../assets/lib/js/head.min.js"></script>
         <script src="../assets/js/reveal.js"></script>
@@ -298,7 +233,26 @@
                     { src: '../assets/plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
                 ]
             });
+            let currentSlide;
+            Reveal.addEventListener('slidechanged', function (event) {
+                currentSlide = event.indexh;
+            });
+
+            Reveal.addEventListener('fragmentshown', function (event) {
+                if (event.fragment.id === 'rest_video_fragment') {
+                    document.getElementById('rest_video').play()
+                }
+                console.log(event);
+            });
+
+            Reveal.addEventListener('fragmenthidden', function (event) {
+                if (event.fragment.id === 'rest_video_fragment') {
+                    const video = document.getElementById('rest_video');
+                    video.pause();
+                    video.currentTime = 0;
+                }
+                console.log(event);
+            });
         </script>
 </body>
-
 </html>
