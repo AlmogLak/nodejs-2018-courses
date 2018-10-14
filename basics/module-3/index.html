@@ -51,8 +51,7 @@
                                 //callback 2:
                                 finishCallback(num);
                             }
-
-                            doExcercise(12, ()=>{ console.log("mid"); }, (num) => { console.log(num); })
+                            doExcercise(12, ()=>{ console.log("mid"); }, (num)=>{ console.log(num); })
                         </code>
                     </pre>
                 </section>
@@ -98,16 +97,12 @@
                                   resolve('foo');
                                 }, 300);
                               });
-                              
                               promise1.then((value) => { 
-                                console.log(value);
-                                // expected output: "foo"
+                                console.log(value); // expected output: "foo"
                               }).catch((err: Error) => {
                                   console.error(err);
                               });
-                              
-                              console.log(promise1);
-                              // expected output: [object Promise]
+                              console.log(promise1); // expected output: [object Promise]
                         </code>
                     </pre>
                 </section>
@@ -130,25 +125,20 @@
                 </section>
                 <section>
                     <br>
-                    <h3>This is awesome, but...</h3>
+                    <h3>Promises downsides</h3>
                     <pre>  
                         <code data-trim data-noescape class="ts">
                             getData()
-                            .then((data)=>{
-                                // manipulate data
+                            .then((data)=>{ // manipulate data
                                 getMoreData(data)
-                                .then((moreData)=>{
-                                    // manipulate more data
+                                .then((moreData)=>{ // manipulate more data
                                     getEvenMoreData(modeData)
-                                    .then((evenModeData)=>{
-                                        // handle data
+                                    .then((evenModeData)=>{ // handle data
                                     })
-                                    .catch((er)r=>{
-                                        // handle errors of getEvenMoreData
+                                    .catch((er)r=>{ // handle errors of getEvenMoreData
                                     });
                                 })
-                                .catch((err)=>{
-                                    // handle errors of getMoreData
+                                .catch((err)=>{ // handle errors of getMoreData
                                 }) 
                             })
                         </code> 
@@ -163,27 +153,29 @@
                 <h2>Async/await</h2>
                 <section>
                     <h3>Definition</h3>
-                    <span>TypeScript supports asynchronous functions for engines that have native support for ES6 generators, e.g. Node v4 and above. Asynchronous functions are prefixed with the async keyword; await suspends the execution until an asynchronous function return promise is fulfilled and unwraps the value from the Promise returned</span>
+                    <span>Asynchronous functions are prefixed with the <b>async</b> keyword
+                        <br><br>
+                        <b>await</b> suspends the execution until an asynchronous function return promise is fulfilled and unwraps the value from the Promise returned</span>
                 </section>
                 <section>
                     <br>
                     <h3>Example</h3>
                     <pre>
                         <code data-trim data-noescape class="ts">
-                            async function printDelayed(elements: string[]) {
-                                for (const element of elements) {
-                                    await delay(400);
-                                    console.log(element);
-                                }
-                            }
-                            async function delay(milliseconds: number) {
-                                return new Promise<void>(resolve => {
+                            function delay(milliseconds: number): Promise&#60;void&#62; {
+                                return new Promise&#60;void&#62;(resolve => {
                                     setTimeout(resolve, milliseconds);
                                 });
                             }
-                            printDelayed(["Hello", "beautiful", "asynchronous", "world"]).then(() => {
-                                console.log();
-                                console.log("Printed every element!");
+                            async function printDelayed(elements: string[]) {
+                                for (const element of elements) {
+                                    console.log("Waiting 2000 ms");
+                                    await delay(2000);
+                                    console.log(element);
+                                }
+                            }
+                            printDelayed(["Hello", "beautiful", "world"]).then(() => {
+                                console.log("done!");
                             });
                         </code>
                     </pre>
@@ -192,7 +184,7 @@
                     <ul>
                         <li>Just a wrapper around promises</li>
                         <li>In future: unhandled promises will fail process, meanwhile surround with try/catch</li>
-                        <li>Each function using await should be masked as <code>async</code></li>
+                        <li>Each function using await should be marked as <b>async</b></li>
                     </ul>
                 </section>
                 <section>
@@ -210,9 +202,9 @@
                         </td>
                         <td style="vertical-align: top; font-size:16px">
                             <ul style="list-style-type: none">
-                                <li>Covert ItemsController API to work asynchronous with async/await
+                                <li>Change ItemsController API to work asynchronous with async/await
                                     <ul>
-                                        <li>Convert all methods to async(will return promises)</li>
+                                        <li>Change all methods to be async(will return promises)</li>
                                         <li>Change methods consumers to use await to get the value</li>
                                         <li>Print the result and make sure nothing change at the UX</li>
                                     </ul>

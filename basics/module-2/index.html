@@ -65,7 +65,7 @@
                 <h2>Typescript rocks!</h2>
                 <pre class="wide">
                     <code data-trim data-noescape class="ts">
-                        function getUserById(id: number, connection: MongoConnection): Promise<User> {
+                        function getUserById(id: number, connection: MongoConnection): Promise&#60;User&#62; {
                             try {
                                 const usersCollection = await connection.getCollection('users');
                                 return await usersCollection.find({_id: id}...)
@@ -283,10 +283,8 @@
                         <code data-trim data-noescape class="js">
                             function identity&#60;T&#62;(arg: T): T {
                                     return arg;
-                                }                                    
-    
+                                }
                             let output = identity&#60;string&#62;("myString");
-                            let output2 = identity("myString");
                             console.log(typeof(output));
                             output = 14; // Error: Type '14' is not assignable to type 'string'
                         </code>

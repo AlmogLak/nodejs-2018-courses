@@ -29,7 +29,7 @@
                 <h2>HTTP API</h2>
                 <section>
                     <p>In order to work with HTTP API over TypeScript you have to add @types/node library:</p>
-                    <p><code>yarn add @types/node</code></p>
+                    <p><pre><code>yarn add @types/node</code></pre></p>
                 </section>
                 <section>
                     <h3>Create server function</h3>
@@ -59,17 +59,21 @@
                     <h3>Create server with Express</h3>
                     <span>
                         You need to install express and it's type definition:
-                        <code>
+                        <pre><code>
                             yarn add express
                             yarn add @types/express
-                        </code>
+                        </code></pre>
+                        
                     </span>
                     <pre>
                         <code data-trim data-noescape class="ts">
                             import * as express from 'express';
-                            const app = express()
-                            app.get('/', (req, res) => res.send('Hello World!'))
-                            app.listen(3000, () => console.log('Example app listening on port 3000!'))
+                            import * as bodyParser from "body-parser";
+                            const app = express();
+                            app.use(bodyParser.json());
+                            app.get('/', (req, res) => res.send('Hello World!'));
+                            app.post('/', (req, res) => res.send(req.body));
+                            app.listen(3000, () => console.log('Example app listening on port 3000!'));
                         </code>
                     </pre>
                 </section>
@@ -105,6 +109,7 @@
                     </code>
                 </pre>
             </section>
+            <!-- Summary -->
             <section>
                 <h2>Summary</h2>
                 <iframe src="https://giphy.com/embed/QhDNPv9wHl7Wg" width="480" height="366" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/question-waiting-jrock-QhDNPv9wHl7Wg">via GIPHY</a></p>
