@@ -22,12 +22,11 @@
             <!-- In This Module -->
             <section>
                 <h2>In This Module</h2>
-                <p>Typescript 101 
-                    <span style="font-size: 22px;">As fast as possible</span>
+                <p>What is Typescript</p>
+                <p>Typescript basics 
+                        <span style="font-size: 22px;">Types, Interfaces, Enums, Decorators</span>
                     <br/>
-                    <p>Typescript vs Javascript</p>
-                    <p>Types, Interfaces, Enums and decorators in Typescript</p>
-                    <p>Modules & Node.js with Typescript</p>
+                <p>Modules & Node.js with Typescript</p>
                 </p>
             </section>
             <!-- JS awesome -->
@@ -40,7 +39,7 @@
             </section>
             <!-- JS downsides -->
             <section>
-                <h2>But, it's also...</h2>
+                <h3>JS have downsides, I.E: it's more verbose</h3>
                 <pre>
                     <code data-trim data-noescape class="js">
                         function getUserById(id, connection, callback) {
@@ -84,10 +83,9 @@
                     <h5>TypeScript is a strongly typed, object oriented, compiled language</h5>
                     <br/>
                     <ul><h5>features:</h5>
-                        <li>TypeScript is just JavaScript</li>
-                        <li>JavaScript is TypeScript(sort of)</li>
+                        <li>TypeScript transpiled to JavaScript</li>
                         <li>TypeScript supports other JS libraries</li>
-                        <li>TypeScript is portable</li>
+                        <li>TypeScript is portable (cross-platform)</li>
                         <li>Aligned with the ECMAScript6 specification</li>
                     </ul>
                 </section>
@@ -125,12 +123,7 @@
                     <h3>Define your own types</h3>
                     <pre>
                         <code data-trim data-noescape class="js">
-                            interface IGreeter {
-                                greeting: string,
-                                greet()
-                            }
-                            
-                            class Greeter implements IGreeter {
+                            class Greeter {
                                 greeting: string;
                                 constructor(message: string) {
                                     this.greeting = message;
@@ -146,6 +139,7 @@
                             }
 
                             let greeter = new Greeter("world");
+                            let person = new Person("Almog", "Laktivi");
                         </code>
                     </pre>
                 </section>
@@ -161,12 +155,14 @@
                                 currentTime: Date;
                                 setTime(d: Date);
                             }
-                            
                             class Clock implements ClockInterface {
                                 currentTime: Date;
-                                setTime(d: Date) {
-                                    this.currentTime = d;
-                                }
+                                setTime(d: Date) { this.currentTime = d; }
+                                constructor(h: number, m: number) { }
+                            }
+                            class SandClock implements ClockInterface {
+                                currentTime: Date;
+                                setTime(d: Date) { this.currentTime = d; }
                                 constructor(h: number, m: number) { }
                             }
                         </code>
@@ -215,8 +211,7 @@
                             printLabel(myObj);
                         </code>
                     </pre>
-                </section>
-                
+                </section> 
             </section>
             <!-- Typescript Enums -->
             <section>
@@ -244,12 +239,10 @@
                                 Circle,
                                 Square,
                             }
-                            
                             interface Circle {
                                 kind: ShapeKind.Circle;
                                 radius: number;
                             }
-                            
                             interface Square {
                                 kind: ShapeKind.Square;
                                 sideLength: number;
@@ -279,7 +272,7 @@
                                 return arg;
                             }
 
-                            let output = identity<string>("myString");
+                            let output = identity("myString");
                         </code>
                     </pre>
                     <h4>What is the problem?</h4>
@@ -288,11 +281,14 @@
                     <h3>Solution with generics</h3>
                     <pre>
                         <code data-trim data-noescape class="js">
-                            function identity<T>(arg: T): T {
-                                return arg;
-                            }
+                            function identity&#60;T&#62;(arg: T): T {
+                                    return arg;
+                                }                                    
     
-                            let output = identity<string>("myString");
+                            let output = identity&#60;string&#62;("myString");
+                            let output2 = identity("myString");
+                            console.log(typeof(output));
+                            output = 14; // Error: Type '14' is not assignable to type 'string'
                         </code>
                     </pre>
                 </section>
