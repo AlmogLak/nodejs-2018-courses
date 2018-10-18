@@ -1,0 +1,14 @@
+body {
+    width: 400px;
+}
+
+button{
+    cursor: pointer;
+    background: none;
+}
+
+.add-item-button{
+    background: #389fe0;
+    color: #fff;
+    font-weight: bold;
+}

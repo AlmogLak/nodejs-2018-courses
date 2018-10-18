@@ -1,0 +1,23 @@
+{
+  "name": "starter",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "mocha --require ts-node/register \"**/*.spec.ts\"",
+    "test-watch": "mocha --require ts-node/register \"**/*.spec.ts\" --watch --watch-extensions ts",
+    "coverage": "nyc --reporter=html mocha --require ts-node/register \"**/*.spec.ts\""
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.17.0",
+    "@types/node": "^10.7.1",
+    "@types/sinon": "^4.3.0",
+    "chai": "^4.1.2",
+    "sinon": "^4.4.6",
+    "ts-node": "^5.0.1"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4"
+  }
+}
