@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../assets/css/reveal.css">
+    <link rel="stylesheet" href="../assets/css/theme/beige.css">
+    <link rel="stylesheet" href="../assets/lib/css/zenburn.css">
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+
+<body>
+    <div class="att_logo"></div>
+    <div class="reveal">
+        <div class="slides">
+            <!-- Introduction to Node.js -->
+            <section>
+                <h1>Introduction to Node.js</h1>
+                <sub>By Nabil Naffar & Danny Vernovsky & Almog Laktivi</sub>
+            </section>
+            <!-- Agenda -->
+            <section>
+                <h2>Agenda</h2>
+                <div>
+                    <p>Quick review on the basics</p>
+                    <p>Express.js</p>
+                    <p>Events & Async</p>
+                    <p>Persistance</p>
+                    <p>Socket.IO</p>
+                    <p>Testing & Debugging</p>
+                </div>
+            </section>
+            <!-- Course Objectives -->
+            <section>
+                <table>
+                    <tr>
+                        <td>
+                            <h2>Course Objectives</h2>
+                            <p>Node.js APIs</p>
+                            <p>yarn package manager</p>
+                            <p>Express framework</p>
+                            <p>Node.js & Databases</p>
+                            <p>How to group shop in ebay/amazon</p>
+                        </td>
+                        <td>
+                            <div class="what-will-you-know"></div>
+                        </td>
+                    </tr>
+                </table>
+            </section>
+            <!-- install -->
+            <section>
+                <h2>So what will you need to install?</h2>
+                <p>
+                    Node.js & NPM |
+                    <a href="https://nodejs.org/en/">Download</a>
+                </p>
+                <p>
+                    Yarn |
+                    <a href="https://yarnpkg.com/en/docs/install">Download</a>
+                </p>
+                <p>
+                    IDE: VS Code |
+                    <a href="https://code.visualstudio.com/download">Download</a>
+                </p>
+            </section>
+            <!-- package manager -->
+            <section>
+                <section>
+                    <h2>What package manager is?</h2>
+                    <p>Collection of software tools that automate the process of installing, upgrading, configuring, and removing computer programs</p>
+                </section>
+                <section>
+                    <h2>Npm vs Yarn</h2>
+                    <p>Requesting packages</p>
+                    <p>Task runner</p>
+                    <p>Deployment scripts</p>
+                    <p>Publishing packages</p>
+                </section>
+            </section>
+            <!-- npm help -->
+            <section>
+                <pre>
+                    <a href="https://www.npmjs.com/">https://www.npmjs.com/</a>
+                    <code data-trim data-noescape class="bash">
+                    root@HOME:~# npm --help
+
+                    Usage: npm command
+                    
+                    where command is one of:
+                        access, <mark>adduser</mark>, bin, bugs, c, cache, completion, config,
+                        ddp, dedupe, deprecate, dist-tag, docs, doctor, edit,
+                        explore, get, help, help-search, i, init, <mark>install</mark>,
+                        install-test, it, <mark>link</mark>, <mark>list</mark>, ln, login, logout, ls,
+                        outdated, owner, pack, ping, prefix, prune, <mark>publish</mark>, rb,
+                        rebuild, repo, restart, root, run, run-script, s, se,
+                        search, set, shrinkwrap, star, stars, start, stop, t, team,
+                        test, tst, un, uninstall, unpublish, unstar, up, update, v,
+                        version, view, whoami
+                    
+                    npm <command> -h     quick help on <command>
+                    npm -l           display full usage info
+                    npm help <term>  search for help on <term>
+                    npm help npm     involved overview
+                    </code>
+                </pre>
+            </section>
+            <!-- yarn help -->
+            <section>
+                <pre>
+                    <code data-trim data-noescape class="bash">
+                        root@HOME:~# yarn --help
+
+                        Usage: yarn [command] [flags]
+                        
+                        Options:
+                        
+                            -h, --help                      output usage information
+                            -V, --version                   output the version number
+                            --verbose                       output verbose messages on internal operations
+                            --offline                       trigger an error if any required dependencies are not available in local cache
+                            --prefer-offline                use network only if dependencies are not available in local cache
+                            --strict-semver
+                            --json
+                            --ignore-scripts                don't run lifecycle scripts
+                            --har                           save HAR output of network traffic
+                            --ignore-platform               ignore platform checks
+                            --ignore-engines                ignore engines check
+                            --ignore-optional               ignore optional dependencies
+                    </code>
+                </pre>
+            </section>
+            <!-- overview -->
+            <section>
+                <img src="../assets/overview.jpg" alt="">
+            </section>
+        </div>
+    </div>
+    <script src="../assets/lib/js/head.min.js"></script>
+    <script src="../assets/js/reveal.js"></script>
+    <script>
+        Reveal.initialize({
+            history: true,
+            dependencies: [
+                { src: '../assets/plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: '../assets/plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: '../assets/plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
+            ]
+        });
+    </script>
+</body>
+
+</html>

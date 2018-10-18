@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../assets/css/reveal.css">
+    <link rel="stylesheet" href="../assets/css/theme/beige.css">
+    <link rel="stylesheet" href="../assets/lib/css/zenburn.css">
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+
+<body>
+    <div class="att_logo"></div>
+    <div class="reveal">
+        <div class="slides">
+            <section>
+                <h1>Debugging & Tests</h1>
+                <sub>By Nabil Naffar & Danny Vernovsky & Almog Laktivi</sub>
+            </section>
+            <section>
+                <h2>Setting up debugger</h2>
+                <small>
+                    <code class="inline">--inspect</code> &
+                    <code class="inline">--inspect-brk</code> params allows to open TCP port to the debugger</small>
+                <img src="../assets/inspect.png" />
+                <small>
+                    <code class="inline">tsconfig.json</code> should be configured to create .ts.map files</small>
+                <img src="../assets/map.png" />
+            </section>
+            <section>
+                <h2>setting up ide</h2>
+                <img src="../assets/debug-webstorm.png" />
+                <img src="../assets/debug-vscode.png" />
+            </section>
+            <section>
+                <h2>testing</h2>
+                <img height="400" src="../assets/to-test-or.jpg" />
+                <p>
+                    <small>
+                        <i>To test or not to test</i>
+                    </small>
+                </p>
+            </section>
+            <section>
+                <h2>Testing stack</h2>
+                <ul>
+                    <li>Testing framework
+                        <code class="inline">mocha, jasmine, jest, alsatian</code>
+                    </li>
+                    <li>Assertion library
+                        <code class="inline">chai, assert, expect, should</code>
+                    </li>
+                    <li>Testing support tools (coverage, mutations)
+                        <code class="inline">istanbul, striker</code>
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <h2>mocha testing framework</h2>
+                <pre>
+                    <code data-trim data-noescape class="ts">
+                        describe('test suite', () => {
+                            before(() => {
+                                // will happen once for suite
+                            });
+                            beforeEach(() => {
+                                //will happen before every test
+                            })
+                            it('some test', () => {
+                                expect(true).to.be.eq(true);
+                            });
+                        
+                            it('some pending test');
+
+                            afterEach(() => {
+                                // will happen once after suite
+                            })
+                            after(() => {
+                                // will happen after evety test
+                            });
+                        });
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2 style="background: url('../assets/chai-logo.png') no-repeat; background-size: 90px; background-position:129px">assertion library</h2>
+                <small>
+                    <a href="http://www.chaijs.com/">Chai</a> is a BDD / TDD assertion library for node and the browser that can be delightfully paired with
+                    any javascript testing framework.</small>
+                <img src="../assets/chai-frameworks.png" />
+            </section>
+            <section>
+                <h2>Coverage: Istanbul</h2>
+                <div style="position:relative">
+                    <div style="position:absolute" class="fragment fade-out">
+                        <img src="../assets/istanul-city.jpeg" />
+                    </div>
+                    <div style="position:absolute" class="fragment">
+                        <img src="../assets/istanbul-library.png" />
+                    </div>
+                </div>
+            </section>
+            <section>
+                <h2>Spies</h2>
+                <img src="../assets/sinon.png" />
+            </section>
+            <section>
+                <h2>Spies</h2>
+                <small>A test spy is a function that records arguments, return value, the value of this and exception thrown (if
+                    any) for all its calls. </small>
+                <pre>
+                    <code data-trim data-noescape class="ts">
+                        class PersistanceMock implements PersistanceInterface {
+                            getItems = sinon.spy();
+                            getItemById = sinon.spy();
+                            insertItem = sinon.spy();
+                            updateItem = sinon.spy();
+                            deleteItem = sinon.spy();
+                        }
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Stubs</h2>
+                <small>Test stubs are functions (spies) with pre-programmed behavior. They support the full test spy API in addition
+                    to methods which can be used to alter the stub’s behavior.</small>
+                <pre>
+                    <code data-trim data-noescape class="ts">
+                        var callback = sinon.stub();
+                        callback.withArgs(42).returns(1);
+                        callback.withArgs(1).throws("TypeError");
+                    
+                        callback(); // No return value, no exception
+                        callback(42); // Returns 1
+                        callback(1); // Throws TypeError
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Bonus: Contract testing</h2>
+                <small>
+                    <a href="https://github.com/visionmedia/supertest">Super-agent</a> driven library for testing node.js HTTP servers using a fluent API
+                </small>
+                <pre class="wide">
+                    <code data-trim data-noescape class="ts">
+                        it('should return 401 if put was send without auth header', (done) => {
+                            supertest(app)
+                                .post('/api/items')
+                                .expect(401)
+                                .end(()=>{
+                                    done();
+                                });
+                        });
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <img src="../assets/demotime.png" alt="">
+            </section>
+            <section>
+                <table>
+                    <tr>
+                        <td style="width:50%">
+                            <img src="../assets/exercise-time.png" />
+                        </td>
+                        <td style="vertical-align: top; font-size:16px">
+                            <ul style="list-style-type: none">
+                                <li>
+                                    <h4>Put your code under tests</h4>
+                                    <ul>
+                                        <li>
+                                            Separate between the controller and the logic.
+                                        </li>
+                                        <li>Add tests to the logic, expecially at the PUT request</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <br/>
+                            <br/>
+                            <ul style="list-style-type: none">
+                                <li>
+                                    <h4>notes</h4>
+                                </li>
+                                <ul>
+                                    <li>Use
+                                        <code class="inline">sinon.spy()</code> to mock functionality</li>
+                                </ul>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            </section>
+        </div>
+    </div>
+    <script src="../assets/lib/js/head.min.js"></script>
+    <script src="../assets/js/reveal.js"></script>
+    <script>
+        Reveal.initialize({
+            history: true,
+            dependencies: [
+                { src: '../assets/plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: '../assets/plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: '../assets/plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
+            ]
+        });
+        let currentSlide;
+        Reveal.addEventListener('slidechanged', function (event) {
+            currentSlide = event.indexh;
+        });
+
+        Reveal.addEventListener('fragmentshown', function (event) {
+            if (event.fragment.id === 'rest_video_fragment') {
+                document.getElementById('rest_video').play()
+            }
+            console.log(event);
+        });
+
+        Reveal.addEventListener('fragmenthidden', function (event) {
+            if (event.fragment.id === 'rest_video_fragment') {
+                const video = document.getElementById('rest_video');
+                video.pause();
+                video.currentTime = 0;
+            }
+            console.log(event);
+        });
+    </script>
+</body>
+
+</html>

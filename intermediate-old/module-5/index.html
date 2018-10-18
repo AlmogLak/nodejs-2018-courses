@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../assets/css/reveal.css">
+    <link rel="stylesheet" href="../assets/css/theme/beige.css">
+    <link rel="stylesheet" href="../assets/lib/css/zenburn.css">
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+
+<body>
+    <div class="att_logo"></div>
+    <div class="reveal">
+        <div class="slides">
+            <section>
+                <h1>Web sockets</h1>
+                <sub>By Nabil Naffar & Danny Vernovsky & Almog Laktivi</sub>
+            </section>
+            <section>
+                <h2>In This Module</h2>
+                <p>What is web socket?</p>
+                <p>socket.io</p>
+                <p>Streams</p>
+            </section>
+            <section>
+                <h2>http</h2>
+                <img src="assets/http.png" />
+            </section>
+            <section>
+                <h2>What is web socket?</h2>
+                <img src="assets/web-sockets.png" />
+            </section>
+            <section>
+                <h2>⚡ Web sockets power ⚡</h2>
+                <table>
+                    <tr>
+                        <td style="height:300px;width:400px;">
+                            <iframe width="500" height="400" style="height: 500px" src="https://socket-io-chat.now.sh/" frameborder="0"></iframe>
+                        </td>
+                        <td style="height:300px;width:400px;">
+                            <iframe width="500" height="400" src="https://socket-io-chat.now.sh/" frameborder="0"></iframe>
+                        </td>
+                    </tr>
+                </table>
+            </section>
+            <section>
+                <h2>socket.io</h2>
+                <ul>
+                    <li>🎉 JS library</li>
+                    <li>🍻 Bi-directional real-time communication between client and server</li>
+                    <li>⚡ Uses Web-sockets</li>
+                    <li>🐌 Fallback to HTTP-polling</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Initiating socket.io</h2>
+                Client
+                <pre>
+                    <code data-trim data-noescape>
+                        &lt;script src="/socket.io/socket.io.js"&gt;&lt;/script&gt;
+                    </code>
+                </pre> Server
+                <pre>
+                    <code data-trim data-noescape>
+                        import * as socket from 'socket.io';
+                        import { Server } from 'http';
+                        import * as express from 'express';
+
+                        const app = express();
+                        const http = new Server(app);
+                        const io = socket(http);
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Using socket.io</h2>
+                It's all about
+                <a href="/module-3/#/4">events!!!</a>
+                <pre>
+                    <code data-trim data-noescape>
+                        io.on('connection', function (socket) {
+                            socket.emit('news', { hello: 'world' });
+                            socket.on('my other event', function (data) {
+                            console.log(data);
+                            });
+                            socket.broadcast.emit({message: 'send to all except me'});
+                        });
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <img src="../assets/demotime.png" alt="">
+            </section>
+            <section>
+                <h2>Streams</h2>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/pPrO2jlay40?rel=0&amp;start=7000&autoplay=1&mute=1" frameborder="0"
+                    allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </section>
+            <section>
+                <h2>What are Streams?</h2>
+                <ul>
+                    <li>Collections of data</li>
+                    <li>Just as Arrays or Strings
+                        <img src="assets/arrays-diagram.png" />
+                    </li>
+                    <li>Data might not be available all at once
+                        <img src="assets/streams-diagram.png" />
+                    </li>
+
+                </ul>
+            </section>
+            <section>
+                <h2>Stream types in Node.js</h2>
+                <img src="assets/stream-types.png" />
+            </section>
+            <section>
+                <h2>The pipe method</h2>
+                <pre>
+                            <code data-trim data-noescape>
+                                readableSrc
+                                    .pipe(transformStream1)
+                                    .pipe(transformStream2)
+                                    .pipe(finalWritableDest)
+                            </code>
+                        </pre>
+            </section>
+            <section>
+                <table>
+                    <tr>
+                        <td style="width:50%">
+                            <img src="../assets/exercise-time.png" />
+                        </td>
+                        <td style="vertical-align: top; font-size:16px">
+                            <ul style="list-style-type: none">
+                                <li>
+                                    <h4>Create MongoDB database for extension items</h4>
+                                    <ul>
+                                        <li>
+                                            Use the following string to connect to db
+                                            <br/>
+                                            <code>mongodb://nodejs_user:Aa123456@ds161148.mlab.com:61148/nodejs-course-2018</code>
+                                        </li>
+                                        <li>Move persistence layer to mongoDB CRUD</li>
+                                        <li>Create new collection for items. Name it '[yourattuid]_items'</li>
+                                        <li>Create database client which will serve your controller</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <br/>
+                            <br/>
+                            <ul style="list-style-type: none">
+                                <li>
+                                    <h4>notes</h4>
+                                </li>
+                                <ul>
+                                    <li>Remove fs.persistanse.ts file</li>
+                                    <li>You can use MongoDB shell to create, read, delete and update databases/collections/documents</li>
+                                </ul>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            </section>
+        </div>
+    </div>
+    <script src="../assets/lib/js/head.min.js"></script>
+    <script src="../assets/js/reveal.js"></script>
+    <script>
+        Reveal.initialize({
+            history: true,
+            dependencies: [
+                { src: '../assets/plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: '../assets/plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: '../assets/plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
+            ]
+        });
+        let currentSlide;
+        Reveal.addEventListener('slidechanged', function (event) {
+            currentSlide = event.indexh;
+        });
+
+        Reveal.addEventListener('fragmentshown', function (event) {
+            if (event.fragment.id === 'rest_video_fragment') {
+                document.getElementById('rest_video').play()
+            }
+            console.log(event);
+        });
+
+        Reveal.addEventListener('fragmenthidden', function (event) {
+            if (event.fragment.id === 'rest_video_fragment') {
+                const video = document.getElementById('rest_video');
+                video.pause();
+                video.currentTime = 0;
+            }
+            console.log(event);
+        });
+    </script>
+</body>
+
+</html>

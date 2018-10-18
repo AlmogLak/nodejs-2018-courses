@@ -1,0 +1,10 @@
+{
+  "watch":  "**/**.html",
+  "reload": "**/**.html",
+  "mount": [
+    {
+      "path":   "./",
+      "target": "./"
+    }
+  ]
+}
