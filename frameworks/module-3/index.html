@@ -24,8 +24,7 @@
                 <h2>In This Module</h2>
                 <p>Middlewares</p>
                 <p>Events</p>
-                <p>Async-Await</p>
-                <p>File API</p>
+                <p>FS API Reminder</p>
             </section>
             <section>
                 <h2>Middleware example</h2>
@@ -44,24 +43,6 @@
                             }
                         </code>
                     </pre>
-            </section>
-            <section>
-                <h2>Observer</h2>
-                <table>
-                    <tr>
-                        <td>
-                            <img src="../assets/hubble.png" width="400" />
-                        </td>
-                        <td style="vertical-align: top">
-                            <ul>
-                                <li>Full Orbit in 96 Minutes</li>
-                                <li>8ft Mirror Diameter</li>
-                                <li>~550km Above Surface</li>
-                                <li>7.59km/s Velocity</li>
-                            </ul>
-                        </td>
-                    </tr>
-                </table>
             </section>
             <section>
                 <h2>Events</h2>
@@ -103,6 +84,22 @@
                 <img src="../assets/demotime.png" alt="">
             </section>
             <section>
+                <h2>FS API reminder</h2>
+                <pre>
+                    <code data-trim data-noescape class="ts">
+                        import * as fs from 'fs';
+                        import * as path from 'path';
+                        const filePath = path.join(__dirname, 'test.txt');
+                        fs.writeFile(filePath, 'kush kush', (err)=>{
+                            console.log(err);
+                        });
+                        fs.readFile(filePath, (err, data) => {
+                            console.log(data.toString());
+                        })
+                    </code>
+                </pre>
+            </section>
+            <section>
                 <table>
                     <tr>
                         <td style="width:50%">
@@ -124,6 +121,7 @@
                                         </li>
                                     </ul>
                                 </li>
+                                <li>Add express middleware which will print to console each request and it's method</li>
                             </ul>
                         </td>
                     </tr>

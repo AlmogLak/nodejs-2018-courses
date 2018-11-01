@@ -48,7 +48,6 @@ export class FSPersistance implements PersistanceInterface {
                 if (err) {
                     reject(err);
                 }
-
                 resolve(item);
             });
         });
