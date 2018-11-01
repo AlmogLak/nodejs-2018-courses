@@ -1,1 +1,1 @@
-{"version":3,"file":"generics.js","sourceRoot":"","sources":["generics.ts"],"names":[],"mappings":";AAAA,kBAAqB,GAAM;IACvB,MAAM,CAAC,GAAG,CAAC;AACf,CAAC;AAED,IAAI,MAAM,GAAG,QAAQ,CAAS,UAAU,CAAC,CAAC;AAC1C,OAAO,CAAC,GAAG,CAAC,OAAM,CAAC,MAAM,CAAC,CAAC,CAAC"}
+{"version":3,"file":"generics.js","sourceRoot":"","sources":["generics.ts"],"names":[],"mappings":";AAAA,kBAAqB,GAAM;IACvB,OAAO,GAAG,CAAC;AACf,CAAC;AAED,IAAI,MAAM,GAAG,QAAQ,CAAS,UAAU,CAAC,CAAC;AAC1C,OAAO,CAAC,GAAG,CAAC,OAAM,CAAC,MAAM,CAAC,CAAC,CAAC"}

@@ -1,0 +1,17 @@
+{
+  "name": "att",
+  "version": "1.0.0",
+  "description": "djd dejhejbee r",
+  "main": "index.js",
+  "author": "Almog",
+  "license": "MIT",
+  "dependencies": {
+    "request": "^2.88.0"
+  },
+  "devDependencies": {
+    "@types/request": "^2.48.0"
+  },
+  "scripts": {
+    "c": "clear"
+  }
+}

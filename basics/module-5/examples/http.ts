@@ -6,7 +6,7 @@ class App {
 
     init() {
         let server = http.createServer((request, response) => {
-            console.log(request.url)
+            console.log(request.url);
             if (request.method === 'POST' && request.url === '/items') {
                 let body = new Array;
 

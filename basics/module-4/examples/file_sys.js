@@ -11,30 +11,35 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const fs = require("fs");
 const path = require("path");
 const filePath = path.join(__dirname, 'test.txt');
-console.log("__dirname", __dirname);
-console.log("__filename", __filename);
-console.log("filePath", filePath);
-try {
-    fs.writeFileSync(filePath, 'bla bla');
-}
-catch (error) {
-    console.error(error);
-}
+// console.log("__dirname", __dirname);
+// console.log("__filename", __filename);
+// console.log("filePath", filePath);
+// try {
+//     fs.writeFileSync(filePath, 'bla bla');
+// } catch (error) {
+//     console.error(error);
+// }
 // fs.writeFile(filePath, 'kush kush', (err)=>{
-//     console.log(err);
+//     if (err) {
+//         console.log(err);
+//         return;
+//     }
+//     console.log("Done!");
 // });
 // fs.readFile(filePath, (err, data) => {
+//     if (err) {
+//         console.log(err);
+//         return;
+//     }
 //     console.log(data.toString());
 // })
 function readFileData() {
-    return __awaiter(this, void 0, void 0, function* () {
-        return new Promise((resolve, reject) => {
-            fs.readFile(filePath, (err, data) => {
-                if (err) {
-                    return reject(err);
-                }
-                resolve(data.toString());
-            });
+    return new Promise((resolve, reject) => {
+        fs.readFile(filePath, (err, data) => {
+            if (err) {
+                return reject(err);
+            }
+            resolve(data.toString());
         });
     });
 }
