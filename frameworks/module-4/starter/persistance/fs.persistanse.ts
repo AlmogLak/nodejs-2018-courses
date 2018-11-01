@@ -20,14 +20,14 @@ export class FSPersistance implements PersistanceInterface {
     }
     getItems(): Promise<Item[]> {
         return new Promise<Item[]>((resolve, reject) => {
-            fs.readdir(ITEMS_FOLDER, async (err, result) => {
+            fs.readdir(ITEMS_FOLDER, async (err, itemFileNames) => {
                 try {
                     if (err) {
                         return reject(err);
                     }
                     const itemsPromises: Promise<Item>[] = [];
-                    for (const entry of result) {
-                        itemsPromises.push(this.readItemFile(entry));
+                    for (const filename of itemFileNames) {
+                        itemsPromises.push(this.readItemFile(filename));
                     }
                     const items = await Promise.all(itemsPromises);
                     resolve(items);
@@ -48,14 +48,12 @@ export class FSPersistance implements PersistanceInterface {
                 if (err) {
                     reject(err);
                 }
-
                 resolve(item);
             });
         });
     }
 
     async updateItem(itemId: number, item: Item): Promise<void> {
-        console.log('bla bla');
         await this.insertItem(item);
     }
 
@@ -66,7 +64,7 @@ export class FSPersistance implements PersistanceInterface {
                 if (err) {
                     return reject(err);
                 }
-
+                
                 resolve(JSON.parse(content));
             });
         });

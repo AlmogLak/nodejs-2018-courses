@@ -13,6 +13,11 @@ const io = socketIO(http);
 const itemsWebsocketController = new items_websocket_controller_1.ItemsWebsocketController(io);
 app.use(cors());
 app.use(bodyParser.json());
+app.use(printMethod);
 app.use('/api/items', router_1.itemsRouterFactory(itemsWebsocketController));
 http.listen(3000, () => console.log('app listening on port 3000!'));
+function printMethod(request, response, next) {
+    console.log(`New incomming request from type [${request.method}]`);
+    next();
+}
 //# sourceMappingURL=app.js.map

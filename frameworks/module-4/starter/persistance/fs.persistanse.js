@@ -25,14 +25,14 @@ class FSPersistance {
     }
     getItems() {
         return new Promise((resolve, reject) => {
-            fs.readdir(ITEMS_FOLDER, (err, result) => __awaiter(this, void 0, void 0, function* () {
+            fs.readdir(ITEMS_FOLDER, (err, itemFileNames) => __awaiter(this, void 0, void 0, function* () {
                 try {
                     if (err) {
                         return reject(err);
                     }
                     const itemsPromises = [];
-                    for (const entry of result) {
-                        itemsPromises.push(this.readItemFile(entry));
+                    for (const filename of itemFileNames) {
+                        itemsPromises.push(this.readItemFile(filename));
                     }
                     const items = yield Promise.all(itemsPromises);
                     resolve(items);
@@ -64,7 +64,6 @@ class FSPersistance {
     }
     updateItem(itemId, item) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log('bla bla');
             yield this.insertItem(item);
         });
     }

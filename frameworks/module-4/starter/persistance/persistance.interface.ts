@@ -6,4 +6,4 @@ export interface PersistanceInterface {
     insertItem(item: Item): Promise<Item>;
     updateItem(itemId: number, item: Item): Promise<void>;
     deleteItem(itemId: number): Promise<void>;
-};
+}
