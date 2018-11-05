@@ -1,5 +1,6 @@
-import * as express from 'express'
-const app = express()
+import * as express from 'express';
+const app = express();
+
 
 app.get('/', [authenticate, requestLog], (req: express.Request, res: express.Response, next: express.NextFunction) => {
     res.send('Hello World!');
@@ -14,6 +15,7 @@ function authenticate(req: express.Request, res: express.Response, next: express
     if (!userId || userId !== 'Danny') {
         console.log(userId);
         res.status(401).send('Authentication Error');
+        return;
     }
 
     res.set('x-user-surname', 'Vernovsky');

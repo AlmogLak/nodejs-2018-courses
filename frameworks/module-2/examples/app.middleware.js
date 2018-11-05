@@ -12,6 +12,7 @@ function authenticate(req, res, next) {
     if (!userId || userId !== 'Danny') {
         console.log(userId);
         res.status(401).send('Authentication Error');
+        return;
     }
     res.set('x-user-surname', 'Vernovsky');
     next();

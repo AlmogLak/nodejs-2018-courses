@@ -2,15 +2,20 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import { Request, Response, NextFunction } from 'express';
-import { router } from './person.controller';
+import { personRouter } from './person.controller';
 const app = express();
 
-// app.use();
-app.use('/api/person', bodyParser.json(), auth, router);
-app.get('/', (req, res) => res.send('test'));
+app.use('/api/person', bodyParser.json(), auth, personRouter);
+app.use(aaa);
+app.get('/:almog', (req, res) => res.send(req.params.almog));
 app.listen(3000, () => {
     console.log('listening on port 3000');
 });
+
+function aaa(req: Request, res: Response, next: NextFunction) {
+    console.log("hello!");
+    next();
+}
 
 function auth(req: Request, res: Response, next: NextFunction) {
     const authHeader = req.headers['auth'];
