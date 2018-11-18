@@ -17,22 +17,4 @@ describe('calucaltor tests', () => {
     //     expect(calculator.divide.bind(calculator, 2, 0)).to.throw();
     // });
 });
-describe('test suite', () => {
-    before(() => {
-        // will happen once for suite
-    });
-    beforeEach(() => {
-        //will happen before every test
-    });
-    it('some test', () => {
-        chai_1.expect(true).to.be.eq(true);
-    });
-    it('some pending test');
-    afterEach(() => {
-        // will happen once after suite
-    });
-    after(() => {
-        // will happen after evety test
-    });
-});
 //# sourceMappingURL=calculator.spec.js.map

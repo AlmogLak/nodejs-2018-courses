@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongo_client_1 = require("./database/mongo-client");
 const mongodb_1 = require("mongodb");
-const COLLECTION_NAME = 'example_items';
+const COLLECTION_NAME = 'al942u_items';
 class MongoPersistance {
     constructor() {
         this.mongoclient = new mongo_client_1.MongoDBClient();

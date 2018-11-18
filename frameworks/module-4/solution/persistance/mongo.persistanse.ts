@@ -3,7 +3,7 @@ import { MongoDBClient } from "./database/mongo-client";
 import Item from "../../../models/Item";
 import { ObjectID } from "mongodb";
 
-const COLLECTION_NAME = 'example_items';
+const COLLECTION_NAME = 'al942u_items';
 
 export class MongoPersistance implements PersistanceInterface {
     private mongoclient = new MongoDBClient();

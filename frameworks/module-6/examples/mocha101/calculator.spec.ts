@@ -19,24 +19,3 @@ describe('calucaltor tests', () => {
     // });
 });
 
-
-describe('test suite', () => {
-    before(() => {
-        // will happen once for suite
-    });
-    beforeEach(() => {
-        //will happen before every test
-    })
-    it('some test', () => {
-        expect(true).to.be.eq(true);
-    });
-
-    it('some pending test');
-    afterEach(() => {
-        // will happen once after suite
-    })
-    after(() => {
-        // will happen after evety test
-    });
-})
-
