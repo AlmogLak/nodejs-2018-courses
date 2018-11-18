@@ -1,0 +1,33 @@
+.att_logo {
+    background: url(../assets/att_logo.png) no-repeat;
+    width: 165px;
+    height: 115px;
+    background-size: contain;
+    position: absolute;
+    left: 45px;
+}
+
+.what-will-you-know {
+    background-size: contain;
+    width: 310px;
+    height: 475px;
+    background: url(../assets/what_will_you_know.png) no-repeat;
+    position: absolute;
+}
+
+pre {
+    box-shadow: none !important;
+}
+
+pre.wide {
+    width: 100%;
+}
+
+code {
+    max-height: none !important;
+}
+
+code.inline {
+    background: #eee;
+    padding: 0px 4px 2px 3px;
+}

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../assets/css/reveal.css">
+    <link rel="stylesheet" href="../assets/css/theme/beige.css">
+    <link rel="stylesheet" href="../assets/lib/css/zenburn.css">
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+
+<body>
+    <div class="att_logo"></div>
+    <div class="reveal">
+        <div class="slides">
+            <!-- Introduction to Node.js -->
+            <section>
+                <h1>Advanced Node.js</h1>
+                <sub>By Almog Laktivi</sub>
+            </section>
+            <!-- Agenda -->
+            <section>
+                <h2>Agenda</h2>
+                <div>
+                    <p>Quick review on the last course</p>
+                    <p>Node.JS Addons</p>
+                    <p>Event loop</p>
+                    <p>Networking</p>
+                    <p>Clusters and child processes</p>
+                </div>
+            </section>
+            <!-- Course Objectives -->
+            <section>
+                <table>
+                    <tr>
+                        <td>
+                            <h2>Course Objectives</h2>
+                            <p>Node.js advanced APIs</p>
+                            <p>Node.js concurrency</p>
+                            <p>Scaling Node.js</p>
+                        </td>
+                        <td>
+                            <div class="what-will-you-know"></div>
+                        </td>
+                    </tr>
+                </table>
+            </section>
+            <!-- install -->
+            <section>
+                <h2>So what will you need to install?</h2>
+                <p>
+                    Node.js & NPM |
+                    <a href="https://nodejs.org/en/">Download</a>
+                </p>
+                <p>
+                    Yarn |
+                    <a href="https://yarnpkg.com/en/docs/install">Download</a>
+                </p>
+                <p>
+                    IDE: VS Code |
+                    <a href="https://code.visualstudio.com/download">Download</a>
+                </p>
+            </section>
+            <!-- Quick overeview -->
+            <section>
+                <section>
+                    <img src="../assets/overview.jpg" alt="">
+                </section>
+                <section>
+                    <h2>Node.js frameworks topics</h2>
+                    <p>Express</p>
+                    <p>Events & Async</p>
+                    <p>Persistence (MongoDB)</p>
+                    <p>Socket.IO</p>
+                    <p>Testing & Debugging</p>
+                </section>
+            </section>
+            <!-- Questions -->
+            <section>
+                <h2>Questions?</h2>
+                <img src="../assets/to-test-or.jpg" alt="">
+            </section>
+        </div>
+    </div>
+    <script src="../assets/lib/js/head.min.js"></script>
+    <script src="../assets/js/reveal.js"></script>
+    <script>
+        Reveal.initialize({
+            history: true,
+            dependencies: [
+                { src: '../assets/plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: '../assets/plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: '../assets/plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
+            ]
+        });
+    </script>
+</body>
+
+</html>

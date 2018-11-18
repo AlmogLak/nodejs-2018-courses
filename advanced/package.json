@@ -1,0 +1,21 @@
+{
+  "name": "advanced",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Almog Laktivi <al942u@att.com>",
+  "license": "MIT",
+  "dependencies": {
+    "reveal.js": "^3.6.0"
+  },
+  "devDependencies": {
+    "concurrently": "^3.5.1",
+    "http-server": "^0.11.1",
+    "simple-autoreload-server": "^0.2.7",
+    "ts-node": "^5.0.1",
+    "typescript": "^2.7.2"
+  },
+  "scripts": {
+    "start": "concurrently \"autoreload-server\" \"tsc -w\"",
+    "tsc": "tsc -w"
+  }
+}
