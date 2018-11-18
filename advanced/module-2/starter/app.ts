@@ -1,3 +1,3 @@
-let dater = require('./build/Release/dater');
+const dater = require('./build/Release/dater');
 
 console.log(dater.parseDate());

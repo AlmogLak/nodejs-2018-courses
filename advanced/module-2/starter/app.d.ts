@@ -1,1 +1,1 @@
-declare let dater: any;
+declare const dater: any;
