@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../assets/css/reveal.css">
+    <link rel="stylesheet" href="../assets/css/theme/beige.css">
+    <link rel="stylesheet" href="../assets/lib/css/zenburn.css">
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+
+<body>
+    <div class="att_logo"></div>
+    <div class="reveal">
+        <div class="slides">
+            <!-- Advanced Node.js -->
+            <section>
+                <h1>Advanced Node.js</h1>
+                <sub>By Almog Laktivi</sub>
+            </section>
+            <!-- In This Module -->
+            <section>
+                <h2>In This Module</h2>
+                <p>Concurrency & Event loop</p>
+                <p>Call stack</p>
+                <p>setImmediate & process.nextTick</p>
+            </section>
+            <!-- What is I/O? -->
+            <section>
+                <h2>What is I/O?</h2>
+                <p class="fragment">Short for input/output</p>
+                <p class="fragment">Communication between process on PC CPU and anything external to it</p>
+                <p class="fragment">Memory, Disk, Network and even another process</p>
+                <p class="fragment"><b>For Node.JS, IO reference accessing disk and network resources</b></p>
+            </section>
+            <!-- Handling slow I/O -->
+            <section>
+                <h2>Handling slow I/O</h2>
+                <p class="fragment">Synchronous - slow, one request blocking the others</p>
+                <p class="fragment">fork() - when it comes to a lot of requests there is a problem scaling</p>
+                <p class="fragment">Threads - shared data, context switch, critical and mutexes, etc..</p>
+                <p class="fragment">Event Loop</p>
+            </section>
+            <!-- Event Loop -->
+            <section>
+                <h2>Event Loop</h2>
+                <section>
+                    <p>Node.JS is single threaded</p>
+                    <p>Implemented over <a href="https://github.com/libuv/libuv">libuv</a></p>
+                    <p>Event loop is the entity that handles exerntal events and converts them into callbacks</p>
+                    <img style="width: 50%" src="../assets/event_loop_1.png">
+                </section>
+                <section>
+                    <sub>How it works?</sub>
+                    <img src="../assets/event_loop_2.png">
+                </section>
+            </section>
+            <!-- V8 Call stack -->
+            <section>
+                <h2>V8 Call stack</h2>
+                <section>
+                    <img src="../assets/call_stack_1.png" alt="">
+                </section>
+                <section>
+                    <img src="../assets/call_stack_2.png" alt="">
+                </section>
+                <section>
+                    <img src="../assets/call_stack_3.png" alt="">
+                </section>
+                <section>
+                    <img src="../assets/call_stack_4.png" alt="">
+                </section>
+                <section>
+                    <img src="../assets/call_stack_5.png" alt="">
+                </section>
+                <section>
+                    <img src="../assets/call_stack_6.png" alt="">
+                </section>
+                <section>
+                    <img src="../assets/call_stack_7.png" alt="">
+                </section>
+                <section>
+                    <img src="../assets/call_stack_8.png" alt="">
+                </section>
+                <section>
+                    <img src="../assets/call_stack_9.png" alt="">
+                </section>
+                <section>
+                    <img src="../assets/call_stack_10.png" alt="">
+                </section>
+                <section>
+                    <img src="../assets/call_stack_11.png" alt="">
+                </section>
+                <section>
+                    <img src="../assets/call_stack_1.png" alt="">
+                </section>
+                <section>
+                    <img src="../assets/demotime.png" alt="">
+                </section>
+            </section>
+            <!-- How event loop works -->
+            <section>
+                <h2>How event loop works</h2>
+                <section>
+                    <pre>
+                        <code data-trim data-noescape class="js">
+                            When the call stack gets empty:
+                                While the queue is not empty:
+                                    event = (dequeue the event from the event queue)
+                                    if event.contains(callback):
+                                        invoke this callback (push it to the V8 call stack)
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <img src="../assets/event_loop_3.png" alt="">
+                </section>
+                <section>
+                    <img src="../assets/event_loop_4.png" alt="">
+                </section>
+                <section>
+                    <img src="../assets/event_loop_5.png" alt="">
+                </section>
+                <section>
+                    <img src="../assets/event_loop_6.png" alt="">
+                </section>
+                <section>
+                    <img src="../assets/event_loop_7.png" alt="">
+                </section>
+                <section>
+                    <img src="../assets/event_loop_8.png" alt="">
+                </section>
+                <section>
+                    <img src="../assets/event_loop_9.png" alt="">
+                </section>
+                <section>
+                    <img src="../assets/event_loop_10.png" alt="">
+                </section>
+                <section>
+                    <sub><a href="https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/">Event loop's phases</a></sub>
+                    <img style="width: 80%" src="../assets/event_loop_phases.png">
+                </section>
+            </section>
+            <!-- setImmediate -->
+            <section>
+                <h2>setImmediate</h2>
+                <section>
+                    <sub>Will it invoked after 0ms?</sub>
+                    <pre>
+                        <code data-trim data-noescape class="js">
+                            const slowAdd = (a, b) => {
+                                setTimeout(() => console.log(a+b), 0);
+                            }
+                        </code>
+                    </pre>
+                    <p class="fragment">CB wil be invoked after we done with the call stack</p>
+                    <p class="fragment">The delay we define in a timer is a <b>minimum</b> time to execution</p>
+                </section>
+                <section>
+                    <sub>setImmediate solves this issue</sub>
+                    <p class="fragment">Executed once the event loop's poll phase completes</p>
+                    <p class="fragment">(Unlike setTimout which executed on the timer phase)</p>
+                </section>
+                <section>
+                    <pre>
+                        <code data-trim data-noescape class="js">
+                            setTimeout(() => {
+                            console.log('timeout');
+                            }, 0); 
+                            setImmediate(() => {
+                            console.log('immediate');
+                            });
+                        </code>
+                        <code data-trim data-noescape class="fragment js">
+                            $ node timeout_vs_immediate
+                            immediate
+                            timeout
+                            $ node timeout_vs_immediate
+                            timeout
+                            immediate
+                        </code>
+                    </pre>
+                    <p class="fragment">Depends on the performance of the process</p>
+                </section>
+                <section>
+                    <pre>
+                        <code data-trim data-noescape class="js">
+                            import * as fs from "fs";
+                            fs.readFile(__filename, () => {
+                                setTimeout(() => {
+                                console.log('timeout');
+                                }, 0);
+                                setImmediate(() => {
+                                console.log('immediate');
+                                });
+                            });
+                        </code>
+                        <code data-trim data-noescape class="fragment js">
+                            $ node timeout_vs_immediate
+                            immediate
+                            timeout
+                        </code>
+                    </pre>
+                    <p class="fragment">the immediate callback is always executed first</p>
+                </section>
+                <section>
+                    <p>Use setImmediate() when you want something to get executed on the next iteration of the event loop</p>
+                </section>
+            </section>
+            <!-- process.nextTick -->
+            <section>
+                <h2>process.nextTick</h2>
+                <section>
+                    <p class="fragment">Not technically part of event loop</p>
+                    <p class="fragment">Node process the callback registered with nextTick:
+                        <ul>
+                            <li class="fragment"><b>After</b> the current operation completes</li>
+                            <li class="fragment"><b>Before</b> the event loop continues</li>
+                        </ul>
+                    </p>
+                </section>
+                <section>
+                    <pre>
+                        <code data-trim data-noescape class="js">
+                            function apiCall(arg, callback) {
+                                if (typeof arg !== 'string')
+                                    return process.nextTick(callback,
+                                                            new TypeError('argument should be string'));
+                                }
+                        </code>
+                    </pre>
+                    <p class="fragment">Passing an error back to the user but only <b>after</b> we have allowed the rest of the user's code to execute</p>
+                    <p class="fragment">By using process.nextTick() we guarantee that apiCall() always runs its callback after the rest of the user's code and before the event loop is allowed to proceed</p>
+                </section>
+                <section>
+                    <h3>Starvation</h3>
+                    <iframe src="https://giphy.com/embed/pOztBRgMDL3XO" width="480" height="359" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/chocolate-funny-pOztBRgMDL3XO">via GIPHY</a></p>
+                </section>
+                <section>
+                    <h3>process.nextTick() vs setImmediate()</h3>
+                    <p>process.nextTick() fires immediately on the same phase</p>
+                    <p>setImmediate() fires on the following iteration or 'tick' of the event loop</p>
+                </section>
+                <section>
+                    <h3>Usage</h3>
+                    <ul>
+                        <li>Allow users to handle errors, cleanup any then unneeded resources, or perhaps try the request again before the event loop continues</li>
+                        <li>At times it's necessary to allow a callback to run after the call stack has unwound but before the event loop continues</li>
+                    </ul>
+                </section>
+            </section>
+            </div>
+        </div>
+        <script src="../assets/lib/js/head.min.js"></script>
+        <script src="../assets/js/reveal.js"></script>
+        <script>
+            Reveal.initialize({
+                history: true,
+                dependencies: [
+                    { src: '../assets/plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                    { src: '../assets/plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                    { src: '../assets/plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
+                ]
+            });
+            let currentSlide;
+            Reveal.addEventListener('slidechanged', function (event) {
+                currentSlide = event.indexh;
+            });
+
+            Reveal.addEventListener('fragmentshown', function (event) {
+                if (event.fragment.id === 'rest_video_fragment') {
+                    document.getElementById('rest_video').play()
+                }
+                console.log(event);
+            });
+
+            Reveal.addEventListener('fragmenthidden', function (event) {
+                if (event.fragment.id === 'rest_video_fragment') {
+                    const video = document.getElementById('rest_video');
+                    video.pause();
+                    video.currentTime = 0;
+                }
+                console.log(event);
+            });
+        </script>
+</body>
+
+</html>
