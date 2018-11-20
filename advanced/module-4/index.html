@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../assets/css/reveal.css">
+    <link rel="stylesheet" href="../assets/css/theme/beige.css">
+    <link rel="stylesheet" href="../assets/lib/css/zenburn.css">
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+
+<body>
+    <div class="att_logo"></div>
+    <div class="reveal">
+        <div class="slides">
+            <!-- Advanced Node.js -->
+            <section>
+                <h1>Advanced Node.js</h1>
+                <sub>By Almog Laktivi</sub>
+            </section>
+            <!-- In This Module -->
+            <section>
+                <h2>In This Module</h2>
+                <h3>Networking</h3>
+                <p>TCP</p>
+                <p>UDP</p>
+                <p>DNS</p>
+            </section>
+            <!-- TCP -->
+            <section>
+                <h2>TCP</h2>
+                <section>
+                        <p>In order to work with net API over TypeScript you have to add @types/node library:</p>
+                    <pre>
+                        <code data-trim data-noescape class="bash">
+                            $ yarn add @types/node
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h3>TCP server example</h3>
+                    <pre>
+                        <code data-trim data-noescape class="ts">
+                            import * as net from "net";
+                            const server = net.createServer();
+                            server.on("connection", socket => {
+                                console.log("new client connected to the server");
+                                socket.write("Hi there!\n");
+                                socket.on("data", data => {
+                                    console.log(`data recived from client: ${data.toString()}`);
+                                    socket.write(`This is the data you sent: ${data}\n`);
+                                });
+                                socket.on("end", () => {
+                                    console.log("Client disconnected");
+                                });
+                            });
+                            server.listen(3000, () => console.log("Server listening on port 3000"));
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <!-- UDP -->
+            <section>
+                <h2>UDP</h2>
+                <section>
+                        <p>In order to work with dgram API over TypeScript you have to add @types/node library:</p>
+                    <pre>
+                        <code data-trim data-noescape class="bash">
+                            $ yarn add @types/node
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h3>UDP server example</h3>
+                    <pre>
+                        <code data-trim data-noescape class="ts">
+                            import * as dgram from "dgram";
+
+                            const server = dgram.createSocket("udp4");
+                            
+                            server.on("listening", () => console.log("server is listening"));
+                            
+                            server.on("message", (msg, info) => {
+                                console.log(`${info.address}:${info.port} - ${msg}`);
+                            });
+                            
+                            server.bind(3000, "127.0.0.1");                                
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h3>UDP client example</h3>
+                    <pre>
+                        <code data-trim data-noescape class="ts">
+                            import * as dgram from "dgram";
+
+                            const client = dgram.createSocket("udp4");
+                            client.send("Node.js is the best!", 3000, "127.0.0.1", err => {
+                                if (err) { throw err; }
+                                console.log("UDP message send successfully");
+                                client.close();
+                            });                              
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <!-- DNS -->
+            <section>
+                <h2>DNS</h2>
+                <section>
+                    <p>In order to work with dns API over TypeScript you have to add @types/node library:</p>
+                    <pre>
+                        <code data-trim data-noescape class="bash">
+                            $ yarn add @types/node
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h3>lookup method</h3>
+                    <sub>take host and returns its first IP</sub>
+                    <pre>
+                        <code data-trim data-noescape class="ts">
+                            import * as dns from "dns";
+
+                            dns.lookup("att.com", (err, address) => {
+                                console.log(`address for att.com: ${address}`);
+                            });
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h3>resolve4 method</h3>
+                    <sub>take host and returns its IPs</sub>
+                    <pre>
+                        <code data-trim data-noescape class="ts">
+                            import * as dns from "dns";
+                            
+                            dns.resolve4("att.com", (err, addresses) => {
+                                console.log(`addresses for att.com: ${addresses}`);
+                            });
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h3>resolve method</h3>
+                    <sub>take host and record type and return the addresses</sub>
+                    <pre>
+                        <code data-trim data-noescape class="ts">
+                            import * as dns from "dns";
+                            
+                            dns.resolve("att.com", "MX", (err, addresses) => {
+                                console.log(`addresses (MX records) for att.com:`, addresses);
+                            });
+    
+                            dns.resolve("att.com", "A", (err, addresses) => {
+                                console.log(`addresses (A records) for att.com:`, addresses);
+                            });
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h3>reverse method</h3>
+                    <sub>Takes IP and return it's host</sub>
+                    <pre>
+                        <code data-trim data-noescape class="ts">
+                            dns.reverse("144.160.155.43", (err, hostnames) => {
+                                console.log("hostnames for 144.160.155.43: ", hostnames);
+                            });
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <!-- Exercise -->
+            <section>
+                    <table>
+                        <tr>
+                            <td style="width:50%">
+                                <img src="../assets/exercise-time.png"/>
+                            </td>
+                            <td style="vertical-align: top; font-size:16px">
+                                <ul style="list-style-type: none">
+                                    <li>Build Node.JS application
+                                        <ul>
+                                            <li>The application expose TCP server</li>
+                                            <li>The TCP will get throgh socket a host and return the DNS resolved data for this host</li>
+                                            <li>Use netcat to validate that the application works</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+            </section>
+            </div>
+        </div>
+        <script src="../assets/lib/js/head.min.js"></script>
+        <script src="../assets/js/reveal.js"></script>
+        <script>
+            Reveal.initialize({
+                history: true,
+                dependencies: [
+                    { src: '../assets/plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                    { src: '../assets/plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                    { src: '../assets/plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
+                ]
+            });
+            let currentSlide;
+            Reveal.addEventListener('slidechanged', function (event) {
+                currentSlide = event.indexh;
+            });
+
+            Reveal.addEventListener('fragmentshown', function (event) {
+                if (event.fragment.id === 'rest_video_fragment') {
+                    document.getElementById('rest_video').play()
+                }
+                console.log(event);
+            });
+
+            Reveal.addEventListener('fragmenthidden', function (event) {
+                if (event.fragment.id === 'rest_video_fragment') {
+                    const video = document.getElementById('rest_video');
+                    video.pause();
+                    video.currentTime = 0;
+                }
+                console.log(event);
+            });
+        </script>
+</body>
+
+</html>
