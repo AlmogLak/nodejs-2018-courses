@@ -140,54 +140,89 @@
             <section>
                 <h2>Cluster Module</h2>
                 <section>
-                    <h3>slide0</h3>
-                </section>
-                <section>
-                    <h3>slide1</h3>
-                    <!-- <pre>
-                        <code data-trim data-noescape class="ts">
-                            
+                        <p>In order to work with cluster API over TypeScript you have to add @types/node library:</p>
+                    <pre>
+                        <code data-trim data-noescape class="bash">
+                            $ yarn add @types/node
                         </code>
-                    </pre> -->
+                    </pre>
                 </section>
                 <section>
-                    <h3>slide2</h3>
-                    
+                    <p>Based on the <b>fork()</b> method</p>
+                    <p>Let us fork our main function (max amount is the # of CPU cores)</p>
+                    <p>Will load balance all requests across all forked processes</p>
                 </section>
                 <section>
-                    <h3>slide3</h3>
-                    
+                    <img style="width: 60%" src="../assets/round_robin.png">
                 </section>
                 <section>
-                    <h3>slide4</h3>
-                    
+                    <h3>Example</h3>
+                    <pre>
+                        <code data-trim data-noescape class="ts">
+                                import * as cluster from "cluster";
+                                import * as os from "os";
+                                
+                                if (cluster.isMaster) {
+                                    const cpus = os.cpus().length;
+                                    for (let i = 0; i &lt; cpus; i++) {
+                                        cluster.fork();
+                                    }
+                                } else {
+                                    require("./server");
+                                }                                        
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <br>
+                    <h3>Communication & Broadcasting</h3>
+                    <p>Communication is easy, because under the hood it just <b>fork()</b></p>
+                    <p>You can use <b>cluster.workers()</b> to get the list of ChildProcess workers</p>
+                    <p>This way, you can use <b>worker.send()</b> to communicate with the worker process</p>
+                    <p>You can also use <b>process.send()</b> to communicate with the main process</p>
+                </section>
+                <section>
+                    <h3>Communication & Broadcasting</h3>
+                    <pre>
+                        <code data-trim data-noescape class="ts">
+                            console.dir(cluster.workers(), {depth: 0});  
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h3>Availabillity</h3>
+                    <p>You can use <b>cluset.on("exit", (worker, code, signal)=>{})</b> to create new workers instead of ones that fail</p>
                 </section>
             </section>
-            <!-- Broadcasting -->
+            <!-- pm2 -->
             <section>
-                <h2>Broadcasting</h2>
+                <h2>PM2 package</h2>
                 <section>
-                    <h3></h3>
+                    <a href="http://pm2.keymetrics.io/">http://pm2.keymetrics.io/</a>
+                    <br><br>
+                    <div style="background-color: black">
+                        <img src="https://raw.githubusercontent.com/pm2-hive/pm2-hive.github.io/6aacedb6e023cc494c66864c9963c4446b58d64e/images/pm2-logo-update.png">
+                    </div>
                 </section>
                 <section>
-                    <h3>slide1</h3>
-                    <!-- <pre>
-                        <code data-trim data-noescape class="ts">
-                            
+                    <h3>Installation</h3>
+                    <pre>
+                        <code data-trim data-noescape class="bash">
+                            yarn add global pm2        
                         </code>
-                    </pre> -->
+                    </pre>
                 </section>
                 <section>
-                    <h3>slide2</h3>
-                    
+                    <p>Process manager for Node.JS</p>
+                    <p>With PM2, you don't need to write the cluster.ts</p>
+                    <p>have it's own fault-tolerance mechanism (creates new worker instead one that fails, etc..</p>
                 </section>
                 <section>
-                    <h3>slide3</h3>
-                    
-                </section>
-                <section>
-                    <h3>slide4</h3>
-                    
+                    <br>
+                    <h3>Worker Safety</h3>
+                    <p>Same as Thread Safety</p>
+                    <p>For example: Caching</p>
+                    <img style="width: 30%" src="https://media.giphy.com/media/GbPU9xcAbPzKU/giphy.gif">
                 </section>
             </section>
             <!-- Exercise -->
@@ -199,11 +234,12 @@
                             </td>
                             <td style="vertical-align: top; font-size:16px">
                                 <ul style="list-style-type: none">
-                                    <li>Scale Node.JS application
+                                    <li>Use PM2 to construct a cluster of our examples/server.ts server
                                         <ul>
-                                            <li>line 1</li>
-                                            <li>line 2</li>
-                                            <li>line 3</li>
+                                            <li>Make sure the workers amount is as the cores amount</li>
+                                            <li>Make sure your cluster has fault tolerance</li>
+                                            <li>Make sure it work as expected</li>
+                                            <li>You can use <a href="http://pm2.keymetrics.io/">http://pm2.keymetrics.io/</a> for documentation and reference</li>
                                         </ul>
                                     </li>
                                 </ul>
