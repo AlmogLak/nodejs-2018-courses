@@ -10,7 +10,7 @@ using v8::Value;
 void Method(const FunctionCallbackInfo<Value>& args) {
     Isolate* isolate = args.GetIsolate();
     args.GetReturnValue().Set(String::NewFromUtf8(
-        isolate, "world", NewStringType::kNormal).ToLocalChecked());
+        isolate, "At&t rocks!", NewStringType::kNormal).ToLocalChecked());
 }
 void Initialize(Local<Object> exports) {
     NODE_SET_METHOD(exports, "hello", Method);

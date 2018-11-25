@@ -39,16 +39,17 @@
             <!-- Handling slow I/O -->
             <section>
                 <h2>Handling slow I/O</h2>
+                <h3>Methods and there problems</h3>
                 <p class="fragment">Synchronous - slow, one request blocking the others</p>
                 <p class="fragment">fork() - when it comes to a lot of requests there is a problem scaling</p>
                 <p class="fragment">Threads - shared data, context switch, critical and mutexes, etc..</p>
-                <p class="fragment">Event Loop</p>
+                <p class="fragment">Solution => Event Loop</p>
             </section>
             <!-- Event Loop -->
             <section>
                 <h2>Event Loop</h2>
                 <section>
-                    <p>Node.JS is single threaded</p>
+                    <p>Node.JS is single threaded (*Excepts when it's not)</p>
                     <p>Implemented over <a href="https://github.com/libuv/libuv">libuv</a></p>
                     <p>Event loop is the entity that handles exerntal events and converts them into callbacks</p>
                     <img style="width: 50%" src="../assets/event_loop_1.png">
@@ -142,6 +143,39 @@
                 <section>
                     <sub><a href="https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/">Event loop's phases</a></sub>
                     <img style="width: 80%" src="../assets/event_loop_phases.png">
+                </section>
+                <section>
+                    <br>
+                    <h3>Wait, What?</h3>
+                    <img src="https://media.giphy.com/media/3o7527pa7qs9kCG78A/giphy.gif">
+                </section>
+                <section>
+                    <h3>Wait, What?</h3>
+                    <p style="font-size: 23pt" class="fragment">All javascript, V8, and the event loop run in one thread, called the main thread</p>
+                    <p style="font-size: 23pt" class="fragment">C++ synchronous methods run in the main thread (<b>blocking</b>)</p>
+                    <p style="font-size: 23pt" class="fragment">C++ asynchronous methods sometimes don't run in the main thread (C++ have access to threads)</p>
+                    <p style="font-size: 23pt" class="fragment">Node.JS uses a pre-allocated set of threads called the <b>Thread Pool</b></p>
+                    <p style="font-size: 23pt" class="fragment">So what is the event loop? Central dispatch that rutes request to C++ and results back to javascript</p>
+                </section>
+                <section>
+                    <br>
+                    <img style="width: 80%" src="http://abdelraoof.com/img/nodejs/nodejs-event-loop.png">
+                    <p class=fragment>Not exactly</p>
+                </section>
+                <section>
+                    <h3>What's escalated to the thread pool? Kernel?</h3>
+                    <ul>Thread Pool
+                        <li style="font-size: 23pt">fs.* (async)</li>
+                        <li style="font-size: 23pt">dns.lookup</li>
+                        <li style="font-size: 23pt">etc..</li>
+                    </ul>
+                    <ul>Kernel
+                        <li style="font-size: 23pt">TCP / UDP sockets, server</li>
+                        <li style="font-size: 23pt">dns.resolveXXXX</li>
+                        <li style="font-size: 23pt">etc..</li>
+                    </ul>
+                    <br><br><br>
+                    <a href="https://nodejs.org/en/docs/guides/dont-block-the-event-loop/">Don't block the event loop!</a>
                 </section>
             </section>
             <!-- setImmediate -->
