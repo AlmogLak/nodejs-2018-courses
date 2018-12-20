@@ -9,7 +9,7 @@ server.on("connection", socket => {
 
     socket.on("data", data => {
         console.log(`host recived from client: ${data.toString()}`);
-        dns.resolve4(data.toString(), (err, addresses) => {
+        dns.resolve4(data.toString().replace("\n", ""), (err, addresses) => {
             if (err) {
                 socket.write(`error occurred: ${err}\n\n`);
                 return;
