@@ -8,20 +8,26 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const items_controller_1 = require("./controllers/items.controller");
-const item_model_1 = require("./models/item.model");
-const item_type_enum_1 = require("./enums/item-type.enum");
-let printItemsList = () => __awaiter(this, void 0, void 0, function* () {
-    let itemsList = yield itemsController.list();
-    console.log(itemsList);
+const note_model_1 = require("./models/note.model");
+const note_level_enum_1 = require("./enums/note-level.enum");
+const user_model_1 = require("./models/user.model");
+const mongodb_1 = require("mongodb");
+const users_controller_1 = require("./controllers/users.controller");
+const usersController = new users_controller_1.UsersController();
+let run = () => __awaiter(this, void 0, void 0, function* () {
+    const note = new note_model_1.Note("This is my first note!", "note writen in the class", note_level_enum_1.NoteLevel.High);
+    const user = new user_model_1.User(new mongodb_1.ObjectID(), "Almog", "Laktivi", "Achisemakh", [note]);
+    try {
+        yield usersController.create(user);
+        let users = yield usersController.list();
+        console.log(users);
+        for (const user of users) {
+            yield usersController.delete(user._id);
+        }
+    }
+    catch (error) {
+        console.error(error);
+    }
 });
-let itemsController = new items_controller_1.ItemsController();
-let item = new item_model_1.Item("Table", "Designers table", 1350, "TLV", true, 1, "almog", item_type_enum_1.ItemType.Garden);
-console.log("inserted item", item);
-itemsController.create(item)
-    .then(() => {
-    console.log("Item created successfully");
-});
-console.log("items after insert:");
-printItemsList();
+run().then(() => console.log("Done running!"));
 //# sourceMappingURL=app.js.map

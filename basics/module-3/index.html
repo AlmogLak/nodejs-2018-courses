@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Node.js</title>
     <link rel="stylesheet" href="../assets/css/reveal.css">
-    <link rel="stylesheet" href="../assets/css/theme/beige.css">
+    <link rel="stylesheet" href="../assets/css/theme/league.css">
     <link rel="stylesheet" href="../assets/lib/css/zenburn.css">
     <link rel="stylesheet" href="../styles/main.css">
 </head>
@@ -17,6 +17,7 @@
             <!-- Node.js Basics -->
             <section>
                 <h1>Node.js Basics</h1>
+                <h2>Module 3 - Async</h2>
                 <sub>By Almog Laktivi</sub>
             </section>
             <!-- In This Module -->
@@ -31,7 +32,7 @@
                 <h2>Callbacks</h2>
                 <section>
                     <h3>What is callback?</h3>
-                    <iframe src="https://giphy.com/embed/8vvW3EUR0jLTlJQ8i4" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/statefarm-ad-8vvW3EUR0jLTlJQ8i4">via GIPHY</a></p>
+                    <img src="https://media.giphy.com/media/8vvW3EUR0jLTlJQ8i4/giphy.gif" width="480" height="360">
                 </section>
                 <section>
                     <h3>A callback is a function that is to be executed after another function has finished executing </h3>
@@ -83,7 +84,7 @@
                 <h2>Promises</h2>
                 <section>
                     <h3>What is promise?</h3>
-                    <iframe src="https://giphy.com/embed/8vvW3EUR0jLTlJQ8i4" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/statefarm-ad-8vvW3EUR0jLTlJQ8i4">via GIPHY</a></p>
+                    <img src="https://media.giphy.com/media/8vvW3EUR0jLTlJQ8i4/giphy.gif" width="480" height="360">
                 </section>
                 <section>
                     <h3>The Promise object represents the eventual completion (or failure) of an asynchronous operation, and its resulting value</h3>
@@ -193,26 +194,32 @@
                     </p>
                 </section>
             </section>
-            <!-- exercise -->
+            <!-- Demo Time -->
             <section>
+                <h2>Demo Time</h2>
+                <img src="https://media.giphy.com/media/QAaR9zoMUb8814WJ6a/giphy.gif" alt="">
+            </section>
+            <!-- Excercise Time -->
+            <section>
+                <h2>Excercise Time - AT&T Notes</h2>
                 <table>
                     <tr>
-                        <td style="width:50%">
-                            <img src="../assets/exercise-time.png"/>
-                        </td>
                         <td style="vertical-align: top; font-size:16px">
                             <ul style="list-style-type: none">
-                                <li>Change ItemsController API to work asynchronous with async/await
+                                <li>Convert methods to work with async/await
                                     <ul>
-                                        <li>Change all methods to be async(will return promises)</li>
-                                        <li>Change methods consumers to use await to get the value</li>
-                                        <li>Print the result and make sure nothing change at the UX</li>
+                                        <li>Convert <b>getNotesByLevel(level: NoteLevel)</b> to be async method.</br> Add await for <code>delay(2000);</code> at the beggining (Will simulate awaiting to remote server)</li>
                                     </ul>
                                 </li>
                             </ul>
                         </td>
+                        <td><img src="https://media.giphy.com/media/UvvK8rOSHPxgjo9ryD/giphy.gif"></tr>
                     </tr>
                 </table>
+            </section>
+            <!-- Next Module -->
+            <section>
+                <a href="../module-4/index.html">Next Module</a>
             </section>
             </div>
         </div>

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Node.js</title>
     <link rel="stylesheet" href="../assets/css/reveal.css">
-    <link rel="stylesheet" href="../assets/css/theme/beige.css">
+    <link rel="stylesheet" href="../assets/css/theme/league.css">
     <link rel="stylesheet" href="../assets/lib/css/zenburn.css">
     <link rel="stylesheet" href="../styles/main.css">
 </head>
@@ -17,6 +17,7 @@
             <!-- Node.js Basics -->
             <section>
                 <h1>Node.js Basics</h1>
+                <h2>Module 1 - Introduction</h2>
                 <sub>By Almog Laktivi</sub>
             </section>
             <!-- Agenda -->
@@ -36,8 +37,8 @@
                     <tr>
                         <td>
                             <h2>Course objectives</h2>
-                            <p>Npm/Yarn package manager</p>
-                            <p>Typescript programming</p>
+                            <p>Npm package manager</p>
+                            <p>Typescript programming language</p>
                             <p>Node.js basic APIs</p>
                         </td>
                         <td>
@@ -51,86 +52,75 @@
                 <h2>What will you need to install?</h2>
                 <p>
                     Node.js & NPM |
-                    <a href="https://nodejs.org/en/">Download</a>
-                </p>
-                <p>
-                    Yarn |
-                    <a href="https://yarnpkg.com/en/docs/install">Download</a>
+                    <a href="https://nodejs.org/en/download/">Download</a>
                 </p>
                 <p>
                     IDE: VS Code |
                     <a href="https://code.visualstudio.com/download">Download</a>
                 </p>
             </section>
-            <!-- Npm vs Yarn -->
+            <!-- Install Node.JS -->
             <section>
+                <h2>Install Node.JS</h2>
                 <section>
-                    <h2>What package manager is?</h2>
+                    <h3>Windows</h3>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/gHuIKptS0Qg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <p>
+                        <a href="https://nodejs.org/en/download/">Download installation wizard (msi)</a>
+                    </p>
+                    <p>
+                        <a href="https://git-scm.com/download/win">GitBash - Recommended terminal client for windows</a>
+                    </p>
+                </section>
+                <section>
+                    <h3>Mac</h3>
+                    <p>
+                        <a href="https://www.dyclassroom.com/howto-mac/how-to-install-nodejs-and-npm-on-mac-using-homebrew">Using Homebrew</a></br>
+                        <a href="https://nodejs.org/en/download/">Download installation wizard (pkg)</a>
+                    </p>
+                    </section>
+            </section>
+            <!-- Package manager -->
+            <section>
+                <h2><a href="https://www.npmjs.com/" target="_blank">npm</a></h2>
+                <section>
+                    <h3>What package manager is?</h3>
                     <p>Collection of software tools that automate the process of installing, upgrading, configuring, and removing computer programs</p>
                 </section>
                 <section>
-                    <h2>Npm vs Yarn</h2>
-                    <p>Requesting packages</p>
-                    <p>Task runner</p>
-                    <p>Deployment scripts</p>
-                    <p>Publishing packages</p>
+                    <pre>
+                        <code data-trim data-noescape class="bash">
+                        root@HOME:~# npm --help
+    
+                        Usage: npm command
+                        
+                        where command is one of:
+                            access, <mark>adduser</mark>, bin, bugs, c, cache, completion, config,
+                            ddp, dedupe, deprecate, dist-tag, docs, doctor, edit,
+                            explore, get, help, help-search, i, init, <mark>install</mark>,
+                            install-test, it, <mark>link</mark>, <mark>list</mark>, ln, login, logout, ls,
+                            outdated, owner, pack, ping, prefix, prune, <mark>publish</mark>, rb,
+                            rebuild, repo, restart, root, run, run-script, s, se,
+                            search, set, shrinkwrap, star, stars, start, stop, t, team,
+                            test, tst, un, uninstall, unpublish, unstar, up, update, v,
+                            version, view, whoami
+                        
+                        npm <command> -h     quick help on <command>
+                        npm -l           display full usage info
+                        npm help <term>  search for help on <term>
+                        npm help npm     involved overview
+                        </code>
+                    </pre>
                 </section>
             </section>
-            <!-- npm help -->
+            <!-- Demo Time -->
             <section>
-                <pre>
-                    <a href="https://www.npmjs.com/">https://www.npmjs.com/</a>
-                    <code data-trim data-noescape class="bash">
-                    root@HOME:~# npm --help
-
-                    Usage: npm command
-                    
-                    where command is one of:
-                        access, <mark>adduser</mark>, bin, bugs, c, cache, completion, config,
-                        ddp, dedupe, deprecate, dist-tag, docs, doctor, edit,
-                        explore, get, help, help-search, i, init, <mark>install</mark>,
-                        install-test, it, <mark>link</mark>, <mark>list</mark>, ln, login, logout, ls,
-                        outdated, owner, pack, ping, prefix, prune, <mark>publish</mark>, rb,
-                        rebuild, repo, restart, root, run, run-script, s, se,
-                        search, set, shrinkwrap, star, stars, start, stop, t, team,
-                        test, tst, un, uninstall, unpublish, unstar, up, update, v,
-                        version, view, whoami
-                    
-                    npm <command> -h     quick help on <command>
-                    npm -l           display full usage info
-                    npm help <term>  search for help on <term>
-                    npm help npm     involved overview
-                    </code>
-                </pre>
+                <h2>Demo Time</h2>
+                <img src="https://media.giphy.com/media/QAaR9zoMUb8814WJ6a/giphy.gif" alt="">
             </section>
-            <!-- yarn help -->
+            <!-- Next Module -->
             <section>
-                <pre>
-                    <code data-trim data-noescape class="bash">
-                        root@HOME:~# yarn --help
-
-                        Usage: yarn [command] [flags]
-                        
-                        Options:
-                        
-                            -h, --help                      output usage information
-                            -V, --version                   output the version number
-                            --verbose                       output verbose messages on internal operations
-                            --offline                       trigger an error if any required dependencies are not available in local cache
-                            --prefer-offline                use network only if dependencies are not available in local cache
-                            --strict-semver
-                            --json
-                            --ignore-scripts                don't run lifecycle scripts
-                            --har                           save HAR output of network traffic
-                            --ignore-platform               ignore platform checks
-                            --ignore-engines                ignore engines check
-                            --ignore-optional               ignore optional dependencies
-                    </code>
-                </pre>
-            </section>
-            <!-- installation demo -->
-            <section>
-                <img src="../assets/demotime.png" alt="">
+                <a href="../module-2/index.html">Next Module</a>
             </section>
         </div>
     </div>

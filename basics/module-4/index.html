@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Node.js</title>
     <link rel="stylesheet" href="../assets/css/reveal.css">
-    <link rel="stylesheet" href="../assets/css/theme/beige.css">
+    <link rel="stylesheet" href="../assets/css/theme/league.css">
     <link rel="stylesheet" href="../assets/lib/css/zenburn.css">
     <link rel="stylesheet" href="../styles/main.css">
 </head>
@@ -17,19 +17,15 @@
             <!-- Node.js Basics -->
             <section>
                 <h1>Node.js Basics</h1>
+                <h2>Module 4 - File system</h2>
                 <sub>By Almog Laktivi</sub>
-            </section>
-            <!-- In This Module -->
-            <section>
-                <h2>In This Module</h2>
-                <p>Working with Node.JS file system</p>
             </section>
             <!-- File system API -->
             <section>
                 <h2>File system API</h2>
                 <section>
                     <p>In order to work with fs API over TypeScript you have to add @types/node library:</p>
-                    <p><pre><code>yarn add @types/node</code></pre></p>
+                    <p><pre><code>npm i -D @types/node</code></pre></p>
                 </section>
                 <section>
                     <h3>Notable functions</h3>
@@ -58,33 +54,37 @@
                         <i>* When using sync function wrap with try..catch</i>
                     </span>
                 </section>
-                <section>
-                    <img src="../assets/demotime.png" alt="">
-                </section>
             </section>
-            <!-- exercise -->
+            <!-- Demo Time -->
             <section>
+                <h2>Demo Time</h2>
+                <img src="https://media.giphy.com/media/QAaR9zoMUb8814WJ6a/giphy.gif" alt="">
+            </section>
+            <!-- Excercise Time -->
+            <section>
+                <h2>Excercise Time - AT&T Notes</h2>
                 <table>
                     <tr>
-                        <td style="width:50%">
-                            <img src="../assets/exercise-time.png"/>
-                        </td>
                         <td style="vertical-align: top; font-size:16px">
                             <ul style="list-style-type: none">
-                                <li>Add persistance layer of file system API
+                                <li>Add persistance layer
                                     <ul>
-                                        <li>Implement ItemsAPI interface with fs API (call it PersistanceFSService.ts)</li>
-                                        <li>Change ItemsController to use this service instead of in-memory array</li>
-                                        <li>Every item should be in separate file when the filename is: <code>[item_name].json</code></li>
+                                        <li>Add in <b>app.ts</b> call to FS API which will save your user in the file system</li>
+                                        <li>Every user should be in separate file when the filename is: <code>{{_id}}.json</code></li>
                                         <li>Don't use sync version of API</li>
                                         <li>Wrap fs api with promise and use async/await in your calls</li>
-                                        <li>Print the result and make sure nothing change at the UX</li>
+                                        <li>Print the result (comming from FS) and make sure the user printed as expected</li>
                                     </ul>
                                 </li>
                             </ul>
                         </td>
+                        <td><img src="https://media.giphy.com/media/UvvK8rOSHPxgjo9ryD/giphy.gif"></tr>
                     </tr>
                 </table>
+            </section>
+            <!-- Next Module -->
+            <section>
+                <a href="../module-5/index.html">Next Module</a>
             </section>
             </div>
         </div>

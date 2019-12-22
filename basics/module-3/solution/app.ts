@@ -1,18 +1,20 @@
-import { ItemsController } from "./controllers/items.controller";
-import { Item } from "./models/item.model";
-import { ItemType } from "./enums/item-type.enum";
+import { Note } from "./models/note.model";
+import { NoteLevel } from "./enums/note-level.enum";
+import { User } from "./models/user.model";
+import { ObjectID } from "mongodb";
 
-let printItemsList = async () => {
-    let itemsList = await itemsController.list();
-    console.log(itemsList);
-}
+const note = new Note("This is my first note!", "note writen in the class", NoteLevel.High);
+console.log("inserted note", note);
 
-let itemsController = new ItemsController();
-let item = new Item("Table", "Designers table", 1350, "TLV", true, 1, "almog", ItemType.Garden);
-console.log("inserted item", item);
-itemsController.create(item)
-    .then(() => {
-        console.log("Item created successfully");
+const user = new User(new ObjectID(), "Almog", "Laktivi", "Achisemakh", [note]);
+console.log("inserted user", user);
+
+Promise.all([
+    user.getNotesByLevel(NoteLevel.High),
+    user.getNotesByLevel(NoteLevel.Medium),
+    user.getNotesByLevel(NoteLevel.Low)])
+    .then(values => {
+        console.log("High level notes", values[0]);
+        console.log("Medium level notes", values[1]);
+        console.log("Low level notes", values[2]);
     });
-console.log("items after insert:");
-printItemsList();

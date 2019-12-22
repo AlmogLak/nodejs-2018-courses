@@ -1,22 +1,24 @@
-import * as express from "express";
-import * as bodyParser from "body-parser";
-import { ItemsController } from "./controllers/items.controller";
+import { Note } from "./models/note.model";
+import { NoteLevel } from "./enums/note-level.enum";
+import { User } from "./models/user.model";
+import { ObjectID } from "mongodb";
+import { UsersController } from "./controllers/users.controller";
 
+const usersController = new UsersController();
 
-class App {
-    private readonly port: number = 3000;
-
-    init() {
-        let itemsController = new ItemsController();
-        let server = express();
-
-        server.use(bodyParser.json());
-        server.get('/api/items', itemsController.list);
-        server.post('/api/items', itemsController.create);
-
-        server.listen(this.port, () => console.log(`server listening on port ${this.port}!`));
+let run = async () => {    
+    const note = new Note("This is my first note!", "note writen in the class", NoteLevel.High);
+    const user = new User(new ObjectID(), "Almog", "Laktivi", "Achisemakh", [note]);
+    try {
+        await usersController.create(user)
+        let users = await usersController.list();
+        console.log(users);
+        for(const user of users) {
+            await usersController.delete(user._id);
+        }
+    } catch (error) {
+        console.error(error);
     }
-}
+};
 
-const app = new App();
-app.init();
+run().then(() => console.log("Done running!"));

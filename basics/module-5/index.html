@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Node.js</title>
     <link rel="stylesheet" href="../assets/css/reveal.css">
-    <link rel="stylesheet" href="../assets/css/theme/beige.css">
+    <link rel="stylesheet" href="../assets/css/theme/league.css">
     <link rel="stylesheet" href="../assets/lib/css/zenburn.css">
     <link rel="stylesheet" href="../styles/main.css">
 </head>
@@ -17,19 +17,15 @@
             <!-- Node.js Basics -->
             <section>
                 <h1>Node.js Basics</h1>
+                <h2>Module 4 - Http</h2>
                 <sub>By Almog Laktivi</sub>
-            </section>
-            <!-- In This Module -->
-            <section>
-                <h2>In This Module</h2>
-                <p>Working with Node.JS HTTP</p>
             </section>
             <!-- File system API -->
             <section>
-                <h2>HTTP API</h2>
+                <h2>Http API</h2>
                 <section>
                     <p>In order to work with HTTP API over TypeScript you have to add @types/node library:</p>
-                    <p><pre><code>yarn add @types/node</code></pre></p>
+                    <p><pre><code>npm i -D @types/node</code></pre></p>
                 </section>
                 <section>
                     <h3>Create server function</h3>
@@ -40,11 +36,12 @@
                     </pre>
                 </section>
                 <section>
-                    <img src="../assets/demotime.png" alt="">
+                    <h2>Demo Time</h2>
+                    <img src="https://media.giphy.com/media/QAaR9zoMUb8814WJ6a/giphy.gif" alt="">
                 </section>
                 <section>
                     <h3>But wait, it's complicated</h3>
-                    <iframe src="https://giphy.com/embed/FSSKVJPj3NadG" width="480" height="340" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/cheezburger-lighter-animation-FSSKVJPj3NadG">via GIPHY</a></p>
+                    <img src="https://media.giphy.com/media/FSSKVJPj3NadG/giphy.gif" width="480" height="340">
                 </section>
                 <section>
                     <br>
@@ -59,11 +56,10 @@
                     <h3>Create server with Express</h3>
                     <span>
                         You need to install express and it's type definition:
-                        <pre><code>
-                            yarn add express
-                            yarn add @types/express
-                        </code></pre>
-                        
+                        <pre><code data-trim data-noescape class="ts">
+                            npm i -s express
+                            npm i -D @types/express
+                        </code data-trim data-noescape class="ts"></pre>
                     </span>
                     <pre>
                         <code data-trim data-noescape class="ts">
@@ -78,41 +74,34 @@
                     </pre>
                 </section>
                 <section>
-                    <img src="../assets/demotime.png" alt="">
+                    <h2>Demo Time</h2>
+                    <img src="https://media.giphy.com/media/QAaR9zoMUb8814WJ6a/giphy.gif" alt="">
                 </section>
             </section>
-            <!-- exercise -->
+            <!-- Excercise Time -->
             <section>
+                <h2>Excercise Time - AT&T Notes</h2>
                 <table>
                     <tr>
-                        <td style="width:50%">
-                            <img src="../assets/exercise-time.png"/>
-                        </td>
                         <td style="vertical-align: top; font-size:16px">
                             <ul style="list-style-type: none">
-                                <li>Build REST API in order to expose items controller
+                                <li>Build REST API in order to expose users controller
                                     <ul>
                                         <li>Use Express as your HTTP server</li>
-                                        <li>Change ItemsController to support Express signatures</li>
-                                        <li>Add methods of GET(list) and POST(create) on route <code>api/items</code></li>
+                                        <li>Change UsersController to support Express signatures</li>
+                                        <li>Add methods of GET(list) and POST(create) on route <code>api/users</code></li>
                                     </ul>
                                 </li>
                             </ul>
                         </td>
+                        <td><img src="https://media.giphy.com/media/UvvK8rOSHPxgjo9ryD/giphy.gif"></tr>
                     </tr>
                 </table>
-                <p>You can use the following curl's for testing:</p>
-                <pre>
-                    <code data-trim data-noescape class="ts">
-                        curl -X GET http://localhost:3000/api/items
-                        curl -i -X POST http://localhost:3000/api/items -d '{"name":"Table2","description":"Designers table","price":1350,"address":"TLV","isInStock":true,"amount":1,"creator":"almog","itemType":4}' -H 'Content-Type: application/json'
-                    </code>
-                </pre>
             </section>
-            <!-- Summary -->
+            <!-- Next Module -->
             <section>
-                <h2>Summary</h2>
-                <iframe src="https://giphy.com/embed/QhDNPv9wHl7Wg" width="480" height="366" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/question-waiting-jrock-QhDNPv9wHl7Wg">via GIPHY</a></p>
+                <h3>Any questions?</h3>
+                <img style="width: 65%; background: transparent; box-shadow: 0 0 0px;" src="https://i.giphy.com/media/ePsV4lBfsrPmo/giphy.webp">
             </section>
             </div>
         </div>

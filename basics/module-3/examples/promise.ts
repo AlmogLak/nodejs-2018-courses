@@ -13,3 +13,4 @@ async function printDelayed(elements: string[]) {
 printDelayed(["Hello", "beautiful", "world"]).then(() => {
     console.log("done!");
 });
+console.log("hello there...!!!");

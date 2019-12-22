@@ -1,11 +1,14 @@
-import { ItemsController } from "./controllers/items.controller";
-import { Item } from "./models/item.model";
-import { ItemType } from "./enums/item-type.enum";
+import { Note } from "./models/note.model";
+import { NoteLevel } from "./enums/note-level.enum";
+import { User } from "./models/user.model";
+import { ObjectID } from "mongodb";
 
+const note = new Note("This is my first note!", "note writen in the class", NoteLevel.High);
+console.log("inserted note", note);
 
-let itemsController = new ItemsController();
-let item = new Item("Table", "Designers table", 1350, "TLV", true, 1, "almog", ItemType.Garden);
-console.log("inserted item", item);
-console.log("items", itemsController.list());
-itemsController.create(item);
-console.log("items after insert", itemsController.list());
+const user = new User(new ObjectID(), "Almog", "Laktivi", "Achisemakh", [note]);
+console.log("inserted user", user);
+
+console.log("High level notes", user.getNotesByLevel(NoteLevel.High));
+console.log("Medium level notes", user.getNotesByLevel(NoteLevel.Medium));
+console.log("Low level notes", user.getNotesByLevel(NoteLevel.Low));

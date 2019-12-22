@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Node.js</title>
     <link rel="stylesheet" href="../assets/css/reveal.css">
-    <link rel="stylesheet" href="../assets/css/theme/beige.css">
+    <link rel="stylesheet" href="../assets/css/theme/league.css">
     <link rel="stylesheet" href="../assets/lib/css/zenburn.css">
     <link rel="stylesheet" href="../styles/main.css">
 </head>
@@ -17,6 +17,7 @@
             <!-- Node.js Basics -->
             <section>
                 <h1>Node.js Basics</h1>
+                <h2>Module 2 - Typescript</h2>
                 <sub>By Almog Laktivi</sub>
             </section>
             <!-- In This Module -->
@@ -24,9 +25,9 @@
                 <h2>In This Module</h2>
                 <p>What is Typescript</p>
                 <p>Typescript basics 
-                        <span style="font-size: 22px;">Types, Interfaces, Enums, Decorators</span>
+                    <span style="font-size: 22px;">Types, Interfaces, Enums, etc..</span>
                     <br/>
-                <p>Modules & Node.js with Typescript</p>
+                <p>Modules on Node.js with Typescript</p>
                 </p>
             </section>
             <!-- JS awesome -->
@@ -39,7 +40,8 @@
             </section>
             <!-- JS downsides -->
             <section>
-                <h3>JS have downsides, I.E: it's more verbose</h3>
+                <h3>JS have downsides</h3>
+                <sub>I.E: it's more verbose</sub>
                 <pre>
                     <code data-trim data-noescape class="js">
                         function getUserById(id, connection, callback) {
@@ -96,7 +98,7 @@
                 <section>
                     <h3>Types example</h3>
                     <pre>
-                        <code data-trim data-noescape class="js">
+                        <code data-trim data-noescape class="ts">
                             let name:string = "John"; 
                             let score1:number = 50;
                             let score2:number = 42.50;
@@ -112,7 +114,7 @@
                     <h3>Any type</h3>
                     <p>We may need to describe the type of variables that we do not know when we are writing an application.</p>
                     <pre>
-                        <code data-trim data-noescape class="js">
+                        <code data-trim data-noescape class="ts">
                             let notSure: any = 4;
                             notSure = "maybe a string instead";
                             notSure = false;
@@ -122,7 +124,7 @@
                 <section>
                     <h3>Define your own types</h3>
                     <pre>
-                        <code data-trim data-noescape class="js">
+                        <code data-trim data-noescape class="ts">
                             class Greeter {
                                 greeting: string;
                                 constructor(message: string) {
@@ -150,7 +152,7 @@
                 <section>
                     <h3>Class types</h3>
                     <pre>
-                        <code data-trim data-noescape class="js">
+                        <code data-trim data-noescape class="ts">
                             interface ClockInterface {
                                 currentTime: Date;
                                 setTime(d: Date);
@@ -171,7 +173,7 @@
                 <section>
                     <h3>Function types</h3>
                     <pre>
-                        <code data-trim data-noescape class="js">
+                        <code data-trim data-noescape class="ts">
                             interface SearchFunc {
                                 (source: string, subString: string): boolean;
                             }
@@ -187,7 +189,7 @@
                 <section>
                     <h3>Optional Properties</h3>
                     <pre>
-                        <code data-trim data-noescape class="js">
+                        <code data-trim data-noescape class="ts">
                             interface SquareConfig {
                                 color?: string;
                                 width?: number;
@@ -198,7 +200,7 @@
                 <section>
                     <h3>Use interfaces to strict objects as variable</h3>
                     <pre>
-                        <code data-trim data-noescape class="js">
+                        <code data-trim data-noescape class="ts">
                             interface LabelledValue {
                                 label: string;
                             }
@@ -218,7 +220,7 @@
                 <h2>Typescript Enums</h2>
                 <section>
                     <pre>
-                        <code data-trim data-noescape class="js">
+                        <code data-trim data-noescape class="ts">
                             enum Response {
                                 No = 0,
                                 Yes = 1,
@@ -234,7 +236,7 @@
                 </section>
                 <section>
                     <pre>
-                        <code data-trim data-noescape class="js">
+                        <code data-trim data-noescape class="ts">
                             enum ShapeKind {
                                 Circle,
                                 Square,
@@ -267,7 +269,7 @@
                 <section>
                     <h3>Naive solution</h3>
                     <pre>
-                        <code data-trim data-noescape class="js">
+                        <code data-trim data-noescape class="ts">
                             function identity(arg: any): any {
                                 return arg;
                             }
@@ -280,7 +282,7 @@
                 <section>
                     <h3>Solution with generics</h3>
                     <pre>
-                        <code data-trim data-noescape class="js">
+                        <code data-trim data-noescape class="ts">
                             function identity&#60;T&#62;(arg: T): T {
                                     return arg;
                                 }
@@ -291,62 +293,21 @@
                     </pre>
                 </section>
             </section>
-            <!-- TypeScript Decorators -->
-            <section>
-                <h2>TypeScript Decorators</h2>
-                <section>
-                    <br>
-                    <p>Instead of wrapping the function with another function, we can use decorators</p>
-                    <pre>
-                        <code data-trim data-noescape class="js">
-                            function f() {
-                                console.log("f(): evaluated");
-                                return function (target, propertyKey: string, descriptor: PropertyDescriptor) {
-                                    console.log("f(): called");
-                                }
-                            }
-                            function g() {
-                                console.log("g(): evaluated");
-                                return function (target, propertyKey: string, descriptor: PropertyDescriptor) {
-                                    console.log("g(): called");
-                                }
-                            }
-                            class C {
-                                @f()
-                                @g()
-                                method() {}
-                            }
-                        </code>
-                    </pre>
-                </section>
-                <section>
-                    <h3>Evaluation</h3>
-                    <div class="fragment">    
-                        <pre>
-                            <code data-trim data-noescape class="js">
-                                f(): evaluated
-                                g(): evaluated
-                                g(): called
-                                f(): called
-                            </code>
-                        </pre>
-                    </div>
-                </section>
-            </section>
             <!-- Node.js with Typescript -->
             <section>
                 <h2>Node.js with Typescript</h2>
                 <section>
-                    <p>yarn add @types/node</p>
-                    <p>yarn add ts-node --> cli</p>
+                    <p>npm i -D @types/node</p>
+                    <p>npm i -g ts-node --> cli</p>
                     <p>Add library types: <a href="https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types">DefinitelyTyped</a></p>
                     <p>Use typescript 'modules' and 'export' to define node modules</p>
                 </section>
                 <section>
                     <h3>.bind</h3>
                     <pre>
-                        <code data-trim data-noescape class="js">
+                        <code data-trim data-noescape class="ts">
                             export class ItemsController {
+                                private items: Item[];
                                 constructor() {
                                     this.get = this.get.bind(this);
                                     this.put = this.put.bind(this);
@@ -403,28 +364,36 @@
                     </pre>
                 </section>
             </section>
-            <!-- exercise -->
+            <!-- Demo Time -->
             <section>
+                <h2>Demo Time</h2>
+                <img src="https://media.giphy.com/media/QAaR9zoMUb8814WJ6a/giphy.gif" alt="">
+            </section>
+            <!-- Excercise Time -->
+            <section>
+                <h2>Excercise Time - AT&T Notes</h2>
                 <table>
                     <tr>
-                        <td style="width:50%">
-                            <img src="../assets/exercise-time.png"/>
-                        </td>
                         <td style="vertical-align: top; font-size:16px">
                             <ul style="list-style-type: none">
-                                <li>Build models which will be used in next exercises
+                                <li>Build models with Typescript
                                     <ul>
-                                        <li>Interface for <code>ItemsController</code> class which will include: create/list/show/delete functions</li>
-                                        <li>Class ItemController which will implements this interface</li>
-                                        <li>Model for <code>Item</code> with the following: name: string, description: string, price: number, address: string, isInStock: boolean, amount: number, creator: string, itemType: ItemType</li>
-                                        <li>Enum for itemType which declare categories of items</li>
-                                        <li>App class which will be run by Node and print all data (create an instance of Item and console.log it)</li>
+                                        <li>Enum model for <b>NoteLevel</b> with the following: <code>Low, Medium, High</code></li>
+                                        <li>Model for <b>Note</b> with the following: <code>note: string, comment: string, level: NoteLevel</code></li>
+                                        <li>Model for <b>User</b> with the following: <code>_id: ObjectID, firstName: string, lastName: string, address: string, notes: Array&#60;Note&#62;</code></li>
+                                        <li>Create <b>getNotesByLevel(level: NoteLevel)</b> method in User model which will return all the notes by specific level</li>
+                                        <li>Create your note and user in <i>app.ts</i> and print them to the console to validate everything works</li>
                                     </ul>
                                 </li>
                             </ul>
                         </td>
+                        <td><img src="https://media.giphy.com/media/UvvK8rOSHPxgjo9ryD/giphy.gif"></tr>
                     </tr>
                 </table>
+            </section>
+            <!-- Next Module -->
+            <section>
+                <a href="../module-3/index.html">Next Module</a>
             </section>
             </div>
         </div>

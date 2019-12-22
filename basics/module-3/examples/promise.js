@@ -24,4 +24,5 @@ function printDelayed(elements) {
 printDelayed(["Hello", "beautiful", "world"]).then(() => {
     console.log("done!");
 });
+console.log("hello there...!!!");
 //# sourceMappingURL=promise.js.map
