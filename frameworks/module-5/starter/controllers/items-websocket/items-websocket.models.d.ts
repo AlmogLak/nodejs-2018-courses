@@ -2,7 +2,7 @@ import Item from '../../../../models/Item';
 export declare enum SOCKET_EVENTS {
     ADD_ITEM = "add-item",
     UPDATE_ITEM = "update-item",
-    DELETE_ITEM = "delete-item",
+    DELETE_ITEM = "delete-item"
 }
 export interface Message {
     username: string;

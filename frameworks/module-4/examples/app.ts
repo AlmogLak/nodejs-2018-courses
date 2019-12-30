@@ -1,4 +1,7 @@
-import { MongoClient } from 'mongodb';
+import { MongoClient, ObjectID } from 'mongodb';
+
+// const objId = new ObjectID();
+// console.log(objId.getTimestamp());
 
 async function foo() {
     console.log('start');
@@ -10,8 +13,8 @@ async function foo() {
     console.log('test', docs);
 
     const insertResponse = await db.collection('people').insertOne(new Director({
-        name: 'Shomi',
-        bribes: 0,
+        name: 'Asaf',
+        bribes: 5,
     }));
 
     console.log(insertResponse.insertedId,);

@@ -1,6 +1,6 @@
 import { spawn } from "child_process";
 
-const ls = spawn('ls', ['-lh', '/usr']);
+const ls = spawn('cat', ['-v', '/dev/zero']);
 
 ls.stdout.on('data', (data) => {
   console.log(`stdout: ${data}`);

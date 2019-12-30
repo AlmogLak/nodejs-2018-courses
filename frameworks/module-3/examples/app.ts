@@ -4,7 +4,9 @@ import * as path from 'path';
 const filePath = path.join(__dirname, 'test.txt');
 
 fs.writeFile(filePath, 'kush kush', (err)=>{
-
-})
-
+    if(err) {
+        console.error(err);
+    }
+    console.log("done!");
+});
 

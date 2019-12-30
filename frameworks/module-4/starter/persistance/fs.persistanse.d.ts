@@ -6,5 +6,5 @@ export declare class FSPersistance implements PersistanceInterface {
     getItemById(itemId: number): Promise<Item>;
     insertItem(item: Item): Promise<Item>;
     updateItem(itemId: number, item: Item): Promise<void>;
-    private readItemFile(filename);
+    private readItemFile;
 }

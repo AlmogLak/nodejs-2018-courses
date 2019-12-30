@@ -1,4 +1,3 @@
-/// <reference types="express" />
 import { Request, Response } from 'express';
 import { PersistanceInterface } from '../../persistance/persistance.interface';
 export declare class ItemsController {

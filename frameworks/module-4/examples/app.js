@@ -9,6 +9,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongodb_1 = require("mongodb");
+// const objId = new ObjectID();
+// console.log(objId.getTimestamp());
 function foo() {
     return __awaiter(this, void 0, void 0, function* () {
         console.log('start');
@@ -18,8 +20,8 @@ function foo() {
         const docs = yield db.collection('people').find({}).toArray();
         console.log('test', docs);
         const insertResponse = yield db.collection('people').insertOne(new Director({
-            name: 'Shomi',
-            bribes: 0,
+            name: 'Asaf',
+            bribes: 5,
         }));
         console.log(insertResponse.insertedId);
         // const dir = new Director({});

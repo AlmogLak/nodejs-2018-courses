@@ -8,6 +8,7 @@ class ItemsController {
         this.get = this.get.bind(this);
         this.put = this.put.bind(this);
         this.post = this.post.bind(this);
+        this.delete = this.delete.bind(this);
     }
     get(req, res) {
         res.send(items);

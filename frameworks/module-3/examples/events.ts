@@ -10,3 +10,5 @@ eventEmitter.on('data', (data) => {
 for (let index = 0; index < 100; index++) {
     eventEmitter.emit('data', {"counter": index});
 }
+
+console.log(eventEmitter.eventNames());

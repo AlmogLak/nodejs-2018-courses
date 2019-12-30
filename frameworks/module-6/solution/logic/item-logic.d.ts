@@ -12,5 +12,5 @@ export declare class ValidationError {
 }
 export declare enum ErrorType {
     BadItem = 400,
-    ItemNotFound = 404,
+    ItemNotFound = 404
 }

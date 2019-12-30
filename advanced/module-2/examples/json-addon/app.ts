@@ -1,4 +1,4 @@
-// const config = require("./config.json");
-const config = require("./config");
+const config = require("./config.json");
+// const config = require("./config");
 
 console.log(config);

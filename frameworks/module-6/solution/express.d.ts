@@ -1,4 +1,3 @@
-/// <reference types="express" />
 /// <reference types="node" />
 import * as express from 'express';
 import { Server } from 'http';

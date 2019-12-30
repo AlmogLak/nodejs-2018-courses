@@ -7,7 +7,7 @@ const slow = () => {
 const a = slow();
 const b = slow();
 const c = slow();
-console.log(a);
-console.log(b);
-console.log(c);
+console.log(a, "a");
+console.log(b, "b");
+console.log(c, "c");
 //# sourceMappingURL=blocking-op.js.map

@@ -10,8 +10,8 @@ const b = slow();
 
 const c = slow();
 
-console.log(a);
+console.log(a, "a");
 
-console.log(b);
+console.log(b, "b");
 
-console.log(c);
+console.log(c, "c");

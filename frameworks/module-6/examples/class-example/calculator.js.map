@@ -1,1 +1,1 @@
-{"version":3,"file":"calculator.js","sourceRoot":"","sources":["calculator.ts"],"names":[],"mappings":";;AAAA;IACI,GAAG,CAAC,KAAY,EAAE,GAAU;QACxB,MAAM,CAAC,KAAK,GAAG,GAAG,CAAC;IACvB,CAAC;CACJ;AAJD,gCAIC"}
+{"version":3,"file":"calculator.js","sourceRoot":"","sources":["calculator.ts"],"names":[],"mappings":";;AAAA,MAAa,UAAU;IACnB,GAAG,CAAC,KAAY,EAAE,GAAU;QACxB,OAAO,KAAK,GAAG,GAAG,CAAC;IACvB,CAAC;CACJ;AAJD,gCAIC"}
