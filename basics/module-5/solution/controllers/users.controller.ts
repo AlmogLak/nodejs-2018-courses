@@ -18,9 +18,9 @@ export class UsersController {
     
     async create(req: Request, res: Response) {
         try {
-            const user = new User(new ObjectID(), req.body.firstName, req.body.lastName,req.body.address, req.body.notes);
+            const user = new User(new ObjectID(), req.body.firstName, req.body.lastName, req.body.address, req.body.notes);
             await this.persistanceService.create(user);
-            res.sendStatus(200);
+            res.sendStatus(201);
         } catch (error) {
             console.error(error);
             res.status(500).json(error);
@@ -37,11 +37,25 @@ export class UsersController {
         }
     }
 
-    show(userId: ObjectID): Promise<User> {
-        return this.persistanceService.show(userId);
+    show(req: Request, res: Response) {
+        try {
+            const userId = new ObjectID(req.query.userId);
+            const user = this.persistanceService.show(userId);
+            res.send(user);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json(error);
+        }
     }
 
-    delete(userId: ObjectID): Promise<void> {
-        return this.persistanceService.delete(userId);
+    delete(req: Request, res: Response) {
+        try {
+            const userId = new ObjectID(req.query.userId);
+            this.persistanceService.delete(userId);
+            res.sendStatus(204);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json(error);
+        }
     }
 }

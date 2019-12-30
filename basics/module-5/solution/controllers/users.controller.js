@@ -24,7 +24,7 @@ class UsersController {
             try {
                 const user = new user_model_1.User(new mongodb_1.ObjectID(), req.body.firstName, req.body.lastName, req.body.address, req.body.notes);
                 yield this.persistanceService.create(user);
-                res.sendStatus(200);
+                res.sendStatus(201);
             }
             catch (error) {
                 console.error(error);
@@ -44,11 +44,27 @@ class UsersController {
             }
         });
     }
-    show(userId) {
-        return this.persistanceService.show(userId);
+    show(req, res) {
+        try {
+            const userId = new mongodb_1.ObjectID(req.query.userId);
+            const user = this.persistanceService.show(userId);
+            res.send(user);
+        }
+        catch (error) {
+            console.error(error);
+            res.status(500).json(error);
+        }
     }
-    delete(userId) {
-        return this.persistanceService.delete(userId);
+    delete(req, res) {
+        try {
+            const userId = new mongodb_1.ObjectID(req.query.userId);
+            this.persistanceService.delete(userId);
+            res.sendStatus(204);
+        }
+        catch (error) {
+            console.error(error);
+            res.status(500).json(error);
+        }
     }
 }
 exports.UsersController = UsersController;

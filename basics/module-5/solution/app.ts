@@ -12,6 +12,8 @@ class App {
         server.use(bodyParser.json());
         server.get('/api/users', usersController.list);
         server.post('/api/users', usersController.create);
+        server.get('/api/users/:userId', usersController.show);
+        server.delete('/api/users/:userId', usersController.delete);
 
         server.listen(this.port, () => console.log(`server listening on port ${this.port}!`));
     }
