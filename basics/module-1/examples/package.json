@@ -1,5 +1,5 @@
 {
-  "name": "proj1",
+  "name": "twit",
   "version": "1.0.0",
   "description": "some desc",
   "main": "index.js",
@@ -13,5 +13,8 @@
   },
   "devDependencies": {
     "ts-node": "^8.3.0"
-  }
+  },
+  "keywords": [
+    "twitter"
+  ]
 }

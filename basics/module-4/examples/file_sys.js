@@ -48,5 +48,5 @@ function read() {
         console.log(yield readFileData());
     });
 }
-read();
+read().then(() => console.log("done running application!"));
 //# sourceMappingURL=file_sys.js.map

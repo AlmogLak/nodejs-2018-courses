@@ -5,7 +5,7 @@ class UsersController {
     constructor() {
         this.persistanceService = new persistance_service_1.PersistanceService();
     }
-    create(user) {
+    create(request, response) {
         return this.persistanceService.create(user);
     }
     list() {

@@ -46,4 +46,4 @@ async function read() {
     console.log(await readFileData());
 }
 
-read();
+read().then(() => console.log("done running application!"));
