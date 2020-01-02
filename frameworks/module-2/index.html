@@ -5,40 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Node.js</title>
     <link rel="stylesheet" href="../assets/css/reveal.css">
-    <link rel="stylesheet" href="../assets/css/theme/beige.css">
+    <link rel="stylesheet" href="../assets/css/theme/league.css">
     <link rel="stylesheet" href="../assets/lib/css/zenburn.css">
     <link rel="stylesheet" href="../styles/main.css">
-    <!-- <script>
-        // 2. This code loads the IFrame Player API code asynchronously.
-        var tag = document.createElement('script');
-
-        tag.src = "https://www.youtube.com/iframe_api";
-        var firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-        // 3. This function creates an <iframe> (and YouTube player)
-        //    after the API code downloads.
-        var player;
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('player', {
-                height: '390',
-                width: '640',
-                videoId: '3oem-M2tQU4'
-            });
-        }
-    </script> -->
 </head>
 
 <body>
     <div class="att_logo"></div>
     <div class="reveal">
         <div class="slides">
+            <!-- Node.js Frameworks -->
             <section>
                 <h1>Node.js Frameworks</h1>
-                <sub>By Almog Laktivi, Nabil Naffar & Danny Vernovsky</sub>
+                <h2>Module 2 - Express.js</h2>
+                <sub>By Almog Laktivi</sub>
             </section>
+            <!-- In This Module -->
             <section>
                 <h2>In This Module</h2>
                 <p>Node.js 
@@ -47,174 +31,200 @@
                 <p>Hello Express.js</p>
                 <p>REST API</p>
             </section>
+            <!-- Node.Js APIs -->
             <section>
                 <h2>Node.js noob to pro</h2>
                 <p>process.env</p>
                 <p>__dirname, __filename</p>
-                <p>fs API</p>
-                <p>path API</p>
+                <p>fs APIs</p>
+                <p>path APIs</p>
             </section>
+            <!-- Hello Express.Js -->
             <section>
                 <h2>Hello Express.js</h2>
-                <img width="700" src="../assets/expressjs.png" />
-                <p>@
-                    <a href="https://expressjs.com/">https://expressjs.com/</a>
-                </p>
+                <section>
+                    <img width="700" src="../assets/expressjs.png" />
+                    <p>@
+                        <a href="https://expressjs.com/">https://expressjs.com/</a>
+                    </p>
+                </section>
+                <section>
+                    <pre>
+                        <code data-trim data-noescape class="bash">
+                            $ npm i -s add express
+                            $ npm i -D @types/express
+                        </code>
+                    </pre>
+                    <pre class="wide">
+                        <code data-trim data-noescape class="ts">
+                            import * as express from 'express';
+                            import * as bodyParser from "body-parser";
+                            const app = express();
+                            app.use(bodyParser.json());
+                            app.get('/', (req, res) => res.send('Hello World!'));
+                            app.post('/', (req, res) => res.send(req.body));
+                            app.listen(3000, () => console.log('Example app listening on port 3000!'));
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Demo Time</h2>
+                    <img src="https://media.giphy.com/media/QAaR9zoMUb8814WJ6a/giphy.gif" alt="">
+                </section>
             </section>
+            <!-- Middlewares -->
             <section>
-                <h2>Express Hello World</h2>
-                <pre>
-                    <code data-trim data-noescape class="bash">
-                        $ yarn add express
-                        $ yarn add @types/express
-                    </code>
-                </pre>
-                <pre class="wide">
-                    <code data-trim data-noescape class="js">
-                        import * as express from 'express';
-                        const app = express()
-                        
-                        app.get('/', (req, res) => res.send('Hello World!'))
-                        
-                        app.listen(3000, () => console.log('Example app listening on port 3000!'))
-                    </code>
-                </pre>
+                <h2>Express.js Middlewares</h2>
+                <section>
+                    <p class="fragment">Just a function (Native / 3rd party / Self implementation)</p>
+                    <p class="fragment">Executes in a queue fasion</p>
+                    <p class="fragment">Responsible to call next middleware</p>
+                </section>
+                <section>
+                    <pre class="wide">
+                        <code data-trim data-noescape class="ts">
+                            function requestLog(req: Request, res: Response, next: NextFunction) {
+                                console.log(`${req.method}  ${req.hostname}${req.url} for user: ${req.header('auth')}`);
+                                next();
+                            }
+                        </code>
+                    </pre>
+                </section>
             </section>
+            <!-- Rest API -->
             <section>
-                <img src="../assets/demotime.png" alt="">
-            </section>
-            <section>
-                <h2>Express.js middlewares</h2>
-                <p class="fragment">Just a function</p>
-                <p class="fragment">executes in a queue fasion</p>
-                <p class="fragment">responsible to call next middleware</p>
-            </section>
-            <section>
-                <h2>rest api</h2>
-                <div id='rest_video_fragment' class="fragment">
-                    <p>Setting up REST API standard</p>
-                    <video id="rest_video" height="400">
-                        <source src="../assets/deciding_rest_convention.mp4" type="video/mp4">
-                    </video>
-                </div>
-            </section>
-            <section>
-                <h2>rest</h2>
-                <table>
-                    <tr>
-                        <td>GET</td>
-                        <td>Get resources or resource by id</td>
-                    </tr>
-                    <tr>
-                        <td>POST</td>
-                        <td>Create new resource</td>
-                    </tr>
-                    <tr>
-                        <td>PUT</td>
-                        <td>Update resource</td>
-                    </tr>
-                    <tr>
-                        <td>DELETE</td>
-                        <td>Delete resource</td>
-                    </tr>
-                    <tr>
-                        <td>PATCH</td>
-                        <td>Partially update resource</td>
-                    </tr>
-                </table>
-            </section>
-            <section>
-                <h2>Rest API - router</h2>
-                <div>
-                    <p>Represent relative root route</p>
+                <h2>Rest API</h2>
+                <section>
+                    <div id='rest_video_fragment' class="fragment">
+                        <p>Setting up REST API standard</p>
+                        <video id="rest_video" height="400">
+                            <source src="../assets/deciding_rest_convention.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </section>
+                <section>
+                    <sub>Http Methods</sub>
+                    <table>
+                        <tr>
+                            <td>GET</td>
+                            <td>Get resources or resource by id</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td>Create new resource</td>
+                        </tr>
+                        <tr>
+                            <td>PUT</td>
+                            <td>Update resource</td>
+                        </tr>
+                        <tr>
+                            <td>DELETE</td>
+                            <td>Delete resource</td>
+                        </tr>
+                        <tr>
+                            <td>PATCH</td>
+                            <td>Partially update resource</td>
+                        </tr>
+                    </table>
+                </section>
+                <section>
+                    <sub>Express Router</sub>
+                    <div>
+                        <p>Represent relative root route</p>
+                        <pre>
+                            <code data-trim data-noescape class="ts">
+                                /*person.controller.ts*/
+                                import { Router } from 'express';
+                                
+                                export const router: Router = Router();
+                                router.get('/', (req, res) => {
+                                    res.send([{ name: 'Danny' }, { name: 'Nabil' }]);
+                                });                            
+                            </code>
+                        </pre>
+                    </div>
+                </section>
+                <section>
+                    <sub>Express Router</sub>
+                    <div>
+                        <p>Can be connected into other routers to create hierarchy</p>
+                        <pre>
+                        <code data-trim data-noescape class="ts">
+                            /* rest-api.ts */
+                            import * as express from 'express';
+                            import { router } from './person.controller';
+                            const app = express();
+    
+                            app.use('/api/person', router);
+    
+                            app.listen(3000, ()=>{
+                                console.log('listening on port 3000');
+                            });
+                        </code>
+                    </div>
+                </section>
+                <section>
+                    <sub>Parameters</sub>
+                    <table>
+                        <tr>
+                            <td>
+                                url parameters (params)
+                            </td>
+                            <td>
+                                /api/user/<b>1234</b>
+                            </td>
+                        </tr>
+                    </table>
                     <pre>
                         <code data-trim data-noescape class="ts">
-                            /*person.controller.ts*/
-                            import { Router } from 'express';
-                            
-                            export const router: Router = Router();
-                            router.get('/', (req, res) => {
-                                res.send([{ name: 'Danny' }, { name: 'Nabil' }]);
+                            router.get('/:userId', (req, res) => {   
+                                const userId = req.params.userId;
+                                const user = await persistance.getUserById(userid);
+                                res.send(user);
                             });                            
                         </code>
                     </pre>
-                </div>
-            </section>
-            <section>
-                <h2>Rest API - router</h2>
-                <div>
-                    <p>Can be connected via other routers to create hierarchy</p>
-                    <pre>
-                    <code data-trim data-noescape class="ts">
-                        /* rest-api.ts */
-                        import * as express from 'express';
-                        import { router } from './person.controller';
-                        const app = express();
-
-                        app.use('/api/person', router);
-
-                        app.listen(3000, ()=>{
-                            console.log('listening on port 3000');
-                        });
-                    </code>
-            </div>
-            </section>
-            <section>
-                <h2>Rest api - parameters</h2>
-                <table>
-                    <tr>
-                        <td>
-                            url parameters (params)
-                        </td>
-                        <td>
-                            /api/user/<b>1234</b>
-                        </td>
-                    </tr>
-                </table>
-                <pre>
-                    <code data-trim data-noescape class="ts">
-                        router.get('/:userId', (req, res) => {   
-                            const userId = req.params.userId;
-                            const user = await persistance.getUserById(userid);
-                            res.send(user);
-                        });                            
-                    </code>
-                </pre>
                     <small>
                         <i>NOTE: to merge between router params use `mergeParams:true` when creating a router </i>
                     </small>
+                </section>
+                <section>
+                    <h2>Demo Time</h2>
+                    <img src="https://media.giphy.com/media/QAaR9zoMUb8814WJ6a/giphy.gif" alt="">
+                </section>
             </section>
+            <!-- Excercise Time -->
             <section>
-                <img src="../assets/demotime.png" alt="">
-            </section>
-            <section>
+                <h2>Excercise Time - AT&T Notes</h2>
                 <table>
                     <tr>
-                        <td style="width:50%">
-                            <img src="../assets/exercise-time.png"/>
-                        </td>
                         <td style="vertical-align: top; font-size:16px">
                             <ul style="list-style-type: none">
-                                <li>Build REST API for marketing chrome extension
+                                <li>Build REST API for AT&T Notes
                                     <ul>
-                                        <li>Add GET request to fetch all records from <code>/api/items</code></li>
-                                        <li>Add POST request to add new item <code>/api/items</code></li>
-                                        <li>Add PUT request to update subscription on item <code>/api/items/:itemId</code></li>
-                                        <li>Add DELETE request to remove subscription on item or remove the item <code>/api/items/:itemId</code></li>
+                                        <li>Add missing GET user request to fetch user by id (show) <code>/api/users/{user-id}</code></li>
+                                        <li>Add missing PUT request to add new notes <code>/api/users/{user-id}</code> (the payload will be by note model)</li>
+                                        <li>Add missing DELETE request to remove note or remove the user <code>/api/items/{user-id}/{?note-id}</code></li>
+                                        <li>Add Express Router which will map all these APIs</li>
                                     </ul>
                                 </li>
-                            </ul>
+                            </ul><br><br>
                             <h4>notes</h4>
                             <ul>
-                                <li>User can't add himself to it's own item (400)</li>
-                                <li>User can't subscribe twice to the same item (400)</li>
-                                <li>Item not found error (404)</li>
-                                <li>User can't remove other user item</li>
-                                <li>User can't remove item he's not subscribed to (400)</li>
+                                <li>Get user by {user-id} will get the id from query params</li>
+                                <li>User not found error on GET (404)</li>
+                                <li>Delete supports both deletion of a note and deletion of an user (if the {note-id} not exists)</li>
+                                <li>Make sure you are using Express routers</li>
+                                <li>Add middleware at the main Router which will log every request to our application</li>
                             </ul>
                         </td>
+                        <td><img src="https://media.giphy.com/media/UvvK8rOSHPxgjo9ryD/giphy.gif"></tr>
                     </tr>
                 </table>
+            </section>
+            <!-- Next Module -->
+            <section>
+                <a href="../module-3/index.html">Next Module</a>
             </section>
             </div>
         </div>

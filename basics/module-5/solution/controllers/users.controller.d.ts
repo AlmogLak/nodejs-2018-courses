@@ -4,6 +4,6 @@ export declare class UsersController {
     constructor();
     create(req: Request, res: Response): Promise<void>;
     list(req: Request, res: Response): Promise<void>;
-    show(req: Request, res: Response): void;
-    delete(req: Request, res: Response): void;
+    show(req: Request, res: Response): Promise<void>;
+    delete(req: Request, res: Response): Promise<void>;
 }

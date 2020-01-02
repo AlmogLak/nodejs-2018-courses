@@ -45,26 +45,30 @@ class UsersController {
         });
     }
     show(req, res) {
-        try {
-            const userId = new mongodb_1.ObjectID(req.query.userId);
-            const user = this.persistanceService.show(userId);
-            res.send(user);
-        }
-        catch (error) {
-            console.error(error);
-            res.status(500).json(error);
-        }
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const userId = new mongodb_1.ObjectID(req.params.userId);
+                const user = yield this.persistanceService.show(userId);
+                res.send(user);
+            }
+            catch (error) {
+                console.error(error);
+                res.status(500).json(error);
+            }
+        });
     }
     delete(req, res) {
-        try {
-            const userId = new mongodb_1.ObjectID(req.query.userId);
-            this.persistanceService.delete(userId);
-            res.sendStatus(204);
-        }
-        catch (error) {
-            console.error(error);
-            res.status(500).json(error);
-        }
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const userId = new mongodb_1.ObjectID(req.params.userId);
+                yield this.persistanceService.delete(userId);
+                res.sendStatus(204);
+            }
+            catch (error) {
+                console.error(error);
+                res.status(500).json(error);
+            }
+        });
     }
 }
 exports.UsersController = UsersController;

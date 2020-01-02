@@ -37,10 +37,10 @@ export class UsersController {
         }
     }
 
-    show(req: Request, res: Response) {
+    async show(req: Request, res: Response) {
         try {
-            const userId = new ObjectID(req.query.userId);
-            const user = this.persistanceService.show(userId);
+            const userId = new ObjectID(req.params.userId);
+            const user = await this.persistanceService.show(userId);
             res.send(user);
         } catch (error) {
             console.error(error);
@@ -48,10 +48,10 @@ export class UsersController {
         }
     }
 
-    delete(req: Request, res: Response) {
+    async delete(req: Request, res: Response) {
         try {
-            const userId = new ObjectID(req.query.userId);
-            this.persistanceService.delete(userId);
+            const userId = new ObjectID(req.params.userId);
+            await this.persistanceService.delete(userId);
             res.sendStatus(204);
         } catch (error) {
             console.error(error);

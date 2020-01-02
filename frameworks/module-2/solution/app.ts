@@ -1,10 +1,33 @@
-import * as express from 'express'
-import * as bodyParser from 'body-parser';
-import * as cors from 'cors';
-import { itemsRouter } from './controllers/items/router';
-const app = express();
-app.use(cors());
-app.use(bodyParser.json());
-app.use('/api/items', itemsRouter)
+import * as express from "express";
+import * as bodyParser from "body-parser";
+import { UsersController } from "./controllers/users.controller";
+import { UsersRouter } from "./controllers/users.router";
 
-app.listen(3000, () => console.log('app listening on port 3000!'))
+class App {
+    private readonly port: number = 3000;
+
+    constructor() {
+        this.requestLog = this.requestLog.bind(this);
+    }
+
+    init() {
+        const usersController = new UsersController();
+        let userRouters = new UsersRouter(usersController);
+        let server = express();
+        
+
+        server.use(bodyParser.json());
+        server.use(this.requestLog);
+        server.use('/api/users', userRouters.router());
+
+        server.listen(this.port, () => console.log(`server listening on port ${this.port}!`));
+    }
+
+    private requestLog(req: express.Request, res: express.Response, next: express.NextFunction) {
+        console.log(`${req.method}:  http://${req.hostname}:${this.port}${req.url}`);
+        next();
+    }
+}
+
+const app = new App();
+app.init();

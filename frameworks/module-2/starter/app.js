@@ -1,7 +1,23 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
-const app = express();
-app.get('/', (req, res) => res.send('Hello World!'));
-app.listen(3000, () => console.log('app listening on port 3000!'));
+const bodyParser = require("body-parser");
+const users_controller_1 = require("./controllers/users.controller");
+class App {
+    constructor() {
+        this.port = 3000;
+    }
+    init() {
+        const usersController = new users_controller_1.UsersController();
+        let server = express();
+        server.use(bodyParser.json());
+        // TODO: Use users router
+        // TODO: Implement log router which will log all requests
+        server.get('/api/users', usersController.list);
+        server.post('/api/users', usersController.create);
+        server.listen(this.port, () => console.log(`server listening on port ${this.port}!`));
+    }
+}
+const app = new App();
+app.init();
 //# sourceMappingURL=app.js.map

@@ -1,6 +1,24 @@
-import * as express from 'express'
-const app = express();
+import * as express from "express";
+import * as bodyParser from "body-parser";
+import { UsersController } from "./controllers/users.controller";
 
-app.get('/', (req, res) => res.send('Hello World!'))
+class App {
+    private readonly port: number = 3000;
 
-app.listen(3000, () => console.log('app listening on port 3000!'))
+    init() {
+        const usersController = new UsersController();
+        let server = express();
+
+        server.use(bodyParser.json());
+        // TODO: Use users router
+        // TODO: Implement log router which will log all requests
+
+        server.get('/api/users', usersController.list);
+        server.post('/api/users', usersController.create);
+
+        server.listen(this.port, () => console.log(`server listening on port ${this.port}!`));
+    }
+}
+
+const app = new App();
+app.init();
