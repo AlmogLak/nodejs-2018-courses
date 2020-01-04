@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Node.js</title>
     <link rel="stylesheet" href="../assets/css/reveal.css">
-    <link rel="stylesheet" href="../assets/css/theme/beige.css">
+    <link rel="stylesheet" href="../assets/css/theme/league.css">
     <link rel="stylesheet" href="../assets/lib/css/zenburn.css">
     <link rel="stylesheet" href="../styles/main.css">
 </head>
@@ -16,17 +16,21 @@
     <div class="att_logo"></div>
     <div class="reveal">
         <div class="slides">
+            <!-- Node.js Frameworks -->
             <section>
-                <h1>Persistence</h1>
-                <sub>By Almog Laktivi, Nabil Naffar & Danny Vernovsky</sub>
+                <h1>Node.js Frameworks</h1>
+                <h2>Module 3 - Persistence</h2>
+                <sub>By Almog Laktivi</sub>
             </section>
+            <!-- In This Module -->
             <section>
                 <h2>In This Module</h2>
                 <p>MongoDB</p>
                 <p>MySQL</p>
             </section>
+            <!-- MongoDB Introduction -->
             <section>
-                <h2>MongoDB introduction</h2>
+                <h2>MongoDB Introduction</h2>
                 <ul>
                     <li>Most common NOSQL database</li>
                     <li>Document database - collections which stores documents</li>
@@ -36,6 +40,7 @@
                     </li>
                 </ul>
             </section>
+            <!-- MongoDB Usage -->
             <section>
                 <section>
                     <h2>MongoDB CRUD via NodeJS</h2>
@@ -108,207 +113,47 @@
                     </pre>
                     <small>Use 'findOne' to return single docuemnt form collection</small>
                 </section>
-            </section>
-            <section>
-                <h2>ObjectID</h2>
-                <ul>
-                    <li>Looks like <code>5aa3c9f48b142702fb2d2e32</code></li>
-                    <li>Time based</li>
-                    <li>Only string and need to be converted to be used</li>
-                </ul>
-                <pre class="wide">
-                    <code data-trim data-noescape class="ts">
-                        import { ObjectID } from "mongodb";
-                        const mongoId = new ObjectID('5aa3c9f48b142702fb2d2e32')
-                    </code>
-                </pre>
-            </section>
-            <section>
-                <img src="../assets/demotime.png" alt="">
-            </section>
-            <section>
-                <h2>MySQL introduction</h2>
-                <ul>
-                    <li>Common RDBMS database</li>
-                    <li>Uses SQL language</li>
-                    <li>Have the ability to work with both small and large data sets</li>
-                    <li>Drivers to most popular programing languages (including NodeJS)</li>
-                </ul>
-            </section>
-            <section>
                 <section>
-                    <h2>MySQL CRUD via NodeJS</h2>
+                    <h2>ObjectID</h2>
                     <ul>
-                        <li>Create</li>
-                        <li>Read</li>
-                        <li>Update</li>
-                        <li>Delete</li>
-                        <li>Events</li>
+                        <li>Looks like <code>5aa3c9f48b142702fb2d2e32</code></li>
+                        <li>Time based</li>
+                        <li>Only string and need to be converted to be used</li>
                     </ul>
-                </section>
-                <section>
-                    Connect to MySQL
-                    <pre>
-                    npm install --save mysql
-                    npm install --save @types/mysql
-                    <code data-trim data-noescape class="ts">
-                        import {createConnection} from 'mysql';
-
-
-                        class DBClient {
-                            let connection = createConnection({
-                                host: 'localhost',
-                                user: 'me',
-                                password: 'test'
-                            });
-
-                            return connection;
-                        }
-
-                        export = new DBClient();
-                    </code>
-                </pre>
-                </section>
-                <section>
-                    Create
-                    <pre>
-                    <code data-trim data-noescape class="ts">
-                        import {format} from 'mysql';
-                        import DBClient = require("./database-client");
-
-                        class App {
-                        public async start() {
-                            try {
-                                DBClient.connect()
-
-                                sql = 'INSERT INTO posts SET ?';
-                                post = { id: 1, title: 'Hello MySQL' };
-                                sql = format(sql, post);
-
-                                let query = DBClient.query(sql, function (err, result) {
-                                    console.log("Success to insert: ",
-                                                JSON.stringify(post));
-                                });
-                            } catch (error) {
-                                console.log("Unable to connect to db");
-                            }
-                        }
-                    }
-                    </code>
-                </pre>
-                </section>
-                <section>
-                    Read
-                    <pre>
-                    <code data-trim data-noescape class="ts">
-                        import DBClient = require("./database-client");
-
-                        class App {
-                        public async start() {
-                            try {
-                                DBClient.query('SELECT * from users', (err, rows, fields) => {
-                                    if (err) throw err;
-
-                                    console.log('The solution is: ', rows);
-                                });
-                            } catch (error) {
-                                console.log("Unable to connect to db");
-                            }
-                        }
-                    }
-                    </code>
-                </pre>
-                </section>
-                <section>
-                    Update
-                    <pre>
-                    <code data-trim data-noescape class="ts">
-                        import DBClient = require("./database-client");
-
-                        class App {
-                        public async start() {
-                            try {
-                                DBClient.connect()
-
-                                let sql = 'UPDATE posts SET title = :title';
-                                let put = { title: 'Hello MySQL' });
-                                let query = DBClient.query(sql, put);
-                            } catch (error) {
-                                console.log("Unable to connect to db");
-                            }
-                        }
-                    }
-                    </code>
-                </pre>
-                </section>
-                <section>
-                    Delete
-                    <pre>
-                    <code data-trim data-noescape class="ts">
-                        import DBClient = require("./database-client");
-
-                        class App {
-                        public async start() {
-                            try {
-                                DBClient.connect()
-
-                                let sql = 'DELETE FROM posts WHERE title = "wrong"';
-
-                                DBClient.query(sql, function (err: mysql.QueryError, result: mysql.OkPacket) {
-                                    console.log('deleted ' + result.affectedRows + ' rows');
-                                });
-                            } catch (error) {
-                                console.log("Unable to connect to db");
-                            }
-                        }
-                    }
-                    </code>
-                </pre>
-                </section>
-                <section>
-                    Events (result, error, fields, packet, end)
-                    <pre>
-                    <code data-trim data-noescape class="ts">
-                        import DBClient = require("./database-client");
-
-                        class App {
-                        public async start() {
-                            try {
-                                DBClient.connect()
-
-                                DBClient.on('error', function (err: MysqlError) {
-                                    console.log('error raised : ' + err);
-                                });
-                            } catch (error) {
-                                console.log("Unable to connect to db");
-                            }
-                        }
-                    }
-                    </code>
-                </pre>
+                    <pre class="wide">
+                        <code data-trim data-noescape class="ts">
+                            import { ObjectID } from "mongodb";
+                            const mongoId = new ObjectID('5aa3c9f48b142702fb2d2e32')
+                        </code>
+                    </pre>
                 </section>
             </section>
+            <!-- Demo Time -->
             <section>
+                <h2>Demo Time</h2>
+                <img src="https://media.giphy.com/media/QAaR9zoMUb8814WJ6a/giphy.gif" alt="">
+            </section>
+            <!-- Excercise Time -->
+            <section>
+                <h2>Excercise Time - AT&T Notes</h2>
                 <table>
                     <tr>
-                        <td style="width:50%">
-                            <img src="../assets/exercise-time.png" />
-                        </td>
                         <td style="vertical-align: top; font-size:16px">
                             <ul style="list-style-type: none">
                                 <li>
-                                    <h4>Create MongoDB database for extension items</h4>
+                                    <h4>Use MongoDB to store notes</h4>
                                     <ul>
                                         <li>
                                             Use the following string to connect to db<br/>
-                                            <pre><code>mongodb://nodejs_user:Aa123456@ds161148.mlab.com:61148/nodejs-course-2018</code></pre>
+                                            <pre><code>mongodb://nodejs_user:Aa123456@ds117200.mlab.com:17200/course-2018</code></pre>
                                         </li>
-                                        <li>Move persistence layer to mongoDB CRUD</li>
-                                        <li>Create new collection for items. Name it '[yourattuid]_items'</li>
-                                        <li>Create database client which will serve your controller</li>
+                                        <li>Implment persistence layer with MongoDB CRUD</li>
+                                        <li>Create new collection for users. Name it '[yourattuid]_notes'</li>
+                                        <li>Create service which will replace the one of fs</li>
                                     </ul>
                                 </li>
                             </ul>
+                            <br/>
                             <br/>
                             <br/>
                             <ul style="list-style-type: none">
@@ -316,13 +161,17 @@
                                     <h4>notes</h4>
                                 </li>
                                 <ul>
-                                    <li>Remove fs.persistanse.ts file</li>
                                     <li>You can use MongoDB shell to create, read, delete and update databases/collections/documents</li>
                                 </ul>
                             </ul>
                         </td>
+                        <td><img src="https://media.giphy.com/media/UvvK8rOSHPxgjo9ryD/giphy.gif"></tr>
                     </tr>
                 </table>
+            </section>
+            <!-- Next Module -->
+            <section>
+                <a href="../module-5/index.html">Next Module</a>
             </section>
         </div>
     </div>

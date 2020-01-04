@@ -90,6 +90,23 @@
                         </code>
                     </pre>
                 </section>
+                <section>
+                    <pre class="wide">
+                        <code data-trim data-noescape class="ts">
+                            function authenticate(req: express.Request, res: express.Response, next: express.NextFunction) {
+                                const userId = req.header('auth');
+                            
+                                if (!userId || userId !== 'almog') {
+                                    console.log(userId);
+                                    res.status(401).send('Authentication Error');
+                                }
+                            
+                                res.set('surname', 'laktivi');
+                                next();
+                            }
+                        </code>
+                    </pre>
+                </section>
             </section>
             <!-- Rest API -->
             <section>

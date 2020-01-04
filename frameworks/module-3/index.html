@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Node.js</title>
     <link rel="stylesheet" href="../assets/css/reveal.css">
-    <link rel="stylesheet" href="../assets/css/theme/beige.css">
+    <link rel="stylesheet" href="../assets/css/theme/league.css">
     <link rel="stylesheet" href="../assets/lib/css/zenburn.css">
     <link rel="stylesheet" href="../styles/main.css">
 </head>
@@ -16,34 +16,13 @@
     <div class="att_logo"></div>
     <div class="reveal">
         <div class="slides">
+            <!-- Node.js Frameworks -->
             <section>
-                <h1>Events & Async</h1>
-                <sub>By Almog Laktivi, Nabil Naffar & Danny Vernovsky</sub>
+                <h1>Node.js Frameworks</h1>
+                <h2>Module 3 - Events & Async</h2>
+                <sub>By Almog Laktivi</sub>
             </section>
-            <section>
-                <h2>In This Module</h2>
-                <p>Middlewares</p>
-                <p>Events</p>
-                <p>FS API Reminder</p>
-            </section>
-            <section>
-                <h2>Middleware example</h2>
-                <pre class="wide">
-                        <code data-trim data-noescape class="ts">
-                            function authenticate(req: express.Request, res: express.Response, next: express.NextFunction) {
-                                const userId = req.header('x-auth');
-                            
-                                if (!userId || userId !== 'Avi') {
-                                    console.log(userId);
-                                    res.status(401).send('Authentication Error');
-                                }
-                            
-                                res.set('x-user-surname', 'Shus');
-                                next();
-                            }
-                        </code>
-                    </pre>
-            </section>
+            <!-- Events -->
             <section>
                 <h2>Events</h2>
                 Emitter side
@@ -61,6 +40,7 @@
                     </code>
                 </pre>
             </section>
+            <!-- Node.js Event Emitter -->
             <section>
                 <h2>Node.js Event Emitter
                 </h2>
@@ -76,56 +56,15 @@
                         emitter.once(eventName, listener)
                     </code>
                 </pre>
-                <a href="https://www.youtube.com/channel/UCsXVk37bltHxD1rDPwtNM8Q">
-                    <span style="font-size: 26px">In a nutshell(kurzgesagt)</span>
-                </a>
             </section>
+            <!-- Demo Time -->
             <section>
-                <img src="../assets/demotime.png" alt="">
+                <h2>Demo Time</h2>
+                <img src="https://media.giphy.com/media/QAaR9zoMUb8814WJ6a/giphy.gif" alt="">
             </section>
+            <!-- Next Module -->
             <section>
-                <h2>FS API reminder</h2>
-                <pre>
-                    <code data-trim data-noescape class="ts">
-                        import * as fs from 'fs';
-                        import * as path from 'path';
-                        const filePath = path.join(__dirname, 'test.txt');
-                        fs.writeFile(filePath, 'kush kush', (err)=>{
-                            console.log(err);
-                        });
-                        fs.readFile(filePath, (err, data) => {
-                            console.log(data.toString());
-                        })
-                    </code>
-                </pre>
-            </section>
-            <section>
-                <table>
-                    <tr>
-                        <td style="width:50%">
-                            <img src="../assets/exercise-time.png" />
-                        </td>
-                        <td style="vertical-align: top; font-size:16px">
-                            <ul style="list-style-type: none">
-                                <li>Move persistance layer to file API
-                                    <ul>
-                                        <li>Extract (if you haven't already an interface from the persistance api
-                                            so it will be easier to refactor later
-                                        </li>
-                                        <li>Every item should be in a separate file when filename is:
-                                            <code>[itemId].json</code>
-                                        </li>
-                                        <li>Don't use sync version of API
-                                        </li>
-                                        <li>Wrap fs api with promise and use async/await in your calls
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>Add express middleware which will print to console each request and it's method</li>
-                            </ul>
-                        </td>
-                    </tr>
-                </table>
+                <a href="../module-4/index.html">Next Module</a>
             </section>
         </div>
         <script src="../assets/lib/js/head.min.js"></script>
