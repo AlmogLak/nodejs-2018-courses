@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Node.js</title>
     <link rel="stylesheet" href="../assets/css/reveal.css">
-    <link rel="stylesheet" href="../assets/css/theme/beige.css">
+    <link rel="stylesheet" href="../assets/css/theme/league.css">
     <link rel="stylesheet" href="../assets/lib/css/zenburn.css">
     <link rel="stylesheet" href="../styles/main.css">
 </head>
@@ -16,26 +16,32 @@
     <div class="att_logo"></div>
     <div class="reveal">
         <div class="slides">
+            <!-- Node.js Frameworks -->
             <section>
-                <h1>Web sockets</h1>
-                <sub>By Almog Laktivi, Nabil Naffar & Danny Vernovsky</sub>
+                <h1>Node.js Frameworks</h1>
+                <h2>Module 4 - Web sockets</h2>
+                <sub>By Almog Laktivi</sub>
             </section>
+            <!-- In This Module -->
             <section>
                 <h2>In This Module</h2>
                 <p>What is web socket?</p>
                 <p>socket.io</p>
                 <p>Streams</p>
             </section>
+            <!-- Http Request -->
             <section>
-                <h2>http</h2>
+                <h2>Http Request</h2>
                 <img src="assets/http.png" />
             </section>
+            <!-- Web socket -->
             <section>
-                <h2>What is web socket?</h2>
-                <img src="assets/web-sockets.png" />
+                <h2>Web socket?</h2>
+                <img style="width: 80%;" src="assets/web-sockets.png" />
             </section>
+            <!-- Web Sockets Example -->
             <section>
-                <h2>⚡ Web sockets power ⚡</h2>
+                <h2>⚡ Web Sockets Power ⚡</h2>
                 <table>
                     <tr>
                         <td style="height:300px;width:400px;">
@@ -47,25 +53,28 @@
                     </tr>
                 </table>
             </section>
+            <!-- socket.io -->
             <section>
                 <h2>socket.io</h2>
                 <ul>
-                    <li>🎉 JS library</li>
-                    <li>🍻 Bi-directional real-time communication between client and server</li>
-                    <li>⚡ Uses Web-sockets</li>
-                    <li>🐌 Fallback to HTTP-polling</li>
+                    <li>JS library</li>
+                    <li>Bi-directional real-time communication between client and server</li>
+                    <li>Uses Web-sockets</li>
+                    <li>Fallback to HTTP-polling</li>
                 </ul>
+                <img src="https://media.giphy.com/media/aUPfvs5MOXpxm/giphy.gif" />
             </section>
+            <!-- Initiating socket.io -->
             <section>
                 <h2>Initiating socket.io</h2>
                 Client
                 <pre>
-                    <code data-trim data-noescape>
+                    <code data-trim data-noescape class="ts">
                         &lt;script src="/socket.io/socket.io.js"&gt;&lt;/script&gt;
                     </code>
                 </pre> Server
                 <pre>
-                    <code data-trim data-noescape>
+                    <code data-trim data-noescape class="ts">
                         import * as socket from 'socket.io';
                         import { Server } from 'http';
                         import * as express from 'express';
@@ -76,12 +85,13 @@
                     </code>
                 </pre>
             </section>
+            <!-- Using socket.io -->
             <section>
                 <h2>Using socket.io</h2>
                 It's all about
-                <a href="/module-3/#/4">events!!!</a>
+                <a href="/module-3/index.html#/1">events!!!</a>
                 <pre>
-                    <code data-trim data-noescape>
+                    <code data-trim data-noescape class="ts">
                         io.on('connection', function (socket) {
                             socket.emit('news', { hello: 'world' });
                             socket.on('my other event', function (data) {
@@ -92,44 +102,54 @@
                     </code>
                 </pre>
             </section>
+            <!-- Demo Time -->
             <section>
-                <img src="../assets/demotime.png" alt="">
+                <h2>Demo Time</h2>
+                <img src="https://media.giphy.com/media/QAaR9zoMUb8814WJ6a/giphy.gif" alt="">
             </section>
+            <!-- Stream -->
             <section>
                 <h2>Streams</h2>
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/pPrO2jlay40?rel=0&amp;start=7000&autoplay=1&mute=1" frameborder="0"
+                <section>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/pPrO2jlay40?rel=0&amp;start=7000&autoplay=1&mute=1" frameborder="0"
                     allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                </section>
+                <section>
+                    <h3>What are Streams?</h3>
+                    <ul>
+                        <li>Collections of data</li>
+                        <li>Just as Arrays or Strings
+                            <br><img style="width: 50%" src="assets/arrays-diagram.png" />
+                        </li>
+                        <li>Data might not be available all at once
+                            <br><img style="width: 50%" src="assets/streams-diagram.png" />
+                        </li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Stream types in Node.js</h3>
+                    <img style="width: 75%" src="assets/stream-types.png" />
+                </section>
+                <section>
+                    <h3>The Pipe Method</h3>
+                    <pre>
+                        <code data-trim data-noescape class="ts">
+                            readableSrc
+                                .pipe(transformStream1)
+                                .pipe(transformStream2)
+                                .pipe(finalWritableDest)
+                        </code>
+                    </pre>
+                </section>
             </section>
+            <!-- Demo Time -->
             <section>
-                <h2>What are Streams?</h2>
-                <ul>
-                    <li>Collections of data</li>
-                    <li>Just as Arrays or Strings
-                        <img src="assets/arrays-diagram.png" />
-                    </li>
-                    <li>Data might not be available all at once
-                        <img src="assets/streams-diagram.png" />
-                    </li>
-
-                </ul>
+                <h2>Demo Time</h2>
+                <img src="https://media.giphy.com/media/QAaR9zoMUb8814WJ6a/giphy.gif" alt="">
             </section>
+            <!-- Next Module -->
             <section>
-                <h2>Stream types in Node.js</h2>
-                <img src="assets/stream-types.png" />
-            </section>
-            <section>
-                <h2>The pipe method</h2>
-                <pre>
-                            <code data-trim data-noescape>
-                                readableSrc
-                                    .pipe(transformStream1)
-                                    .pipe(transformStream2)
-                                    .pipe(finalWritableDest)
-                            </code>
-                        </pre>
-            </section>
-            <section>
-                <img src="../assets/demotime.png" alt="">
+                <a href="../module-6/index.html">Next Module</a>
             </section>
         </div>
     </div>
