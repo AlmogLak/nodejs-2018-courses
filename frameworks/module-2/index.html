@@ -81,6 +81,7 @@
                     <p class="fragment">Responsible to call next middleware</p>
                 </section>
                 <section>
+                    <h3>Log Requests Example</h3>
                     <pre class="wide">
                         <code data-trim data-noescape class="ts">
                             function requestLog(req: Request, res: Response, next: NextFunction) {
@@ -91,6 +92,7 @@
                     </pre>
                 </section>
                 <section>
+                    <h3>Authentication Example</h3>
                     <pre class="wide">
                         <code data-trim data-noescape class="ts">
                             function authenticate(req: express.Request, res: express.Response, next: express.NextFunction) {
@@ -104,6 +106,20 @@
                                 res.set('surname', 'laktivi');
                                 next();
                             }
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <a href="https://expressjs.com/en/starter/static-files.html"><h3>express.static Middleware</h3></a>
+                    <ul>
+                        <li>We will use it to serve static files such as images, CSS files, and JavaScript files</li>
+                        <li>express.static(root, [options])</li>
+                    </ul>
+                    <pre class="wide">
+                        <code data-trim data-noescape class="ts">
+                            app.use(express.static('public'));
+                            app.use(express.static('files'));
+                            app.use('/static', express.static('public'));
                         </code>
                     </pre>
                 </section>
