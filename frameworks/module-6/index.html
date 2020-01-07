@@ -22,44 +22,36 @@
                 <h2>Module 6 - Debugging & Tests</h2>
                 <sub>By Almog Laktivi</sub>
             </section>
+            <!-- Setting up debugger -->
             <section>
-                <h2>Setting up debugger</h2>
-                <small>
-                    <code class="inline">--inspect</code> &
-                    <code class="inline">--inspect-brk</code> params allows to open TCP port to the debugger</small>
-                <img src="../assets/inspect.png" />
-                <small>
-                    <code class="inline">tsconfig.json</code> should be configured to create .ts.map files</small>
-                <img src="../assets/map.png" />
+                <a href="https://code.visualstudio.com/docs/nodejs/nodejs-debugging"><h2>Setting up debugger</h2></a>
             </section>
-            <section>
-                <h2>setting up ide</h2>
-                <img src="../assets/debug-webstorm.png" />
-                <img src="../assets/debug-vscode.png" />
-            </section>
+            <!-- Testing -->
             <section>
                 <h2>testing</h2>
-                <img height="400" src="../assets/to-test-or.jpg" />
+                <img height="400" src="https://media.giphy.com/media/ipSj9vVu7RhcoP6B7D/giphy.gif" />
                 <p>
                     <small>
                         <i>To test or not to test</i>
                     </small>
                 </p>
             </section>
+            <!-- Testing stack -->
             <section>
                 <h2>Testing stack</h2>
                 <ul>
                     <li>Testing framework
-                        <code class="inline">mocha, jasmine, jest, alsatian</code>
+                        <pre><code>mocha, jasmine, jest, alsatian</code></pre>
                     </li>
                     <li>Assertion library
-                        <code class="inline">chai, assert, expect, should</code>
+                        <pre><code >chai, assert, expect, should</code></pre>
                     </li>
                     <li>Testing support tools (coverage, mutations)
-                        <code class="inline">istanbul, striker</code>
+                        <pre><code>istanbul, striker</code></pre>
                     </li>
                 </ul>
             </section>
+            <!-- Mocha Example -->
             <section>
                 <h2>mocha testing framework</h2>
                 <pre>
@@ -87,6 +79,7 @@
                     </code>
                 </pre>
             </section>
+            <!-- Chai -->
             <section>
                 <h2 style="background: url('../assets/chai-logo.png') no-repeat; background-size: 90px; background-position:129px">assertion library</h2>
                 <small>
@@ -94,6 +87,7 @@
                     any javascript testing framework.</small>
                 <img src="../assets/chai-frameworks.png" />
             </section>
+            <!-- Istanbul -->
             <section>
                 <h2>Coverage: Istanbul</h2>
                 <div style="position:relative">
@@ -105,10 +99,12 @@
                     </div>
                 </div>
             </section>
+            <!-- Spies -->
             <section>
                 <h2>Spies</h2>
                 <img src="../assets/sinon.png" />
             </section>
+            <!-- Spies Example -->
             <section>
                 <h2>Spies</h2>
                 <small>A test spy is a function that records arguments, return value, the value of this and exception thrown (if
@@ -125,6 +121,7 @@
                     </code>
                 </pre>
             </section>
+            <!-- Stubs -->
             <section>
                 <h2>Stubs</h2>
                 <small>Test stubs are functions (spies) with pre-programmed behavior. They support the full test spy API in addition
@@ -141,59 +138,15 @@
                     </code>
                 </pre>
             </section>
+            <!-- Demo Time -->
             <section>
-                <h2>Bonus: Contract testing</h2>
-                <small>
-                    <a href="https://github.com/visionmedia/supertest">Super-agent</a> driven library for testing node.js HTTP servers using a fluent API
-                </small>
-                <pre class="wide">
-                    <code data-trim data-noescape class="ts">
-                        it('should return 401 if put was send without auth header', (done) => {
-                            supertest(app)
-                                .post('/api/items')
-                                .expect(401)
-                                .end(()=>{
-                                    done();
-                                });
-                        });
-                    </code>
-                </pre>
+                <h2>Demo Time</h2>
+                <img src="https://media.giphy.com/media/QAaR9zoMUb8814WJ6a/giphy.gif" alt="">
             </section>
+            <!-- Questions -->
             <section>
-                <img src="../assets/demotime.png" alt="">
-            </section>
-            <section>
-                <table>
-                    <tr>
-                        <td style="width:50%">
-                            <img src="../assets/exercise-time.png" />
-                        </td>
-                        <td style="vertical-align: top; font-size:16px">
-                            <ul style="list-style-type: none">
-                                <li>
-                                    <h4>Put your code under tests</h4>
-                                    <ul>
-                                        <li>
-                                            Separate between the controller and the logic.
-                                        </li>
-                                        <li>Add tests to the logic, expecially at the PUT request</li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <br/>
-                            <br/>
-                            <ul style="list-style-type: none">
-                                <li>
-                                    <h4>notes</h4>
-                                </li>
-                                <ul>
-                                    <li>Use
-                                        <code class="inline">sinon.spy()</code> to mock functionality</li>
-                                </ul>
-                            </ul>
-                        </td>
-                    </tr>
-                </table>
+                <h3>Any questions?</h3>
+                <img style="width: 65%; background: transparent; box-shadow: 0 0 0px;" src="https://i.giphy.com/media/ePsV4lBfsrPmo/giphy.webp">
             </section>
         </div>
     </div>

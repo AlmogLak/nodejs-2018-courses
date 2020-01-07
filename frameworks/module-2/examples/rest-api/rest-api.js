@@ -7,7 +7,7 @@ const person_controller_1 = require("./person.controller");
 const app = express();
 app.use('/api/person', bodyParser.json(), auth, person_controller_1.personRouter);
 app.use(aaa);
-app.get('/:almog', (req, res) => res.send(req.params.almog));
+app.get('/:almog?', (req, res) => res.send(req.params.almog));
 app.listen(3000, () => {
     console.log('listening on port 3000');
 });

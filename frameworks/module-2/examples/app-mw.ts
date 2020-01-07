@@ -1,6 +1,10 @@
 import * as express from 'express';
 const app = express()
 
+// app.use(authenticate);
+// app.use(requestLog);
+// app.use([authenticate, requestLog]);
+
 app.get('/', [authenticate, requestLog], (req: express.Request, res: express.Response, next: express.NextFunction) => {
     res.send('Hello World!');
     next();

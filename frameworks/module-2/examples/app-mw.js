@@ -2,6 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const app = express();
+// app.use(authenticate);
+// app.use(requestLog);
+// app.use([authenticate, requestLog]);
 app.get('/', [authenticate, requestLog], (req, res, next) => {
     res.send('Hello World!');
     next();
