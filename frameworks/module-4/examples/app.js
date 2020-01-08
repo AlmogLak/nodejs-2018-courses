@@ -14,23 +14,27 @@ const mongodb_1 = require("mongodb");
 function foo() {
     return __awaiter(this, void 0, void 0, function* () {
         console.log('start');
-        const connection = yield mongodb_1.MongoClient.connect('mongodb://nodejs_user:Aa123456@ds161148.mlab.com:61148/nodejs-course-2018');
-        const db = connection.db('nodejs-course-2018');
+        const connection = yield mongodb_1.MongoClient.connect('mongodb://nodejs_user:Aa123456@ds117200.mlab.com:17200/course-2018');
+        const db = connection.db('course-2018');
         console.log('connected');
-        const docs = yield db.collection('people').find({}).toArray();
-        console.log('test', docs);
-        const insertResponse = yield db.collection('people').insertOne(new Director({
-            name: 'Asaf',
-            bribes: 5,
-        }));
-        console.log(insertResponse.insertedId);
-        // const dir = new Director({});
-        // if(dir.name){
-        //     dir.name.substr(0);
-        // }
+        // Create
+        // const insertResponse = await db.collection('people').insertOne(new Director({
+        //     name: 'Almog',
+        //     bribes: 12
+        // }));
+        // console.log(insertResponse);
+        // Read:
+        // const docs = await db.collection('people').find<Employee | Director>({}).toArray();
+        // console.log('docs', docs);
+        // Update
+        // const updatedResponse = await db.collection('people').updateMany({"name": "Almog"}, { $set: {"bribes": 50} });
+        // console.log(updatedResponse);
+        // Delete:
+        // const deleteResponse = await db.collection('people').deleteMany({"name": "Almog"});
+        // console.log(deleteResponse);
     });
 }
-foo();
+foo().then(() => console.log("DONE!"));
 class Person {
 }
 class Employee extends Person {

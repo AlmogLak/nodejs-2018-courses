@@ -6,29 +6,31 @@ import { MongoClient, ObjectID } from 'mongodb';
 async function foo() {
     console.log('start');
     const connection =
-        await MongoClient.connect('mongodb://nodejs_user:Aa123456@ds161148.mlab.com:61148/nodejs-course-2018');
-    const db = connection.db('nodejs-course-2018');
+        await MongoClient.connect('mongodb://nodejs_user:Aa123456@ds117200.mlab.com:17200/course-2018');
+    const db = connection.db('course-2018');
     console.log('connected');
-    const docs = await db.collection('people').find<Employee | Director>({}).toArray();
-    console.log('test', docs);
-
-    const insertResponse = await db.collection('people').insertOne(new Director({
-        name: 'Asaf',
-        bribes: 5,
-    }));
-
-    console.log(insertResponse.insertedId,);
-
-
-    // const dir = new Director({});
-
-    // if(dir.name){
-    //     dir.name.substr(0);
-    // }
     
+    // Create
+    // const insertResponse = await db.collection('people').insertOne(new Director({
+    //     name: 'Almog',
+    //     bribes: 12
+    // }));
+    // console.log(insertResponse);
+    
+    // Read:
+    // const docs = await db.collection('people').find<Employee | Director>({}).toArray();
+    // console.log('docs', docs);
+
+    // Update
+    // const updatedResponse = await db.collection('people').updateMany({"name": "Almog"}, { $set: {"bribes": 50} });
+    // console.log(updatedResponse);
+
+    // Delete:
+    // const deleteResponse = await db.collection('people').deleteMany({"name": "Almog"});
+    // console.log(deleteResponse);
 }
 
-foo();
+foo().then(() => console.log("DONE!"));
 
 
 class Person {
