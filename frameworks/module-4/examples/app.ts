@@ -24,6 +24,7 @@ async function foo() {
     // Update
     // const updatedResponse = await db.collection('people').updateMany({"name": "Almog"}, { $set: {"bribes": 50} });
     // console.log(updatedResponse);
+    // const result = await db.collection(COLLECTION_NAME).update({ _id: user._id }, user, {upsert: true});
 
     // Delete:
     // const deleteResponse = await db.collection('people').deleteMany({"name": "Almog"});
