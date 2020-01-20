@@ -1,1 +1,1 @@
-declare const addon: any;
+declare const addon2: any;

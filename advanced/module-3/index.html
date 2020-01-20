@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Node.js</title>
     <link rel="stylesheet" href="../assets/css/reveal.css">
-    <link rel="stylesheet" href="../assets/css/theme/beige.css">
+    <link rel="stylesheet" href="../assets/css/theme/league.css">
     <link rel="stylesheet" href="../assets/lib/css/zenburn.css">
     <link rel="stylesheet" href="../styles/main.css">
 </head>
@@ -16,9 +16,10 @@
     <div class="att_logo"></div>
     <div class="reveal">
         <div class="slides">
-            <!-- Advanced Node.js -->
+            <!-- Node.js Advanced -->
             <section>
-                <h1>Advanced Node.js</h1>
+                <h1>Node.js Advanced</h1>
+                <h2>Module 2 - Concurrency & Event loop</h2>
                 <sub>By Almog Laktivi</sub>
             </section>
             <!-- In This Module -->
@@ -98,16 +99,19 @@
                 <section>
                     <img src="../assets/call_stack_1.png" alt="">
                 </section>
-                <section>
-                    <img src="../assets/demotime.png" alt="">
-                </section>
+            </section>
+            <!-- Demo Time -->
+            <section>
+                <h2>Demo Time</h2>
+                <img src="https://media.giphy.com/media/QAaR9zoMUb8814WJ6a/giphy.gif" alt="">
             </section>
             <!-- How event loop works -->
             <section>
                 <h2>How event loop works</h2>
                 <section>
+                    <h3>Algorithm pseodocode:</h3>
                     <pre>
-                        <code data-trim data-noescape class="js">
+                        <code data-trim data-noescape class="ts">
                             When the call stack gets empty:
                                 While the queue is not empty:
                                     event = (dequeue the event from the event queue)
@@ -146,11 +150,11 @@
                 </section>
                 <section>
                     <br>
-                    <h3>Wait, What?</h3>
+                    <h3>Async on Sync - Wait, What?</h3>
                     <img src="https://media.giphy.com/media/3o7527pa7qs9kCG78A/giphy.gif">
                 </section>
                 <section>
-                    <h3>Wait, What?</h3>
+                    <h3>Async on Sync - Wait, What?</h3>
                     <p style="font-size: 23pt" class="fragment">All javascript, V8, and the event loop run in one thread, called the main thread</p>
                     <p style="font-size: 23pt" class="fragment">C++ synchronous methods run in the main thread (<b>blocking</b>)</p>
                     <p style="font-size: 23pt" class="fragment">C++ asynchronous methods sometimes don't run in the main thread (C++ have access to threads)</p>
@@ -160,7 +164,7 @@
                 <section>
                     <br>
                     <img style="width: 80%" src="http://abdelraoof.com/img/nodejs/nodejs-event-loop.png">
-                    <p class=fragment>Not exactly</p>
+                    <p class=fragment>Not everything runs on Node.js thread pool</p>
                 </section>
                 <section>
                     <h3>What's escalated to the thread pool? Kernel?</h3>
@@ -184,7 +188,7 @@
                 <section>
                     <sub>Will it invoked after 0ms?</sub>
                     <pre>
-                        <code data-trim data-noescape class="js">
+                        <code data-trim data-noescape class="ts">
                             const slowAdd = (a, b) => {
                                 setTimeout(() => console.log(a+b), 0);
                             }
@@ -200,7 +204,7 @@
                 </section>
                 <section>
                     <pre>
-                        <code data-trim data-noescape class="js">
+                        <code data-trim data-noescape class="ts">
                             setTimeout(() => {
                             console.log('timeout');
                             }, 0); 
@@ -208,7 +212,7 @@
                             console.log('immediate');
                             });
                         </code>
-                        <code data-trim data-noescape class="fragment js">
+                        <code data-trim data-noescape class="fragment ts">
                             $ node timeout_vs_immediate
                             immediate
                             timeout
@@ -221,7 +225,7 @@
                 </section>
                 <section>
                     <pre>
-                        <code data-trim data-noescape class="js">
+                        <code data-trim data-noescape class="ts">
                             import * as fs from "fs";
                             fs.readFile(__filename, () => {
                                 setTimeout(() => {
@@ -232,7 +236,7 @@
                                 });
                             });
                         </code>
-                        <code data-trim data-noescape class="fragment js">
+                        <code data-trim data-noescape class="fragment ts">
                             $ node timeout_vs_immediate
                             immediate
                             timeout
@@ -251,32 +255,10 @@
                     <p class="fragment">Not technically part of event loop</p>
                     <p class="fragment">Node process the callback registered with nextTick:
                         <ul>
-                            <li class="fragment"><b>After</b> the current operation completes</li>
+                            <li class="fragment"><b>After</b> the current operation(event) completes</li>
                             <li class="fragment"><b>Before</b> the event loop continues</li>
                         </ul>
                     </p>
-                </section>
-                <section>
-                    <pre>
-                        <code data-trim data-noescape class="js">
-                            function apiCall(arg, callback) {
-                                if (typeof arg !== 'string')
-                                    return process.nextTick(callback,
-                                                            new TypeError('argument should be string'));
-                                }
-                        </code>
-                    </pre>
-                    <p class="fragment">Passing an error back to the user but only <b>after</b> we have allowed the rest of the user's code to execute</p>
-                    <p class="fragment">By using process.nextTick() we guarantee that apiCall() always runs its callback after the rest of the user's code and before the event loop is allowed to proceed</p>
-                </section>
-                <section>
-                    <h3>Starvation</h3>
-                    <iframe src="https://giphy.com/embed/pOztBRgMDL3XO" width="480" height="359" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/chocolate-funny-pOztBRgMDL3XO">via GIPHY</a></p>
-                </section>
-                <section>
-                    <h3>process.nextTick() vs setImmediate()</h3>
-                    <p>process.nextTick() fires immediately on the same phase</p>
-                    <p>setImmediate() fires on the following iteration or 'tick' of the event loop</p>
                 </section>
                 <section>
                     <h3>Usage</h3>
@@ -285,6 +267,68 @@
                         <li>At times it's necessary to allow a callback to run after the call stack has unwound but before the event loop continues</li>
                     </ul>
                 </section>
+                <section>
+                    <h3>Usage example</h3>
+                    <pre>
+                        <code data-trim data-noescape class="ts">
+                            function apiCall(arg, callback) {
+                                if (typeof arg !== 'string')
+                                    return process.nextTick(callback,
+                                                            new TypeError('argument should be string'));
+                                }
+                        </code>
+                    </pre>
+                    <p class="fragment">Passing an error back to the user but only <b>after</b> we have allowed the rest of the user's code to execute</p>
+                </section>
+                <section>
+                    <h3>Usage example</h3>
+                    <pre>
+                        <code data-trim data-noescape class="ts">
+                            import { EventEmitter } from "events";
+                            export const eventEmitter = new EventEmitter();
+                            eventEmitter.emit('start');
+                            eventEmitter.emit('data', chunkRead);
+                            // -----------------------------------------------
+                            consumer.on('start', () => console.log("start"));
+                            consumer.on('data', (chunkRead) => console.log(`data: ${chunkRead}`));
+                        </code>
+                    </pre>
+                    <p class="fragment">"start" event will never printed to the console</p>
+                    <p class="fragment">"data" will occur for the continuously chunks</p>
+                </section>
+                <section>
+                    <h3>Usage example</h3>
+                    <pre>
+                        <code data-trim data-noescape class="ts">
+                            import { EventEmitter } from "events";
+                            export const eventEmitter = new EventEmitter();
+                            process.nextTick(() => eventEmitter.emit('start'));                        
+                            eventEmitter.emit('data', chunkRead);
+                            // -----------------------------------------------
+                            consumer.on('start', () => console.log("start"));
+                            consumer.on('data', (chunkRead) => console.log(`data: ${chunkRead}`));
+                        </code>
+                    </pre>
+                    <p class="fragment">This way, the "start" will happen when the current event is done</p>
+                </section>
+                <section>
+                    <h3>Starvation</h3>
+                    <img src="https://media.giphy.com/media/pOztBRgMDL3XO/giphy.gif">
+                </section>
+                <section>
+                    <h3>process.nextTick() vs setImmediate()</h3>
+                    <p>process.nextTick() fires immediately on the same phase</p>
+                    <p>setImmediate() fires on the following iteration or 'tick' of the event loop</p>
+                </section>
+            </section>
+            <!-- Demo Time -->
+            <section>
+                <h2>Demo Time</h2>
+                <img src="https://media.giphy.com/media/QAaR9zoMUb8814WJ6a/giphy.gif" alt="">
+            </section>
+            <!-- Next Module -->
+            <section>
+                <a href="../module-4/index.html">Next Module</a>
             </section>
             </div>
         </div>

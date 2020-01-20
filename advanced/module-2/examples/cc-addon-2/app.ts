@@ -1,5 +1,5 @@
-const addon = require('./build/Release/addon');
+const addon2 = require('./build/Release/addon');
 
-addon((msg) => {
+addon2((msg: string) => {
   console.log(`Almog Laktivi: ${msg}`);
 });

@@ -5,39 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Node.js</title>
     <link rel="stylesheet" href="../assets/css/reveal.css">
-    <link rel="stylesheet" href="../assets/css/theme/beige.css">
+    <link rel="stylesheet" href="../assets/css/theme/league.css">
     <link rel="stylesheet" href="../assets/lib/css/zenburn.css">
     <link rel="stylesheet" href="../styles/main.css">
-    <!-- <script>
-        // 2. This code loads the IFrame Player API code asynchronously.
-        var tag = document.createElement('script');
-
-        tag.src = "https://www.youtube.com/iframe_api";
-        var firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-        // 3. This function creates an <iframe> (and YouTube player)
-        //    after the API code downloads.
-        var player;
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('player', {
-                height: '390',
-                width: '640',
-                videoId: '3oem-M2tQU4'
-            });
-        }
-    </script> -->
 </head>
-
 <body>
     <div class="att_logo"></div>
     <div class="reveal">
         <div class="slides">
-            <!-- Advanced Node.js -->
+            <!-- Node.js Advanced -->
             <section>
-                <h1>Advanced Node.js</h1>
+                <h1>Node.js Advanced</h1>
+                <h2>Module 2 - Addons</h2>
                 <sub>By Almog Laktivi</sub>
             </section>
             <!-- Addons -->
@@ -46,7 +27,7 @@
                 <p>Node.js Addons</p>
                 <p>C++ Addon</p>
             </section>
-            <!-- addons types -->
+            <!-- Addons types -->
             <section>
                 <h2>Node.js addons types</h2>
                 <p>.json</p>
@@ -57,16 +38,17 @@
             <section>
                 <h2>.json example</h2>
                 <pre class="wide">
-                    <code data-trim data-noescape class="js">
+                    <code data-trim data-noescape class="ts">
                             const config = require("./config.json");
                             console.log(config);
                     </code>
                 </pre>
                 <sub>The extension is not mandatory</sub>
             </section>
-            <!-- demotime -->
+            <!-- Demo Time -->
             <section>
-                <img src="../assets/demotime.png" alt="">
+                <h2>Demo Time</h2>
+                <img src="https://media.giphy.com/media/QAaR9zoMUb8814WJ6a/giphy.gif" alt="">
             </section>
             <!-- C++ Addon -->
             <section>
@@ -76,16 +58,15 @@
                     <p class="fragment">The compilcation will be over Node.JS build tool</p>
                     <pre class="fragment">
                         <code data-trim data-noescape class="bash">
-                            yarn add global node-gyp
-                            npm install -g node-gyp
+                            npm i -g node-gyp
                         </code>
                     </pre>
-                    <p class="fragment">The output is .node file which will be required</p>
+                    <p class="fragment">The output is .node file which will be imported</p>
                 </section>
                 <section>
                     <sub>binding.gyp configuration</sub>
                     <pre>
-                        <code data-trim data-noescape class="js">
+                        <code data-trim data-noescape class="ts">
                             {
                                 "targets": [
                                     {
@@ -126,49 +107,24 @@
                 </section>
                 <section>
                     <h4>node-gyp commands</h4>
-                    <p>node-gyp configure</p>
-                    <p>node-gyp build</p>
-                    <p>cp build/Release/NAME.node ../../node_modules</p>
+                    <pre>
+                        <code data-trim data-noescape class="ts">
+                            node-gyp configure
+                            node-gyp build
+                            cp build/Release/NAME.node ../../node_modules
+                        </code>
+                    </pre>
                     <p>More details you can find <a href="https://nodejs.org/api/addons.html">here</a></p>
                 </section>
-                <section>
-                    <img src="../assets/demotime.png" alt="">
-                </section>
             </section>
-            <!-- exercise -->
+            <!-- Demo Time -->
             <section>
-                <table>
-                    <tr>
-                        <td style="width:50%">
-                            <img src="../assets/exercise-time.png"/>
-                        </td>
-                        <td style="vertical-align: top; font-size:16px">
-                            <ul style="list-style-type: none">
-                                <li>Build Node.JS C++ addon
-                                    <ul>
-                                        <li>The addon will take the current date and return it as string</li>
-                                        <li>You can use this code for parsing the date:
-                                            <pre>
-                                                <code data-trim data-noescape class="cpp">
-                                                    const std::string currentDateTime() {
-                                                        time_t     now = time(0);
-                                                        struct tm  tstruct;
-                                                        char       buf[80];
-                                                        tstruct = *localtime(&now);
-                                                        strftime(buf, sizeof(buf), "%Y-%m-%d.%X", &tstruct);
-                                                        return buf;
-                                                    }
-
-                                                    currentDateTime().c_str()
-                                                </code>
-                                            </pre>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </td>
-                    </tr>
-                </table>
+                <h2>Demo Time</h2>
+                <img src="https://media.giphy.com/media/QAaR9zoMUb8814WJ6a/giphy.gif" alt="">
+            </section>
+            <!-- Next Module -->
+            <section>
+                <a href="../module-3/index.html">Next Module</a>
             </section>
             </div>
         </div>

@@ -5,247 +5,118 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Node.js</title>
     <link rel="stylesheet" href="../assets/css/reveal.css">
-    <link rel="stylesheet" href="../assets/css/theme/beige.css">
+    <link rel="stylesheet" href="../assets/css/theme/league.css">
     <link rel="stylesheet" href="../assets/lib/css/zenburn.css">
     <link rel="stylesheet" href="../styles/main.css">
 </head>
-
 <body>
     <div class="att_logo"></div>
     <div class="reveal">
         <div class="slides">
-            <!-- Advanced Node.js -->
+            <!-- Node.js Advanced -->
             <section>
-                <h1>Advanced Node.js</h1>
+                <h1>Node.js Advanced</h1>
+                <h2>Module 2 - GraphQL</h2>
                 <sub>By Almog Laktivi</sub>
             </section>
-            <!-- In This Module -->
+            <!-- Addons -->
             <section>
                 <h2>In This Module</h2>
-                <h3>Clusters & Child Processes</h3>
-                <p>Scaling Node.JS</p>
-                <p>exec() & execFile()</p>
-                <p>fork()</p>
-                <p>Cluster Module</p>
-                <p>Broadcasting</p>
+                <p>GraphQL over Node.js</p>
             </section>
-            <!-- Clusters & Child Processes -->
+            <!-- What is GraphQL? -->
             <section>
-                <h2>Clusters & Child Processes</h2>
+                <h2><a href="https://graphql.org/">What is GraphQL?</a></h2>
                 <section>
-                        <p>In order to work with cluster API over TypeScript you have to add @types/node library:</p>
-                    <pre>
-                        <code data-trim data-noescape class="bash">
-                            $ yarn add @types/node
-                        </code>
-                    </pre>
+                    <img src="../assets/gql.png">
+                    <ul>
+                        <li>Created by Facebook</li>
+                        <li>Query language for APIs</li>
+                        <li>Building robust applications based on intuitive and flexible syntax</li>
+                        <li>Gives clients the power to ask for exactly what they need and nothing more</li>
+                    </ul>
                 </section>
                 <section>
-                    <h3>Scale Reasons</h3>
-                    <p>Workload</p>
-                    <p>Availabillity</p>
-                    <p>Fault Tollerance</p>
+                    <h3>Developer Tools</h3>
+                    <video id="rest_video" height="400">
+                        <source src="https://graphql.org/img/graphiql.mp4?x" type="video/mp4">
+                    </video>
                 </section>
-                <section>
-                    <h3>Scale Methods</h3>
-                    <p>Cloning - Low time, Highly effective</p>
-                    <p>Decompossing - Via micro services</p>
-                    <p>Splitting - Split into instances, each instance responsibel for portion of the data (Sharding)</p>
-                </section>
+                
             </section>
-            <!-- Scaling Node.Js -->
+            <!-- GraphQL in Node.js -->
             <section>
-                <h2>Scaling Node.JS</h2>
+                <h2>GraphQL in Node.js</h2>
                 <section>
-                    <img style="width: 70%; border: 0" src="../assets/child_process.png">
-                </section>
-                <section>
-                    <h3>Spawn</h3>
-                    <span>Launches command in a new process (not a shell)<br>
-                        Good for large data because it supports streams
-                    </span>
-                    <pre>
+                    <pre class="wide">
                         <code data-trim data-noescape class="ts">
-                            import { spawn } from "child_process";
-                            const ls = spawn('ls', ['-lh', '/usr']);
-                            ls.stdout.on('data', (data) => {
-                            console.log(`stdout: ${data}`);
-                            });
-                            ls.on('close', (code) => {
-                            console.log(`child process exited with code ${code}`);
-                            });
+                            npm i -s express graphql express-graphql mongoose
+                            npm i -D @types/express @types/mongoose
                         </code>
                     </pre>
                 </section>
                 <section>
-                    <h3>exec()</h3>
-                    <span>Creates a shell, buffer the command's generated output, and pass it to a callback function</span>
-                    <pre>
+                    <pre class="wide">
                         <code data-trim data-noescape class="ts">
-                            import { exec } from "child_process";
-                            exec('cat *.js missing_file | wc -l', (error, stdout, stderr) => {
-                            if (error) {
-                                console.error(`exec error: ${error}`);
-                                return;
-                            }
-                            console.log(`stdout: ${stdout}`);
-                            console.log(`stderr: ${stderr}`);
-                            });
-                        </code>
-                    </pre>
-                </section>
-                <section>
-                    <h3>execFile()</h3>
-                    <span>The same as <b>exec()</b>, but runs a file of commands (not using shell)</span>
-                    <pre>
-                        <code data-trim data-noescape class="ts">
-                            import { execFile } from "child_process";
+                            import Schema from "./schema";
+                            const app = express();
 
-                            const child = execFile('node', ['./exec.js'], (error, stdout, stderr) => {
-                              if (error) {
-                                throw error;
-                              }
-                              console.log(stdout);
-                            }); 
-                        </code>
-                    </pre>
-                </section>
-                <section>
-                    <br><h3>fork()</h3>
-                    <span>Same as <b>spawn</b>, but also have communication channel with the parent process (through even emmiter)
-                    </span>
-                    <pre>
-                        <code data-trim data-noescape class="ts">
-                            // Main:
-                            import { fork } from "child_process";
-                            const forked = fork("fork_forked.js");
-                            forked.on("message", (message) => {
-                                console.log(`main process got a message: ${message}`);
-                                forked.send("Thanks for your message");
+                            mongo.connect('mongodb://nodejs_user:Aa123456@ds117200.mlab.com:17200/course-2018', {
+                                useNewUrlParser: true,
+                                useUnifiedTopology: true
+                            });
+                            mongo.connection.once('open', () => {
+                                console.log('connected to database');
                             });
 
-                            // Worker:
-                            console.log("do stuff...");
-                            process.on("message", (message) => {
-                                console.log(`worker process got a message: ${message}`);
+                            app.use('/graphql', graphqlHTTP({
+                                schema: Schema,
+                                graphiql: true
+                            }));
+                            app.listen(3000, () => {
+                                console.log('Server running succefully...')
                             });
-                            process.send("Hello main!");
                         </code>
                     </pre>
                 </section>
             </section>
-            <!-- Cluster Module -->
+            <!-- Demo Time -->
             <section>
-                <h2>Cluster Module</h2>
-                <section>
-                        <p>In order to work with cluster API over TypeScript you have to add @types/node library:</p>
-                    <pre>
-                        <code data-trim data-noescape class="bash">
-                            $ yarn add @types/node
-                        </code>
-                    </pre>
-                </section>
-                <section>
-                    <p>Based on the <b>fork()</b> method</p>
-                    <p>Let us fork our main function (max amount is the # of CPU cores)</p>
-                    <p>Will load balance all requests across all forked processes</p>
-                </section>
-                <section>
-                    <img style="width: 60%" src="../assets/round_robin.png">
-                </section>
-                <section>
-                    <h3>Example</h3>
-                    <pre>
-                        <code data-trim data-noescape class="ts">
-                                import * as cluster from "cluster";
-                                import * as os from "os";
-                                
-                                if (cluster.isMaster) {
-                                    const cpus = os.cpus().length;
-                                    for (let i = 0; i &lt; cpus; i++) {
-                                        cluster.fork();
-                                    }
-                                } else {
-                                    require("./server");
-                                }                                        
-                        </code>
-                    </pre>
-                </section>
-                <section>
-                    <br>
-                    <h3>Communication & Broadcasting</h3>
-                    <p>Communication is easy, because under the hood it just <b>fork()</b></p>
-                    <p>You can use <b>cluster.workers()</b> to get the list of ChildProcess workers</p>
-                    <p>This way, you can use <b>worker.send()</b> to communicate with the worker process</p>
-                    <p>You can also use <b>process.send()</b> to communicate with the main process</p>
-                </section>
-                <section>
-                    <h3>Communication & Broadcasting</h3>
-                    <pre>
-                        <code data-trim data-noescape class="ts">
-                            console.dir(cluster.workers(), {depth: 0});  
-                        </code>
-                    </pre>
-                </section>
-                <section>
-                    <h3>Availabillity</h3>
-                    <p>You can use <b>cluset.on("exit", (worker, code, signal)=>{})</b> to create new workers instead of ones that fail</p>
-                </section>
+                <h2>Demo Time</h2>
+                <img src="https://media.giphy.com/media/QAaR9zoMUb8814WJ6a/giphy.gif" alt="">
             </section>
-            <!-- pm2 -->
+            <!-- Excercise Time -->
             <section>
-                <h2>PM2 package</h2>
-                <section>
-                    <a href="http://pm2.keymetrics.io/">http://pm2.keymetrics.io/</a>
-                    <br><br>
-                    <div style="background-color: black">
-                        <img src="https://raw.githubusercontent.com/pm2-hive/pm2-hive.github.io/6aacedb6e023cc494c66864c9963c4446b58d64e/images/pm2-logo-update.png">
-                    </div>
-                </section>
-                <section>
-                    <h3>Installation</h3>
-                    <pre>
-                        <code data-trim data-noescape class="bash">
-                            yarn add global pm2        
-                        </code>
-                    </pre>
-                </section>
-                <section>
-                    <p>Process manager for Node.JS</p>
-                    <p>With PM2, you don't need to write the cluster.ts</p>
-                    <p>have it's own fault-tolerance mechanism (creates new worker instead one that fails, etc..</p>
-                </section>
-                <section>
-                    <br>
-                    <h3>Worker Safety</h3>
-                    <p>Same as Thread Safety</p>
-                    <p>For example: Caching</p>
-                    <img style="width: 30%" src="https://media.giphy.com/media/GbPU9xcAbPzKU/giphy.gif">
-                </section>
+                <h2>Excercise Time - GraphQL</h2>
+                <table>
+                    <tr>
+                        <td style="vertical-align: top; font-size:16px">
+                            <ul style="list-style-type: none">
+                                <li>
+                                    <h4>Create GraphQL API for CRUD the following:</h4>
+                                    <ul>
+                                        <li>
+                                            Use the following string to connect to MongoDB<br/>
+                                            <pre><code>mongodb://nodejs_user:Aa123456@ds117200.mlab.com:17200/course-2018</code></pre>
+                                        </li>
+                                        <li>Create Note schema model: _id, note, comments, level</li>
+                                        <li>Extend User model with these fields: activated, notes</li>
+                                        <li>Add new mutation for pushing new note</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </td>
+                        <td><img src="https://media.giphy.com/media/UvvK8rOSHPxgjo9ryD/giphy.gif"></tr>
+                    </tr>
+                </table>
             </section>
-            <!-- Exercise -->
+            <!-- Questions + Bonus -->
             <section>
-                    <table>
-                        <tr>
-                            <td style="width:50%">
-                                <img src="../assets/exercise-time.png"/>
-                            </td>
-                            <td style="vertical-align: top; font-size:16px">
-                                <ul style="list-style-type: none">
-                                    <li>Use PM2 to construct a cluster of our examples/server.ts server
-                                        <ul>
-                                            <li>Make sure the workers amount is as the cores amount</li>
-                                            <li>Make sure your cluster has fault tolerance</li>
-                                            <li>Make sure it work as expected</li>
-                                            <li>You can use <a href="http://pm2.keymetrics.io/">http://pm2.keymetrics.io/</a> for documentation and reference</li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </td>
-                        </tr>
-                    </table>
+                <h3>Any questions?</h3>
+                <img style="width: 65%; background: transparent; box-shadow: 0 0 0px;" src="https://i.giphy.com/media/ePsV4lBfsrPmo/giphy.webp"></br>
+                <a href="../module-6/index.html">Bonus Module</a>
             </section>
             </div>
         </div>
