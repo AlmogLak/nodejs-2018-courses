@@ -6,11 +6,12 @@ import { UsersController } from "./controllers/users.controller";
 
 const usersController = new UsersController();
 
-let run = async () => {    
+let run = async () => {
     const note = new Note("This is my first note!", "note writen in the class", NoteLevel.High);
     const user = new User(new ObjectID(), "Almog", "Laktivi", "Achisemakh", [note]);
     try {
         // TODO
+        // For the 'save file' to work, you need to create 'users' directory in 'basics' main folder
     } catch (error) {
         console.error(error);
     }

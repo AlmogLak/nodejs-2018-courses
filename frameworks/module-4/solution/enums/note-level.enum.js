@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.NoteLevel = void 0;
 var NoteLevel;
 (function (NoteLevel) {
     NoteLevel[NoteLevel["Low"] = 1] = "Low";

@@ -24,7 +24,7 @@ export class PersistanceService implements UsersApi {
             fs.readdir(this.usersFolder, async (err, users) => {
                 let result: User[] = new Array();
                 if(err) {
-                    reject(err);
+                    return reject(err);
                 }
 
                 try {
@@ -34,7 +34,7 @@ export class PersistanceService implements UsersApi {
 
                     resolve(result);
                 } catch (err) {
-                    reject(err);
+                    return reject(err);
                 }
             });
         });
@@ -61,7 +61,7 @@ export class PersistanceService implements UsersApi {
         return new Promise((resolve, reject) => {
             fs.unlink(this.getItemFilePath(userId), (err) => {
                 if (err) {
-                    reject(err);
+                    return reject(err);
                 }
                 resolve();
             });

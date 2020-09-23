@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.User = void 0;
 class User {
     constructor(_id, firstName, lastName, address, notes) {
         this._id = _id;

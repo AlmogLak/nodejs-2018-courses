@@ -1,13 +1,17 @@
 import * as express from 'express';
-const app = express()
+const app = express();
 
 // app.use(authenticate);
 // app.use(requestLog);
 // app.use([authenticate, requestLog]);
 
 app.get('/', [authenticate, requestLog], (req: express.Request, res: express.Response, next: express.NextFunction) => {
-    res.send('Hello World!');
+    res.send('Hello World! ' + res.get("surname"));
     next();
+});
+
+app.get('/unauth', (req: express.Request, res: express.Response) => {
+    res.send('Hello World! unauth');
 });
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'));

@@ -6,8 +6,11 @@ const app = express();
 // app.use(requestLog);
 // app.use([authenticate, requestLog]);
 app.get('/', [authenticate, requestLog], (req, res, next) => {
-    res.send('Hello World!');
+    res.send('Hello World! ' + res.get("surname"));
     next();
+});
+app.get('/unauth', (req, res) => {
+    res.send('Hello World! unauth');
 });
 app.listen(3000, () => console.log('Example app listening on port 3000!'));
 function authenticate(req, res, next) {

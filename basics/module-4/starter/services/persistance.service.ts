@@ -9,6 +9,7 @@ export class PersistanceService implements UsersApi {
 
     create(user: User): Promise<void> {
         // TODO
+        // use JSON.stringify(obj)
         return Promise.resolve();
     }
     

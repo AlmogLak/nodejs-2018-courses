@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.PersistanceService = void 0;
 const path = require("path");
 class PersistanceService {
     constructor() {
@@ -7,6 +8,7 @@ class PersistanceService {
     }
     create(user) {
         // TODO
+        // use JSON.stringify(obj)
         return Promise.resolve();
     }
     list() {

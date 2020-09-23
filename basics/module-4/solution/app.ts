@@ -10,7 +10,7 @@ let run = async () => {
     const note = new Note("This is my first note!", "note writen in the class", NoteLevel.High);
     const user = new User(new ObjectID(), "Almog", "Laktivi", "Achisemakh", [note]);
     try {
-        await usersController.create(user)
+        await usersController.create(user);
         let users = await usersController.list();
         console.log(users);
         for(const user of users) {

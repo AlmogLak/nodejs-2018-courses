@@ -1,0 +1,20 @@
+{
+  "name": "b",
+  "version": "1.0.0",
+  "description": "demo applicaion",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha test/*"
+  },
+  "keywords": [
+    "twitter"
+  ],
+  "author": "Almog Laktivi",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0"
+  },
+  "devDependencies": {
+    "@types/node": "^14.6.3"
+  }
+}

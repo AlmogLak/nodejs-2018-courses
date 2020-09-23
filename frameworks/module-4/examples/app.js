@@ -1,17 +1,19 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongodb_1 = require("mongodb");
 // const objId = new ObjectID();
+// const objId = new ObjectID("5aa3c9f48b142702fb2d2e32");
 // console.log(objId.getTimestamp());
-function foo() {
+function mongoExample() {
     return __awaiter(this, void 0, void 0, function* () {
         console.log('start');
         const connection = yield mongodb_1.MongoClient.connect('mongodb://nodejs_user:Aa123456@ds117200.mlab.com:17200/course-2018');
@@ -24,18 +26,20 @@ function foo() {
         // }));
         // console.log(insertResponse);
         // Read:
-        // const docs = await db.collection('people').find<Employee | Director>({}).toArray();
-        // console.log('docs', docs);
+        const docs = yield db.collection('people').find({}).toArray();
+        console.log('docs', docs);
         // Update
         // const updatedResponse = await db.collection('people').updateMany({"name": "Almog"}, { $set: {"bribes": 50} });
+        // const updatedResponse = await db.collection('people').updateOne({"name": "Almog"}, { $set: {"bribes": 500} });
         // console.log(updatedResponse);
-        // const result = await db.collection(COLLECTION_NAME).update({ _id: user._id }, user, {upsert: true});
+        // const updatedResponse = await db.collection('people').updateMany({"name": "Amjed"}, { $set: {"bribes": 0}}, {upsert: true});
+        // console.log(updatedResponse);
         // Delete:
         // const deleteResponse = await db.collection('people').deleteMany({"name": "Almog"});
         // console.log(deleteResponse);
     });
 }
-foo().then(() => console.log("DONE!"));
+mongoExample().then(() => console.log("DONE!"));
 class Person {
 }
 class Employee extends Person {
