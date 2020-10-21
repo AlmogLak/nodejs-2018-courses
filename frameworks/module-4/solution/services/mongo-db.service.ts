@@ -11,7 +11,7 @@ export class MongoDBService implements UsersApi {
     async createOrUpdate(user: User): Promise<void> {
         try {
             const db = await this.mongoclient.getDbConnection();
-            const result = await db.collection(COLLECTION_NAME).update({ _id: user._id }, user, {upsert: true});
+            const result = await db.collection(COLLECTION_NAME).updateMany({ _id: user._id }, user, {upsert: true});
             console.log(`Create or update result: ${result}`);
         } catch (error) {
             console.log(`error upserting user to db ${error}`);

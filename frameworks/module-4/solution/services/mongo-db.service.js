@@ -20,7 +20,7 @@ class MongoDBService {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const db = yield this.mongoclient.getDbConnection();
-                const result = yield db.collection(COLLECTION_NAME).update({ _id: user._id }, user, { upsert: true });
+                const result = yield db.collection(COLLECTION_NAME).updateMany({ _id: user._id }, user, { upsert: true });
                 console.log(`Create or update result: ${result}`);
             }
             catch (error) {
