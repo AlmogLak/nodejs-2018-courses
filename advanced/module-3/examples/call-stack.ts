@@ -1,4 +1,7 @@
-const fullName = (name: string, last: string) => `${name} ${last}`;
+const fullName = (name: string, last: string) => {
+    // throw new Error("Hi there...!");
+    return `${name} ${last}`;
+};
 
 const nameWithAge = (name: string, last: string, age: number) => `${fullName(name, last)} (${age})`;
 

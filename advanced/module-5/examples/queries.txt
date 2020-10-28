@@ -1,0 +1,28 @@
+# {
+#   allUsers {
+#     _id
+#     lastName
+#   }
+# }
+
+{
+  users(id: "5e2628171e713a2e1a3d893f") {
+    address
+    notes {
+      note
+    }
+  }
+}
+
+# mutation CreateUser {
+#   addUser(firstName: "Almog", lastName: "Laktivi", address: "Achisemach", activated: true) {
+#     firstName
+#   }
+# }
+
+# mutation CreateNote {
+#   addNote(userId: "5e2628171e713a2e1a3d893f", note: "second note", comments: "comment about the note", level: "High") {
+#     _id
+#     note
+#   }
+# }

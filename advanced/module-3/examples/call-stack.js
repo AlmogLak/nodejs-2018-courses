@@ -1,5 +1,8 @@
 "use strict";
-const fullName = (name, last) => `${name} ${last}`;
+const fullName = (name, last) => {
+    // throw new Error("Hi there...!");
+    return `${name} ${last}`;
+};
 const nameWithAge = (name, last, age) => `${fullName(name, last)} (${age})`;
 const printDetailes = (name, last, age) => {
     const result = nameWithAge(name, last, age);
