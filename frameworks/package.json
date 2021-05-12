@@ -9,7 +9,7 @@
     "express": "^4.17.1",
     "mongodb": "^3.4.1",
     "request": "^2.88.0",
-    "reveal.js": "^3.8.0",
+    "reveal.js": "^3.9.2",
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
