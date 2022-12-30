@@ -24,7 +24,7 @@
     "chai": "^4.2.0",
     "concurrently": "^5.0.2",
     "http-server": "^0.12.0",
-    "mocha": "^7.0.0",
+    "mocha": "^10.2.0",
     "reload": "^3.0.3"
   },
   "scripts": {
